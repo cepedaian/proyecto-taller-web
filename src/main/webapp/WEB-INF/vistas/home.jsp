@@ -13,10 +13,10 @@
 			<h1>Bienvenidos a Taller Web 1</h1>
 			<br>
 			<br>	
-			<form:form action="saludar/pedro" method="GET">	
+			<form:form action="saludar/" method="POST">	
 				
-				
-				<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Saludar a pedro</button>	
+				<form:input type="text" name="nombre" id="nombre" path="nombre"></form:input>
+				<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Saludar</button>	
 				
 			</form:form>
 		
