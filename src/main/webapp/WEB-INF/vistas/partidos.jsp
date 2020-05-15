@@ -10,15 +10,10 @@
 	</head>
 	<body>
 		<div class = "container">
-			<h1>Bienvenidos a Taller Web 1</h1>
+			<h1>Partidos</h1>
 			<br>
 			<br>	
-			<form:form action="mostrar-partidos" method="GET" modelAttribute="partido">	
-				
-				<button type="Submit">Ver Partidos</button>
-					
-				
-			</form:form>
+			<p>${partidos}</p> 
 		
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->

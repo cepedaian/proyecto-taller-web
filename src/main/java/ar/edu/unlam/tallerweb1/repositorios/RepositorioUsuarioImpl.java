@@ -24,6 +24,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		this.sessionFactory = sessionFactory;
 	}
 
+	
 	@Override
 	public Usuario consultarUsuario(Usuario usuario) {
 
