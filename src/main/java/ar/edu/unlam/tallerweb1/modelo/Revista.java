@@ -3,36 +3,33 @@ package ar.edu.unlam.tallerweb1.modelo;
 import javax.persistence.*;
 
 @Entity
-//@Table("RESTOS")
 public class Revista {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   @Column(nullable = false)
-    private String nombreRevista;
+    @Column(nullable = false)
+    private String nombre;
 
-  
-    private String tipoRevista;
+    private String tipo;
 
-   
     private Integer numeroPublicacion;
 
 
     public void setNombre(String nombre) {
-        this.nombreRevista = nombre;
+        this.nombre = nombre;
     }
 
     public String getNombre(){
-        return nombreRevista;
+        return nombre;
     }
 
-    public void setTipoRevista(String tipoRevista) {
-        this.tipoRevista = tipoRevista;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public String getTipoRevista(){
-        return this.tipoRevista;
+    public String getTipo(){
+        return this.tipo;
     }
 
     public void setNumeroPublicacion(Integer numero){

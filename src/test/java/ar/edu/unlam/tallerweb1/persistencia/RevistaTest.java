@@ -12,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
-
-
-
 public class RevistaTest extends SpringTest {
 
     @Test
@@ -23,7 +20,7 @@ public class RevistaTest extends SpringTest {
         // preparacion
         Revista pronto = new Revista();
         pronto.setNombre("Revista");
-        pronto.setTipoRevista("Espectaculos");
+        pronto.setTipo("Espectaculos");
         pronto.setNumeroPublicacion(1);
 
         //ejecucion
@@ -31,7 +28,6 @@ public class RevistaTest extends SpringTest {
         session.save(pronto);
 
         //comprobacion
-
         Revista IdBuscado = session.get(Revista.class, pronto.getId());
         assertThat(IdBuscado).isNotNull();
     }
@@ -42,25 +38,22 @@ public class RevistaTest extends SpringTest {
         // preparacion
         Revista pronto = new Revista();
         pronto.setNombre("Pronto");
-        pronto.setTipoRevista("Espectaculos");
+        pronto.setTipo("Espectaculos");
         pronto.setNumeroPublicacion(null);
-        
         
         //ejecucion
         final Session session = session();
         session.save(pronto);
         
         pronto.setNombre("Pronto");
-        pronto.setTipoRevista("deportes");
+        pronto.setTipo("deportes");
         pronto.setNumeroPublicacion(2);
-        
-        
+
         session.update(pronto);
 
         //comprobacion
-        
-        Revista numPublicacionBuscado = session.get(Revista.class, pronto.getId());
-        Assert.assertEquals((int)2,(int)numPublicacionBuscado.getNumeroPublicacion());
+        Revista publicacionBuscado = session.get(Revista.class, pronto.getId());
+        Assert.assertEquals((int)2,(int)publicacionBuscado.getNumeroPublicacion());
     }
 
     @Test
@@ -69,22 +62,16 @@ public class RevistaTest extends SpringTest {
         // preparacion
         Revista pronto = new Revista();
         pronto.setNombre("Pronto");
-        pronto.setTipoRevista("Espectaculos");
+        pronto.setTipo("Espectaculos");
         pronto.setNumeroPublicacion(null);
-        
-        
+
         //ejecucion
         final Session session = session();
         session.save(pronto);
         session.delete(pronto);
 
         //comprobacion
-        
-        Revista IdBuscado = session.get(Revista.class, pronto.getId());
-        assertThat(IdBuscado).isNull();
+        Revista buscado = session.get(Revista.class, pronto.getId());
+        assertThat(buscado).isNull();
     }
-
-
-
-
 }
