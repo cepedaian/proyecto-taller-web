@@ -13,11 +13,10 @@
 			<h1>Bienvenidos a Taller Web 1</h1>
 			<br>
 			<br>	
-			<form:form action="mostrar-partidos" method="GET" modelAttribute="partido">	
+			<form:form action="mostrar-partidos" method="POST">
 				
-				<button type="Submit">Ver Partidos</button>
+				<button type="submit">Ver Partidos</button>
 					
-				
 			</form:form>
 		
 		</div>

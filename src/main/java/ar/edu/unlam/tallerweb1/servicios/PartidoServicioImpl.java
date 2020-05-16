@@ -4,10 +4,12 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service("partidoService")
+@Transactional
 public class PartidoServicioImpl implements PartidoService{
 
 	private RepositorioPartido repositorioPartido;
@@ -21,5 +23,4 @@ public class PartidoServicioImpl implements PartidoService{
 	public List<Partido> getAll() {
 		return repositorioPartido.getAll();
 	}
-	
 }

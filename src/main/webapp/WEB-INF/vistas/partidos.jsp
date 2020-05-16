@@ -11,10 +11,11 @@
 	<body>
 		<div class = "container">
 			<h1>Partidos</h1>
-			<br>
-			<br>	
-			<p>${partidos}</p> 
-		
+			<ul>
+				<c:forEach items="${partidos}" var="partido">
+					<li>${partido.cancha} - Organiza: ${partido.organizador}</li>
+				</c:forEach>
+			</ul>
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

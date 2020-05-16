@@ -35,7 +35,7 @@ public class PartidoController {
 	}
 	
 	
-	@RequestMapping(value="/mostrar-partidos", method= RequestMethod.GET)
+	@RequestMapping(value="/mostrar-partidos", method= RequestMethod.POST)
 	public ModelAndView mostrarPartidos(){
 		
 		ModelMap model = new ModelMap();
@@ -43,13 +43,6 @@ public class PartidoController {
 		List<Partido> partidos = this.partidoService.getAll();
 		model.put("partidos", partidos);
 
-		/*if(listaPartidos.size()==3) {
-			
-			model.put("partidos","hay partidos pero no se como mostrarlos");
-		}else {
-			
-			model.put("partidos","no hay partidos");
-		}*/
 		return new ModelAndView ("partidos", model);
 	}
 
