@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.servicios.PartidoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartidoImpl;
 
 @Controller
 public class PartidoController {
 	
-	private RepositorioPartidoImpl repositorioPartidoDAO;
+	private PartidoService partidoService;
+
+	@Autowired
+	public PartidoController(PartidoService partidoService){
+		this.partidoService = partidoService;
+	}
 	
 	@RequestMapping("/home")
 	public ModelAndView irAHome() {
@@ -34,11 +39,10 @@ public class PartidoController {
 	public ModelAndView mostrarPartidos(){
 		
 		ModelMap model = new ModelMap();
-		
-		Partido partido = repositorioPartidoDAO.getAll();
-		
-		model.put("partido",partido.getCancha()); 
-		
+
+		List<Partido> partidos = this.partidoService.getAll();
+		model.put("partidos", partidos);
+
 		/*if(listaPartidos.size()==3) {
 			
 			model.put("partidos","hay partidos pero no se como mostrarlos");
@@ -48,5 +52,6 @@ public class PartidoController {
 		}*/
 		return new ModelAndView ("partidos", model);
 	}
-	
-}	
+
+
+}

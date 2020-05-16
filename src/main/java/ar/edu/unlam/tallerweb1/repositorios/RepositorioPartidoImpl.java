@@ -21,16 +21,13 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 		}
 	
 	@Override
-	public Partido getAll() {
+	public List<Partido> getAll() {
 		
 		final Session session = sessionFactory.getCurrentSession();
-		Partido partido = new Partido();
-		
-		Partido partidoObtenido = session.get(Partido.class,partido.getId());
-		
-		
-		return partidoObtenido;
-	}
+		Criteria criteria = session.createCriteria(Partido.class);
+		List<Partido> partidos = criteria.list();
 
+		return partidos;
+	}
 }
 	

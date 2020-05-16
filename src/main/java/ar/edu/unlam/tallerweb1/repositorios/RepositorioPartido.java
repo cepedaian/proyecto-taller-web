@@ -6,5 +6,5 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 
 public interface RepositorioPartido {
 	
-	public Partido getAll();
+	public List<Partido> getAll();
 }
