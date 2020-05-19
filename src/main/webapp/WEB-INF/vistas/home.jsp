@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<div class = "container">
-			<h1>Bienvenidos a Taller Web 1</h1>
+			<h1>Formulario Partido:</h1>
 			<br>
 			<br>	
 			<form:form action="mostrar-partidos" method="POST">
@@ -18,6 +18,12 @@
 				<button type="submit">Ver Partidos</button>
 					
 			</form:form>
+			<form:form action="crear-partido" method="POST">
+				
+				<button type="submit">Crear Partidos</button>
+					
+			</form:form>
+		
 		
 		</div>
 		<!-- Placed at the end of the document so the pages load faster -->

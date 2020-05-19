@@ -23,4 +23,16 @@ public class PartidoServicioImpl implements PartidoService{
 	public List<Partido> getAll() {
 		return repositorioPartido.getAll();
 	}
+	
+	@Override
+	public void eliminarPartido(Long id) {
+		 repositorioPartido.eliminarPartido(id);
+	}
+
+	@Override
+	public void insertarPartido(Partido partido) {
+		
+		repositorioPartido.insertarPartido(partido);
+		
+	}
 }
