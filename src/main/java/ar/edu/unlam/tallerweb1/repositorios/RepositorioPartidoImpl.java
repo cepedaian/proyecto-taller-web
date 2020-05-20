@@ -29,5 +29,11 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 
 		return partidos;
 	}
+	
+	public void borrarPartido(Integer id) {
+		final Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Partido.class);
+	
+	}
 }
 	
