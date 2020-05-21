@@ -14,11 +14,11 @@
 				
 				<p>La cancha ha sido creada con exito.</p>
 				
-				<form:form action="/proyecto-limpio-spring/mostrar-canchas" method="POST">
+
 				
-				<button type="submit">Volver a Canchas</button>
-					
-				</form:form>	
+
+				<a class="btn btn-primary" href="/mostrar-canchas">Volver a Canchas</a>
+
 				
 			</div>
 		</div>

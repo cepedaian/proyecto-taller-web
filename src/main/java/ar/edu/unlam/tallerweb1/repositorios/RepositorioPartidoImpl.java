@@ -36,7 +36,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 	}
 	
 
-	public void borrarPartido(Integer id) {
+	public void borrarPartido(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Partido.class);
 	}

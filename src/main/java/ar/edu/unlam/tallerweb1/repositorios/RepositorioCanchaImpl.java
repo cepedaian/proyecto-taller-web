@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,5 +38,15 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
 		
 		final Session session = sessionFactory.getCurrentSession();
 		session.save(cancha);
+	}
+
+	@Override
+	public void eliminarCancha(Long id) {
+		final Session session = sessionFactory.getCurrentSession();
+
+		Cancha canchaBuscada = session.get(Cancha.class, id);
+
+		session.delete(canchaBuscada);
+
 	}
 }

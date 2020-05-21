@@ -31,4 +31,9 @@ public class CanchaServiceImpl implements CanchaService{
 		
 		this.repositorioCancha.crearCancha(cancha);
 	}
+
+	@Override
+	public void eliminarCancha(Long id) {
+		this.repositorioCancha.eliminarCancha(id);
+	}
 }

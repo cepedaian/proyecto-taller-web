@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +35,15 @@ public class CanchaController {
 		model.put("canchas", canchas);
 		
 		return new ModelAndView("canchas", model);
+	}
+	@RequestMapping(value="/eliminar-cancha/{id}", method= RequestMethod.POST)
+	public ModelAndView eliminarCancha(@PathVariable("id") Long id){
+
+		ModelMap model = new ModelMap();
+
+		this.canchaService.eliminarCancha(id);
+
+		return new ModelAndView ("cancha-eliminada", model);
 	}
 	
 	@RequestMapping(path = "/crear-cancha", method = RequestMethod.GET)

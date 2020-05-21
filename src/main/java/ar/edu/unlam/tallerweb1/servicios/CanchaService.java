@@ -9,4 +9,6 @@ public interface CanchaService {
 	public List<Cancha> getAll();
 	
 	public void crearCancha(Cancha cancha);
+
+	public void eliminarCancha(Long id);
 }
