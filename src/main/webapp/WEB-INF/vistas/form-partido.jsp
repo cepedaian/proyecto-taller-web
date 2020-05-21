@@ -14,15 +14,19 @@
 				<%--Definicion de un form asociado a la accion /validar-login por POST. Se indica ademas que el model attribute se--%>
 				<%--debe referenciar con el nombre usuario, spring mapea los elementos de la vista con los atributos de dicho objeto--%>
 					<%--para eso debe coincidir el valor del elemento path de cada input con el nombre de un atributo del objeto --%>
-				<form:form action="validar-login" method="POST" modelAttribute="usuario">
+				<form:form action="insertar-partido" method="POST" modelAttribute="partido">
 			    	<h3 class="form-signin-heading">Taller Web I</h3>
 					<hr class="colorgraph"><br>
 
 					<%--Elementos de entrada de datos, el elemento path debe indicar en que atributo del objeto usuario se guardan los datos ingresados--%>
-					<form:input path="email" id="email" type="email" class="form-control" />
-					<form:input path="password" type="password" id="password" class="form-control"/>     		  
+					<label>CANCHA:</label>
+					<form:input path="cancha" id="cancha" type="text" class="form-control" />
+					<label>CANTIDAD DE JUGADORES:</label>
+					<form:input path="cantidadJugadores" type="text" id="cantidadJugadores" class="form-control"/>     		  
+					<label>ORGANIZADOR:</label>	
+					<form:input path="organizador" type="text" id="organizador" class="form-control"/>
 					
-					<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Login</button>
+					<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Confirmar</button>
 						
 					
 				</form:form>

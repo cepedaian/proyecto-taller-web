@@ -10,11 +10,11 @@
 	</head>
 	<body>
 		<div class = "container">
-			<h1>Partidos</h1>
+			<h1>Canchas</h1>
 			<ul>
-				<c:forEach items="${partidos}" var="partido">
-					<form:form action="eliminar-partido/${partido.id}" method="POST">
-					<li>IdPartido = ${partido.id} - ${partido.cancha} - Organiza: ${partido.organizador} - Cantidad Jugadores: ${partido.cantidadJugadores}</li>
+				<c:forEach items="${canchas}" var="cancha">
+					<form:form action="eliminar-cancha/${cancha.id}" method="POST">
+					<li>IdCancha = ${cancha.id} - Nombre = ${cancha.nombre} - TipoPartido ${cancha.tipo} - SueloCancha ${cancha.tipoSuelo}</li>
 					<button class="btn btn-lg btn-primary btn-block" Type="Submit"/>Eliminar</button>
 					</form:form>
 				</c:forEach>
