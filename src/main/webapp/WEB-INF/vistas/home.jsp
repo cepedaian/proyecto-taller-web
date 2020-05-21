@@ -1,44 +1,10 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<!-- Bootstrap core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	</head>
-	<body>
-		<div class = "container">
-			<h1>Formulario Partido:</h1>
-			<br>
-			<br>	
-			<form:form action="mostrar-partidos" method="POST">
-				
-				<button type="submit">Ver Partidos</button>
-					
-			</form:form>
-			<form:form action="crear-partido" method="POST">
-				
-				<button type="submit">Crear Partidos</button>
-					
-			</form:form>
-			<form:form action="mostrar-canchas" method="POST">
-				
-				<button type="submit">Ver Canchas</button>
-					
-			</form:form>
-			<form:form action="crear-cancha" method="POST">
-				
-				<button type="submit">Crear Cancha</button>
-					
-			</form:form>
-		
-		
-		</div>
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	</body>
-</html>
+<jsp:include page="header.jsp" />
+
+<section class="container">
+	<div class="text-center p-5">
+		<h1 class="text-white display-4 mb-5">Bienvenidos!!!</h1>
+		<img src="https://i.pinimg.com/originals/45/2c/58/452c58e20c10bfba89c7ea1346efafae.gif">
+	</div>
+</section>
+
+<jsp:include page="footer.jsp" />

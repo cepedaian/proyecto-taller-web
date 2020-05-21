@@ -41,7 +41,7 @@ public class PartidoController {
 	}
 	
 	
-	@RequestMapping(value="/mostrar-partidos", method= RequestMethod.POST)
+	@RequestMapping(value="/mostrar-partidos", method= RequestMethod.GET)
 	public ModelAndView mostrarPartidos(){
 		
 		ModelMap model = new ModelMap();
@@ -62,7 +62,7 @@ public class PartidoController {
 		return new ModelAndView ("partido-eliminado", model);
 	}
 
-	@RequestMapping(value="/crear-partido", method= RequestMethod.POST)
+	@RequestMapping(value="/crear-partido", method= RequestMethod.GET)
 	public ModelAndView crearPartido(){
 		
 		ModelMap model = new ModelMap();

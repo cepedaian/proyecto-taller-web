@@ -1,31 +1,11 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<!-- Bootstrap core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	</head>
-	<body>
-		<div class = "container">
-			<div class="alert-warning">
-				
-				<p>El partido ha sido eliminado.</p>
-				
-				<form:form action="/proyecto-limpio-spring/mostrar-partidos" method="POST">
-				
-				<button type="submit">Volver a Partidos</button>
-					
-				</form:form>	
-				
-			</div>
-		</div>
-		<!-- Placed at the end of the document so the pages load faster -->
-		
-				<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	</body>
-</html>
+<jsp:include page="header.jsp" />
+
+<section class="container">
+	<div class="bg-warning mb-3 p-2">
+		<h3>El partido ha sido eliminado.</h3>
+	</div>
+
+	<a class="btn btn-primary" href="mostrar-partidos">Volver a Partidos</a>
+</section>
+
+<jsp:include page="footer.jsp" />

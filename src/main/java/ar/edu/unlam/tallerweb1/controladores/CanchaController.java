@@ -26,7 +26,7 @@ public class CanchaController {
 		this.canchaService = canchaService;
 	}
 	
-	@RequestMapping(path = "/mostrar-canchas", method = RequestMethod.POST)
+	@RequestMapping(path = "/mostrar-canchas", method = RequestMethod.GET)
 	public ModelAndView mostrarCanchas() {
 		ModelMap model = new ModelMap();
 		
@@ -36,7 +36,7 @@ public class CanchaController {
 		return new ModelAndView("canchas", model);
 	}
 	
-	@RequestMapping(path = "/crear-cancha", method = RequestMethod.POST)
+	@RequestMapping(path = "/crear-cancha", method = RequestMethod.GET)
 	public ModelAndView crearCancha() {
 		
 		ModelMap model = new ModelMap();
