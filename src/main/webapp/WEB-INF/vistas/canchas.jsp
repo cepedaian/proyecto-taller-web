@@ -3,15 +3,7 @@
 
 <jsp:include page="header.jsp" />
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<!-- Bootstrap core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	</head>
-	<body>
+<section class="container">
 	<h1 class="display-4 text-center text-white mb-2">Canchas</h1>
 	<table class="table">
 		<tr>
@@ -43,15 +35,7 @@
 			</tr>
 		</c:forEach>
 	</table>
-		<!-- Placed at the end of the document so the pages load faster -->
+</section>
 		
-		<script>
-		function removerCuit(id) {
-			window.location.replace("/proyecto-limpio-spring/eliminar-partido/ + id");
-		}</script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
-	</body>
-</html>
+
 <jsp:include page="footer.jsp" />

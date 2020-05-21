@@ -12,6 +12,7 @@ public class Partido {
 	private Integer cantidadJugadores;
 	private String cancha;
 	private String organizador;
+
 	public Long getId() {
 		return id;
 	}
