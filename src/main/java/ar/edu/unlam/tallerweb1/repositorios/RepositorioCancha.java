@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.Barrio;
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
 
 public interface RepositorioCancha {
@@ -11,4 +12,6 @@ public interface RepositorioCancha {
 	public void crearCancha(Cancha cancha);
 
     public void eliminarCancha(Long id);
+
+    public List<Cancha> buscarCancha(Barrio barrio);
 }

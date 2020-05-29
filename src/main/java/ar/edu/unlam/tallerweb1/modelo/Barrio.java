@@ -9,7 +9,11 @@ public class Barrio {
 
     @Column(nullable = false)
     private String descripcion;
-
+    @ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+    private Comuna comuna;
+    
+    
+    
     public Long getId() {
         return id;
     }
@@ -25,4 +29,12 @@ public class Barrio {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+	public Comuna getComuna() {
+		return comuna;
+	}
+
+	public void setComuna(Comuna comuna) {
+		this.comuna = comuna;
+	}
 }

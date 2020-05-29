@@ -3,6 +3,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Partido {
@@ -10,7 +11,8 @@ public class Partido {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	private Integer cantidadJugadores;
-	private String cancha;
+	@OneToOne
+	private Cancha cancha;
 	private String organizador;
 
 	public Long getId() {
@@ -25,10 +27,10 @@ public class Partido {
 	public void setCantidadJugadores(Integer cantidadJugadores) {
 		this.cantidadJugadores = cantidadJugadores;
 	}
-	public String getCancha() {
+	public Cancha getCancha() {
 		return cancha;
 	}
-	public void setCancha(String cancha) {
+	public void setCancha(Cancha cancha) {
 		this.cancha = cancha;
 	}
 	public String getOrganizador() {

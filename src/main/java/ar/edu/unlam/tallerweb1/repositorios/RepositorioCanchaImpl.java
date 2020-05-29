@@ -6,10 +6,13 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ar.edu.unlam.tallerweb1.modelo.Barrio;
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
+import ar.edu.unlam.tallerweb1.modelo.Farmacia;
 
 
 
@@ -48,5 +51,18 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
 
 		session.delete(canchaBuscada);
 
+	}
+
+	@Override
+	public List<Cancha> buscarCancha(Barrio barrio) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		Criteria criteria = session.createCriteria(Cancha.class);
+        //criteria.createAlias("barrio", "b"); //para determinar el join con Barrio
+        criteria.add(Restrictions.eq("barrio.descripcion", "Congreso"));
+        List<Cancha> listaCancha = criteria.list();
+		
+		
+		return null;
 	}
 }

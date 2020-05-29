@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.persistencia;
 import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.modelo.Barrio;
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
+import ar.edu.unlam.tallerweb1.modelo.Direccion;
 import ar.edu.unlam.tallerweb1.modelo.Farmacia;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -49,6 +51,22 @@ public class FarmaciaTest extends SpringTest {
         return session;
     }
 
+    final Session preparacionCancha(){
+        Cancha cancha1 = new Cancha();
+    	Direccion direccion1 = new Direccion();
+    	
+    	direccion1.setCalle("Rivadavia");
+    	
+    	cancha1.setDireccion(direccion1);
+    	
+        final Session session = session();
+        session.save(cancha1);
+        
+
+        return session;
+    }
+    
+    
     @Test
     @Transactional @Rollback
     public void testQueBuscaFarmaciasConNombreFarmacity(){
@@ -103,5 +121,19 @@ public class FarmaciaTest extends SpringTest {
         List<Farmacia> listaFarmacia = criteria.list();
         //Comprobación
         assertThat(listaFarmacia).hasSize(2);
+    }
+    
+    @Test
+    @Transactional @Rollback
+    public void testQueBuscaCanchaConDireccionCalleRivadavia(){
+        //Preparación
+        Session session = preparacionCancha();
+        //Ejecución
+        Criteria criteria = session.createCriteria(Cancha.class);
+        criteria.createAlias("direccion", "d"); //para determinar el join con Barrio
+        criteria.add(Restrictions.eq("d.calle", "Rivadavia"));
+        List<Cancha> listaCancha = criteria.list();
+        //Comprobación
+        assertThat(listaCancha).hasSize(1);
     }
 }

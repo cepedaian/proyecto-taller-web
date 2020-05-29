@@ -1,9 +1,12 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity 
 public class Cancha {
@@ -14,6 +17,8 @@ public class Cancha {
 	private String nombre;
 	private String tipo;
 	private String tipoSuelo;
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private Direccion direccion;
 	
 	
 	public Long getId() {
@@ -37,6 +42,11 @@ public class Cancha {
 	public void setTipoSuelo(String tipoSuelo) {
 		this.tipoSuelo = tipoSuelo;
 	}
-	
+	public Direccion getDireccion() {
+		return direccion;
+	}
 		 
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
 }
