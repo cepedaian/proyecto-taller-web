@@ -37,5 +37,13 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 				.add(Restrictions.eq("password", usuario.getPassword()))
 				.uniqueResult();
 	}
+	
+	@Override
+	public void crearUsuario(Usuario usuario) {
+		
+		final Session session = sessionFactory.getCurrentSession();
+		session.save(usuario);
+		
+	}
 
 }

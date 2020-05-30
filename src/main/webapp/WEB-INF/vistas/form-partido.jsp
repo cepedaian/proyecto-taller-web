@@ -13,7 +13,7 @@
 		<label>ORGANIZADOR:</label>
 		<form:input path="organizador" type="text" id="organizador" class="form-control mb-2"/>
 
-		<button class="btn btn-lg btn-primary" type="submit"/>Confirmar</button>
+		<button class="btn btn-lg btn-primary" type="submit">Confirmar</button>
 	</form:form>
 </section>
 
