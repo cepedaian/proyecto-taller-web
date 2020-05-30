@@ -1,9 +1,12 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 // Clase que modela el concepto de Usuario, la anotacion @Entity le avisa a hibernate que esta clase es persistible
 // el paquete ar.edu.unlam.tallerweb1.modelo esta indicado en el archivo hibernateCOntext.xml para que hibernate
@@ -17,9 +20,14 @@ public class Usuario {
 	private Long id;
 	// para el resto de los atributo no se usan anotaciones entonces se usa el default de hibernate: la columna se llama igual que
 	// el atributo, la misma admite nulos, y el tipo de dato se deduce del tipo de dato de java.
+	
+	private String userName;
 	private String email;
 	private String password;
-	private String rol;
+	@OneToOne(fetch=FetchType.EAGER)
+	private Barrio barrio;
+	private String posicion;
+	
 	
 	public Long getId() {
 		return id;
@@ -39,12 +47,24 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public String getRol() {
-		return rol;
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public Barrio getBarrio() {
+		return barrio;
+	}
+	public void setBarrio(Barrio barrio) {
+		this.barrio = barrio;
+	}
+	public String getPosicion() {
+		return posicion;
+	}
+	public void setPosicion(String posicion) {
+		this.posicion = posicion;
 	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
+	
 }

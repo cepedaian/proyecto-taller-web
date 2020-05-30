@@ -23,6 +23,7 @@
 			<form:input path="organizador" type="text" id="organizador" class="form-control mb-2"/>
 		</div>
 		<button class="btn btn-sm btn-primary" type="submit"/>Crear</button>
+
 	</form:form>
 </section>
 
