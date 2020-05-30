@@ -27,9 +27,8 @@ public class CanchaServiceImpl implements CanchaService{
 	}
 	
 	@Override
-	public void crearCancha(Cancha cancha) {
-		
-		this.repositorioCancha.crearCancha(cancha);
+	public Long crearCancha(Cancha cancha) {
+		return this.repositorioCancha.crearCancha(cancha);
 	}
 
 	@Override

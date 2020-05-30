@@ -3,35 +3,37 @@
 
 <jsp:include page="header.jsp" />
 
+<c:if test="${not empty mensaje}">${mensaje}</c:if>
+
 <section class="container">
 	<h1 class="display-4 text-center text-white mb-2">Canchas</h1>
 	<table class="table">
 		<tr>
-			<td>Id</td>
 			<td>Nombre</td>
 			<td>Tipo</td>
 			<td>Tipo de suelo</td>
+			<td>Barrio</td>
 			<td></td>
 		</tr>
 		<c:forEach items="${canchas}" var="cancha">
 			<tr>
-				<form:form action="eliminar-cancha/${cancha.id}" method="POST">
-					<td>
-							${cancha.id}
-					</td>
+				<%--<form:form action="eliminar-cancha/${cancha.id}" method="POST">--%>
 					<td>
 							${cancha.nombre}
 					</td>
 					<td>
-							${cancha.tipo}
+							Futbol ${cancha.tipo}
 					</td>
 					<td>
-							${cancha.tipoSuelo}
+							${cancha.suelo}
 					</td>
 					<td>
+							<%--${cancha.direccion}--%>
+					</td>
+					<%--<td>
 						<button class="btn btn-sm btn-danger" type="submit"/>Eliminar</button>
-					</td>
-				</form:form>
+					</td>--%>
+				<%--</form:form>--%>
 			</tr>
 		</c:forEach>
 	</table>

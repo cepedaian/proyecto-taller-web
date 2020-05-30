@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.io.Serializable;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Partido;
@@ -37,10 +38,11 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
 	}
 	
 	@Override
-	public void crearCancha(Cancha cancha) {
+	public Long crearCancha(Cancha cancha) {
 		
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(cancha);
+		Long id = (Long) session.save(cancha);
+		return id;
 	}
 
 	@Override

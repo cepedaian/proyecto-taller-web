@@ -10,12 +10,12 @@ import java.util.List;
 
 @Service("partidoService")
 @Transactional
-public class PartidoServicioImpl implements PartidoService{
+public class PartidoServiceImpl implements PartidoService{
 
 	private RepositorioPartido repositorioPartido;
 
 	@Autowired
-	public PartidoServicioImpl(RepositorioPartido repositorioPartido){
+	public PartidoServiceImpl(RepositorioPartido repositorioPartido){
 		this.repositorioPartido = repositorioPartido;
 	}
 

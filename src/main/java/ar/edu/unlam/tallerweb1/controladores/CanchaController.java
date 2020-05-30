@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ar.edu.unlam.tallerweb1.modelo.Barrio;
+import ar.edu.unlam.tallerweb1.servicios.BarrioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,11 +22,12 @@ import ar.edu.unlam.tallerweb1.servicios.CanchaService;
 public class CanchaController {
 	
 	private CanchaService canchaService;
+	private BarrioService barrioService;
 	
 	@Autowired
-	public CanchaController(CanchaService canchaService) {
-		
+	public CanchaController(CanchaService canchaService, BarrioService barrioService) {
 		this.canchaService = canchaService;
+		this.barrioService = barrioService;
 	}
 	
 	@RequestMapping(path = "/mostrar-canchas", method = RequestMethod.GET)
@@ -36,6 +39,34 @@ public class CanchaController {
 		
 		return new ModelAndView("canchas", model);
 	}
+
+	@RequestMapping(path = "/show-form-cancha", method = RequestMethod.GET)
+	public ModelAndView showFormCancha() {
+		ModelMap model = new ModelMap();
+
+		List<Barrio> barrios = this.barrioService.getAll();
+		model.put("barrios", barrios);
+		model.put("cancha", new Cancha());
+
+		return new ModelAndView("form-cancha", model);
+	}
+	
+	@RequestMapping(path = "/crear-cancha", method = RequestMethod.POST)
+	public ModelAndView crearCancha(@ModelAttribute("cancha") Cancha cancha, HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+
+		Long id = this.canchaService.crearCancha(cancha);
+
+		if(id!=0) {
+			model.put("mensaje", "La cancha se creo con exito!!!");
+		}
+
+		List<Cancha> canchas = this.canchaService.getAll();
+		model.put("canchas", canchas);
+		
+		return new ModelAndView ("canchas", model);
+	}
+
 	@RequestMapping(value="/eliminar-cancha/{id}", method= RequestMethod.POST)
 	public ModelAndView eliminarCancha(@PathVariable("id") Long id){
 
@@ -44,25 +75,5 @@ public class CanchaController {
 		this.canchaService.eliminarCancha(id);
 
 		return new ModelAndView ("cancha-eliminada", model);
-	}
-	
-	@RequestMapping(path = "/crear-cancha", method = RequestMethod.GET)
-	public ModelAndView crearCancha() {
-		
-		ModelMap model = new ModelMap();
-		Cancha cancha = new Cancha();
-		model.put("cancha", cancha);
-		
-		return new ModelAndView("form-cancha", model);
-	}
-	
-	@RequestMapping(path = "/insertar-cancha", method = RequestMethod.POST)
-	public ModelAndView insertarCancha(@ModelAttribute("cancha") Cancha cancha, HttpServletRequest request) {
-		ModelMap model = new ModelMap();
-
-		this.canchaService.crearCancha(cancha);
-		
-		return new ModelAndView ("confirmar-cancha", model);
-			
 	}
 }

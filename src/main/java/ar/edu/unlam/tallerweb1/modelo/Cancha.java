@@ -10,42 +10,54 @@ import javax.persistence.OneToOne;
 
 @Entity 
 public class Cancha {
-
-	 @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+	@Id @GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String nombre;
-	private String tipo;
-	private String tipoSuelo;
+
+	private String suelo;
+
+	private Integer tipo;
+
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	private Direccion direccion;
-	
-	
+
 	public Long getId() {
-		return this.id;
+		return id;
 	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getTipo() {
+
+	public String getSuelo() {
+		return suelo;
+	}
+
+	public void setSuelo(String suelo) {
+		this.suelo = suelo;
+	}
+
+	public Integer getTipo() {
 		return tipo;
 	}
-	public void setTipo(String tipo) {
+
+	public void setTipo(Integer tipo) {
 		this.tipo = tipo;
 	}
-	public String getTipoSuelo() {
-		return tipoSuelo;
-	}
-	public void setTipoSuelo(String tipoSuelo) {
-		this.tipoSuelo = tipoSuelo;
-	}
+
 	public Direccion getDireccion() {
 		return direccion;
 	}
-		 
+
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
