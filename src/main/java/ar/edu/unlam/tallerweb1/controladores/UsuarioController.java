@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.filter.UsuarioFilter;
 import ar.edu.unlam.tallerweb1.modelo.Barrio;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.BarrioService;
 import ar.edu.unlam.tallerweb1.servicios.UsuarioService;
@@ -53,5 +55,18 @@ public class UsuarioController {
 		
 		return new ModelAndView ("confirmar-usuario", model);
 		
+	}
+	
+	
+	@RequestMapping(value="/invitar-usuario", method= RequestMethod.GET)
+	public ModelAndView InvitarUsuario(){
+		
+		ModelMap model = new ModelMap();
+		
+		UsuarioFilter usuarioFilter = new UsuarioFilter();
+		
+		model.put("usuarioFilter",usuarioFilter);
+		
+		return new ModelAndView ("form-invitado", model);
 	}
 }
