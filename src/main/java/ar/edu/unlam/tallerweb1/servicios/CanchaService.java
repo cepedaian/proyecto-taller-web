@@ -11,4 +11,6 @@ public interface CanchaService {
 	public Long crearCancha(Cancha cancha);
 
 	public void eliminarCancha(Long id);
+
+	public Cancha getCancha(Long id);
 }

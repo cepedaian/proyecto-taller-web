@@ -54,7 +54,18 @@ public class RepositorioCanchaImpl implements RepositorioCancha{
 		session.delete(canchaBuscada);
 
 	}
+	
+	@Override
+	public Cancha getCancha(Long id) {
+		final Session session = sessionFactory.getCurrentSession();
 
+		Cancha canchaBuscada = session.get(Cancha.class, id);
+
+		return canchaBuscada;
+
+	}
+	
+	
 	@Override
 	public List<Cancha> buscarCancha(Barrio barrio) {
 		final Session session = sessionFactory.getCurrentSession();

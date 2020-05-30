@@ -20,7 +20,7 @@
 						${partido.id}
 					</td>
 					<td>
-						${partido.cancha}
+						${partido.cancha.nombre}
 					</td>
 					<td>
 						${partido.organizador}

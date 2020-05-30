@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import ar.edu.unlam.tallerweb1.servicios.CanchaService;
 import ar.edu.unlam.tallerweb1.servicios.PartidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +24,12 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 public class PartidoController {
 	
 	private PartidoService partidoService;
-
+	private CanchaService canchaService;
+	
 	@Autowired
-	public PartidoController(PartidoService partidoService){
+	public PartidoController(PartidoService partidoService, CanchaService canchaService){
 		this.partidoService = partidoService;
+		this.canchaService = canchaService;
 	}
 	
 	@RequestMapping("/home")
@@ -48,7 +51,8 @@ public class PartidoController {
 
 		List<Partido> partidos = this.partidoService.getAll();
 		model.put("partidos", partidos);
-
+		
+		
 		return new ModelAndView ("partidos", model);
 	}
 	
@@ -70,6 +74,10 @@ public class PartidoController {
 		Partido partido = new Partido();
 		
 		model.put("partido",partido);
+		
+		List<Cancha> canchas = this.canchaService.getAll();
+		model.put("canchas", canchas);
+		
 		
 		return new ModelAndView ("form-partido", model);
 	}
