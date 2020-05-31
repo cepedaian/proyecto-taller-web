@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,27 +9,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.util.Date;
 
-// Clase que modela el concepto de Usuario, la anotacion @Entity le avisa a hibernate que esta clase es persistible
-// el paquete ar.edu.unlam.tallerweb1.modelo esta indicado en el archivo hibernateCOntext.xml para que hibernate
-// busque entities en él
 @Entity
 public class Usuario {
 
-	// La anotacion id indica que este atributo es el utilizado como clave primaria de la entity, se indica que el valor es autogenerado.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	// para el resto de los atributo no se usan anotaciones entonces se usa el default de hibernate: la columna se llama igual que
-	// el atributo, la misma admite nulos, y el tipo de dato se deduce del tipo de dato de java.
 	
 	private String userName;
+
 	private String email;
+
 	private String password;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fecha_nac;
+
+	private String sexo;
+
 	@OneToOne(fetch=FetchType.EAGER)
 	private Barrio barrio;
+
 	private String posicion;
-	
 	
 	public Long getId() {
 		return id;
@@ -65,6 +70,16 @@ public class Usuario {
 	public void setPosicion(String posicion) {
 		this.posicion = posicion;
 	}
-
-	
+	public Date getFecha_nac() {
+		return fecha_nac;
+	}
+	public void setFecha_nac(Date fecha_nac) {
+		this.fecha_nac = fecha_nac;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
 }

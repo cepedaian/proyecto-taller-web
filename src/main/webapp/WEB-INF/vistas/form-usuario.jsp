@@ -19,9 +19,9 @@
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="password" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Contraseña:</label>
+			<label for="password" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Contraseï¿½a:</label>
 			<div class="col-sm-10">
-				<form:input path="password" type="password" class="form-control form-control-sm" id="password" placeholder="Ingrese su Contraseña"/>
+				<form:input path="password" type="password" class="form-control form-control-sm" id="password" placeholder="Ingrese su Contraseï¿½a"/>
 			</div>
 		</div>
 		<div class="form-group row">
@@ -43,6 +43,21 @@
 						<option value="${barrioUsuario.id}">${barrioUsuario.descripcion}</option>
 				  	</c:forEach>
 			  	</form:select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="fecha_nac" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Fecha de nacimiento:</label>
+			<div class="col-sm-10">
+				<form:input path="fecha_nac" type="date" class="form-control form-control-sm" id="fecha_nac" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="sexo" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Sexo:</label>
+			<div class="col-sm-10">
+			  <form:select path="sexo" class="form-control form-control-sm" id="sexo">
+				  <option value="M">Masculino</option>
+				  <option value="F">Femenino</option>
+			  </form:select>
 			</div>
 		</div>
 

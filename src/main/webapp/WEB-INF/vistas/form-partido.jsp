@@ -21,6 +21,21 @@
 			<label class="col-form-label col-form-label-sm font-weight-bold">Cantidad de Jugadores:</label>
 			<form:input path="cantidadJugadores" type="text" id="cantidadJugadores" class="form-control mb-2"/>
 		</div>
+		<div class="form-group row">
+			<label for="fecha" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Fecha:</label>
+			<div class="col-sm-10">
+				<form:input path="fecha" type="date" class="form-control form-control-sm" id="fecha" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="sexo" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Tipo de partido:</label>
+			<div class="col-sm-10">
+			  <form:select path="sexo" class="form-control form-control-sm" id="sexo">
+				  <option value="M">Masculino</option>
+				  <option value="F">Femenino</option>
+			  </form:select>
+			</div>
+		</div>
 		<div class="form-group col-md-12 col-sm-12">
 			<label class="col-form-label col-form-label-sm font-weight-bold">Organizador:</label>
 			<form:input path="organizador" type="text" id="organizador" class="form-control mb-2"/>

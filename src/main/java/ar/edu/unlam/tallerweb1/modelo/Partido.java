@@ -1,20 +1,31 @@
 package ar.edu.unlam.tallerweb1.modelo;
-import javax.persistence.CascadeType;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.util.Date;
 
 @Entity
 public class Partido {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
 	private Integer cantidadJugadores;
+
 	@OneToOne(fetch=FetchType.EAGER)
 	private Cancha cancha;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fecha;
+
+	private String sexo;
+
 	private String organizador;
 
 	public Long getId() {
@@ -41,7 +52,16 @@ public class Partido {
 	public void setOrganizador(String organizador) {
 		this.organizador = organizador;
 	}
-	
-	
-	
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
 }
