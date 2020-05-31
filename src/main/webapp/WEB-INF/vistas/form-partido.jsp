@@ -6,14 +6,27 @@
 <section class="container">
 	<h1 class="display-4 text-center text-white mb-2">Crear partido</h1>
 	<form:form action="insertar-partido" method="POST" modelAttribute="partido">
-		<label>CANCHA:</label>
-		<form:input path="cancha" id="cancha" type="text" class="form-control mb-2" />
-		<label>CANTIDAD DE JUGADORES:</label>
-		<form:input path="cantidadJugadores" type="text" id="cantidadJugadores" class="form-control mb-2"/>
-		<label>ORGANIZADOR:</label>
-		<form:input path="organizador" type="text" id="organizador" class="form-control mb-2"/>
+		<div class="form-group col-md-12 col-sm-12">
+			  	<label for="cancha" class="col-form-label col-form-label-sm font-weight-bold">Cancha:</label>
+			  	<form:select path="cancha.id" class="form-control form-control-sm" id="cancha">
+				  	<c:forEach items="${canchas}" var="cancha">
+						<option value="${cancha.id}">${cancha.nombre} - ${cancha.direccion.barrio.descripcion} </option>
+				  	</c:forEach>
+			  	</form:select>
+			<button><a class="btn btn-sm btn-primary mt-1" href="/show-form-cancha">Nueva Cancha</a></button>
+			</div>
+		<div>
+		</div>
+		<div class="form-group col-md-12 col-sm-12">
+			<label class="col-form-label col-form-label-sm font-weight-bold">Cantidad de Jugadores:</label>
+			<form:input path="cantidadJugadores" type="text" id="cantidadJugadores" class="form-control mb-2"/>
+		</div>
+		<div class="form-group col-md-12 col-sm-12">
+			<label class="col-form-label col-form-label-sm font-weight-bold">Organizador:</label>
+			<form:input path="organizador" type="text" id="organizador" class="form-control mb-2"/>
+		</div>
+		<button class="btn btn-sm btn-primary" type="submit"/>Crear</button>
 
-		<button class="btn btn-lg btn-primary" type="submit"/>Confirmar</button>
 	</form:form>
 </section>
 

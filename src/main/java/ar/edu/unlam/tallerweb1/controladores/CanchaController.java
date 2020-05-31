@@ -37,6 +37,8 @@ public class CanchaController {
 		List<Cancha> canchas = this.canchaService.getAll();
 		model.put("canchas", canchas);
 		
+		Barrio barrio = new Barrio();
+		
 		return new ModelAndView("canchas", model);
 	}
 
@@ -47,7 +49,9 @@ public class CanchaController {
 		List<Barrio> barrios = this.barrioService.getAll();
 		model.put("barrios", barrios);
 		model.put("cancha", new Cancha());
-
+		
+		
+		
 		return new ModelAndView("form-cancha", model);
 	}
 	

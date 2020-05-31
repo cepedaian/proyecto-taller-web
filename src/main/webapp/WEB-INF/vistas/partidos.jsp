@@ -12,6 +12,7 @@
 					<td>Organiza</td>
 					<td>Cantidad de jugadores</td>
 					<td></td>
+					<td></td>
 				</tr>
 				<c:forEach items="${partidos}" var="partido">
 				<tr>
@@ -20,7 +21,7 @@
 						${partido.id}
 					</td>
 					<td>
-						${partido.cancha}
+						${partido.cancha.nombre}
 					</td>
 					<td>
 						${partido.organizador}
@@ -30,6 +31,9 @@
 					</td>
 					<td>
 						<button class="btn btn-sm btn-danger" type="submit"/>Eliminar</button>
+					</td>
+					<td>
+						<a class="btn btn-primary" href="invitar-usuario">Invitar Jugador</a>
 					</td>
 					</form:form>
 				</tr>

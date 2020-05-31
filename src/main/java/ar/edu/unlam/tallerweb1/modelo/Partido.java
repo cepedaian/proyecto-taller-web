@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +13,7 @@ public class Partido {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 	private Integer cantidadJugadores;
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	private Cancha cancha;
 	private String organizador;
 

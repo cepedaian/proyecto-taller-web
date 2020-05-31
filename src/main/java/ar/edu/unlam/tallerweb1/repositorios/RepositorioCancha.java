@@ -14,4 +14,6 @@ public interface RepositorioCancha {
     public void eliminarCancha(Long id);
 
     public List<Cancha> buscarCancha(Barrio barrio);
+
+	public Cancha getCancha(Long id);
 }
