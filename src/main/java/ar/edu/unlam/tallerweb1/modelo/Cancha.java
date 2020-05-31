@@ -19,7 +19,7 @@ public class Cancha {
 
 	private Integer tipo;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Direccion direccion;
 
 	public Long getId() {
