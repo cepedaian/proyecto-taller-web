@@ -1,11 +1,16 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Farmacia;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -44,6 +49,21 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		final Session session = sessionFactory.getCurrentSession();
 		session.save(usuario);
 		
+	}
+
+
+	@Override
+	public List<Usuario> buscarUsuario(Usuario usuario) {
+		
+		  Session session = sessionFactory.getCurrentSession();
+	      
+		  Criteria criteria = session.createCriteria(Usuario.class);
+	      criteria.add(Restrictions.eq("posicion", usuario.getPosicion()));
+	      criteria.add(Restrictions.eq("barrio", usuario.getBarrio())); 
+	      
+	      List<Usuario> usuarios = criteria.list();
+	      
+	      return usuarios;
 	}
 
 }

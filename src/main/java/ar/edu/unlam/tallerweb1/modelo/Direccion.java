@@ -17,7 +17,7 @@ public class Direccion {
 
 	private String altura;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Barrio barrio;
 
 	public Long getId() {

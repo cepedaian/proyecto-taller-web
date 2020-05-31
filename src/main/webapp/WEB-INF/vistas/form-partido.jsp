@@ -10,10 +10,13 @@
 			  	<label for="cancha" class="col-form-label col-form-label-sm font-weight-bold">Cancha:</label>
 			  	<form:select path="cancha.id" class="form-control form-control-sm" id="cancha">
 				  	<c:forEach items="${canchas}" var="cancha">
-						<option value="${cancha.id}">${cancha.nombre}</option>
+						<option value="${cancha.id}">${cancha.nombre} - ${cancha.direccion.barrio.descripcion} </option>
 				  	</c:forEach>
 			  	</form:select>
+			<button><a class="btn btn-sm btn-primary mt-1" href="/show-form-cancha">Nueva Cancha</a></button>
 			</div>
+		<div>
+		</div>
 		<div class="form-group col-md-12 col-sm-12">
 			<label class="col-form-label col-form-label-sm font-weight-bold">Cantidad de Jugadores:</label>
 			<form:input path="cantidadJugadores" type="text" id="cantidadJugadores" class="form-control mb-2"/>

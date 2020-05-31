@@ -28,7 +28,7 @@
 							${cancha.suelo}
 					</td>
 					<td>
-							<%--${cancha.direccion}--%>
+							${cancha.direccion.barrio.descripcion}
 					</td>
 					<%--<td>
 						<button class="btn btn-sm btn-danger" type="submit"/>Eliminar</button>

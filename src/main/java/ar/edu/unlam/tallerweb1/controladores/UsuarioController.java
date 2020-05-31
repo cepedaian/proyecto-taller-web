@@ -63,10 +63,36 @@ public class UsuarioController {
 		
 		ModelMap model = new ModelMap();
 		
-		UsuarioFilter usuarioFilter = new UsuarioFilter();
+		//UsuarioFilter usuarioFilter = new UsuarioFilter();
 		
-		model.put("usuarioFilter",usuarioFilter);
+		//model.put("usuarioFilter",usuarioFilter);
+		
+		List<Barrio> barrios = this.barrioService.getAll();
+		model.put("barrios", barrios);
+		
+		model.put("usuario",new Usuario());
 		
 		return new ModelAndView ("form-invitado", model);
 	}
+
+
+	@RequestMapping(value="/buscar-usuario", method= RequestMethod.POST)
+	public ModelAndView BuscarUsuario(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request){
+		
+		ModelMap model = new ModelMap();
+		
+		
+		
+		List<Usuario> usuarios = this.usuarioService.buscarUsuario(usuario);
+		model.put("usuarios", usuarios);
+		
+		
+		return new ModelAndView ("mostrar-usuarios", model);
+	}
+
+
+
+
+
+
 }

@@ -6,6 +6,7 @@
 		</div>
 
 		<a class="btn btn-primary" href="mostrar-partidos">Volver a Partidos</a>
+		<a class="btn btn-primary" href="invitar-usuario">Invitar Jugador</a>
 </section>
 
 <jsp:include page="footer.jsp" />

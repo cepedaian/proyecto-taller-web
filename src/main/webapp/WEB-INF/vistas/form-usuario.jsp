@@ -24,12 +24,6 @@
 				<form:input path="password" type="password" class="form-control form-control-sm" id="password" placeholder="Ingrese su Contraseña"/>
 			</div>
 		</div>
-		<!--<div class="form-group row">
-			<label for="re-password" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Reingrese Contraseña:</label>
-			<div class="col-sm-10">
-				<form:input path="re-password" type="password" class="form-control form-control-sm" id="re-password" placeholder="Ingrese nuevamente su Contraseña"/>
-			</div>
-		</div>-->
 		<div class="form-group row">
 			<label for="posicion" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Posicion:</label>
 			<div class="col-sm-10">
