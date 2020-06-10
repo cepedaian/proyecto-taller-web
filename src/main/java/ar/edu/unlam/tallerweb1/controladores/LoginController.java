@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Cuenta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-public class ControladorLogin {
+public class LoginController {
 
 	// La anotacion @Autowired indica a Spring que se debe utilizar el contructor como mecanismo de inyección de dependencias,
 	// es decir, qeue lo parametros del mismo deben ser un bean de spring y el framewrok automaticamente pasa como parametro
@@ -23,7 +24,7 @@ public class ControladorLogin {
 	private ServicioLogin servicioLogin;
 
 	@Autowired
-	public ControladorLogin(ServicioLogin servicioLogin){
+	public LoginController(ServicioLogin servicioLogin){
 		this.servicioLogin = servicioLogin;
 	}
 
@@ -34,8 +35,8 @@ public class ControladorLogin {
 		ModelMap modelo = new ModelMap();
 		// Se agrega al modelo un objeto del tipo Usuario con key 'usuario' para que el mismo sea asociado
 		// al model attribute del form que esta definido en la vista 'login'
-		Usuario usuario = new Usuario();
-		modelo.put("usuario", usuario);
+		Cuenta cuenta = new Cuenta();
+		modelo.put("cuenta", cuenta);
 		// Se va a la vista login (el nombre completo de la lista se resuelve utilizando el view resolver definido en el archivo spring-servlet.xml)
 		// y se envian los datos a la misma  dentro del modelo
 		return new ModelAndView("login", modelo);

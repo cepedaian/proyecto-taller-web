@@ -32,7 +32,4 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		return this.repositorioUsuario.buscarUsuario(usuario);
 	}
-	
-	
-	
 }
