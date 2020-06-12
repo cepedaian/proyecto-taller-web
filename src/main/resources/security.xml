@@ -12,19 +12,20 @@
     <security:http auto-config="true">
         <security:intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
         <security:http-basic />
-        <security:csrf disabled="true"/>
     </security:http>
 
     <security:authentication-manager alias="authenticationManager">
-        <security:authentication-provider user-service-ref="mockProvider" />
+        <security:authentication-provider user-service-ref="customProvider"/>
     </security:authentication-manager>
 
-    <security:user-service id="mockProvider">
-        <security:user name="admin" password="1234" authorities="ROLE_ADMIN" />
-        <security:user name="guest" password="4321" authorities="ROLE_USER" />
-    </security:user-service>
+    <beans:bean id="customProvider" class="ar.edu.unlam.tallerweb1.security.MyAuthenticationProvider"/>
 
-    <!--<beans:bean id="customProvider" class="ar.com.grupoesfera.twitter.seguridad.SimpleAuthenticationProvider">
+    <!--<security:user-service id="mockProvider">
+        <security:user name="admin" password="1234" authorities="ROLE_ADMIN" />
+        <security:user name="guest" password    ="4321" authorities="ROLE_USER" />
+    </security:user-service>-->
+
+    <!--<beans:bean id="customProvider" class="ar.edu.unlam.tallerweb1.security.MyAuthenticationProvider">
         <beans:property name="user" value="admin"/>
         <beans:property name="password" value="1234"/>
     </beans:bean>-->
