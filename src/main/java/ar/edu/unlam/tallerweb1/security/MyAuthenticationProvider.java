@@ -1,4 +1,4 @@
-package ar.edu.unlam.tallerweb1.security;
+/*package ar.edu.unlam.tallerweb1.security;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,3 +25,4 @@ public class MyAuthenticationProvider implements UserDetailsService {
         return userDetails;
     }
 }
+*/

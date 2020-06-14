@@ -4,21 +4,19 @@
 		<!-- Bootstrap core CSS -->
 	    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" >
 		<style>
-			body {
-				height: 100vh;
-				background: #56ab2f;  /* fallback for old browsers */
-				background: -webkit-linear-gradient(to top, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
-				background: linear-gradient(to top, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-			}
+
 
 			.nav-link {
 				color: white !important;
 			}
+			.home{
+				background-image: url("../../img/background_sin_logo.jpg");
+			}
 		</style>
 	</head>
-	<body>
+	<body class="home">
 		<header>
-			<nav class="navbar navbar-expand-lg navbar-light">
+			<!--<nav class="navbar navbar-expand-lg navbar-light">
 				<a class="navbar-brand" href="#">Linea de 4</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -39,5 +37,5 @@
 					  	</li>
 					</ul>
 				  </div>
-			</nav>
+			</nav>-->
 		</header>
