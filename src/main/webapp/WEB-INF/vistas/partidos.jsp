@@ -2,10 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="header.jsp" />
+<jsp:include page="nav.jsp" />
 
-<section class="container">
+<section class="container-fluid section">
 		<h1 class="display-4 text-center text-white mb-2">Partidos</h1>
-		<table class="table">
+		<table class="table text-white">
 				<tr>
 					<td>Id</td>
 					<td>Cancha</td>

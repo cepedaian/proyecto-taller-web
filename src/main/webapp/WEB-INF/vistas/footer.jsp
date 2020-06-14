@@ -1,5 +1,10 @@
-		<footer class="text-center">
-			<small>Linea de 4 - Taller Web 1 - UNlam</small>
+		<footer class="bg-secondary text-white p-5">
+			<div class="col-sm-6">
+				<small>Linea de 4 - Taller Web 1 - UNlam</small>
+			</div>
+			<div class="col-sm-6">
+
+			</div>
 		</footer>
 
 		<!-- scripts -->
