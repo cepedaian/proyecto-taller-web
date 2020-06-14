@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("repositorioUsuario")
+@Repository("repositorioCuenta")
 public class RepositorioCuentaImpl implements RepositorioCuenta {
 
 	private SessionFactory sessionFactory;
