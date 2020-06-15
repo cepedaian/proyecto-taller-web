@@ -26,11 +26,24 @@ public class RepositorioCuentaImpl implements RepositorioCuenta {
 	public Cuenta findByEmail(String email) {
 		Session session = sessionFactory.getCurrentSession();
 
-		  Criteria criteria = session.createCriteria(Cuenta.class);
-	      criteria.add(Restrictions.eq("email", email));
+	  	Criteria criteria = session.createCriteria(Cuenta.class);
+	  	criteria.add(Restrictions.eq("email", email));
 
-	      Cuenta cuenta = (Cuenta) criteria.uniqueResult();
+	  	Cuenta cuenta = (Cuenta) criteria.uniqueResult();
 
-	      return cuenta;
+	  	return cuenta;
+	}
+
+	@Override
+	public Cuenta getCuenta(Cuenta cuenta) {
+		Session session = sessionFactory.getCurrentSession();
+
+	  	Criteria criteria = session.createCriteria(Cuenta.class);
+	  	criteria.add(Restrictions.eq("email", cuenta.getEmail()));
+	  	criteria.add(Restrictions.eq("password", cuenta.getPassword()));
+
+	  	Cuenta cuentaBuscada = (Cuenta) criteria.uniqueResult();
+
+	  	return cuentaBuscada;
 	}
 }
