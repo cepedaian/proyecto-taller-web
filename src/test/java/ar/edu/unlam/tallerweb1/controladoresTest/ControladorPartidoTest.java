@@ -12,7 +12,7 @@ import ar.edu.unlam.tallerweb1.controladores.PartidoController;
 import ar.edu.unlam.tallerweb1.servicios.CanchaService;
 import ar.edu.unlam.tallerweb1.servicios.PartidoService;
 
-public class ControladorTest{
+public class ControladorPartidoTest{
 	
 	@Test
 	@Transactional @Rollback
