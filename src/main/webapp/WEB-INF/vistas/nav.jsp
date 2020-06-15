@@ -7,12 +7,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="login">Login</a>
               </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="registrarse">Registrarse</a>
               </li>
+            <c:if test="${not empty cuenta}">
+            <li class="nav-item">
+                Hola ${cuenta.usuario.userName}
+            </li>
+            </c:if>
+
             <%--<li class="nav-item active">
                 <a class="nav-link" href="mostrar-canchas">Mostrar canchas</a>
               </li>

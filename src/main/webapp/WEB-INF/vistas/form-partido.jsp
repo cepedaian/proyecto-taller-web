@@ -2,8 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="header.jsp" />
+<jsp:include page="nav.jsp" />
 
-<section class="container">
+<section class="container-fluid section">
 	<h1 class="display-4 text-center text-white mb-2">Crear partido</h1>
 	<form:form action="insertar-partido" method="POST" modelAttribute="partido">
 		<div class="form-group col-md-12 col-sm-12">
