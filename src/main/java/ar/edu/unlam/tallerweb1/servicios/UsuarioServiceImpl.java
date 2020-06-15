@@ -25,7 +25,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void crearUsuario(Usuario usuario) {
 
 		this.repositorioUsuario.crearUsuario(usuario);
-		
+	 
+	
 	}
 	@Override
 	public List<Usuario> buscarUsuario(Usuario usuario) {

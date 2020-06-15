@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Cuenta;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.PartidoService;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,16 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class LoginController {
 
 	private ServicioLogin servicioLogin;
+	private PartidoService partidoService;
 
 	@Autowired
-	public LoginController(ServicioLogin servicioLogin){
+	public LoginController(ServicioLogin servicioLogin, PartidoService partidoService) {
 		this.servicioLogin = servicioLogin;
+		this.partidoService = partidoService;
 	}
 
 	@RequestMapping("/login")
@@ -41,6 +47,8 @@ public class LoginController {
 		if (usuarioBuscado != null) {
 			view = "partidos";
 			model.put("cuenta", usuarioBuscado);
+			List<Partido> partidos = this.partidoService.getAll();
+			model.put("partidos", partidos);
 		} else {
 			model.put("error", "Usuario o clave incorrecta");
 		}
@@ -53,7 +61,8 @@ public class LoginController {
 		return new ModelAndView("home");
 	}
 
-	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
+	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la
+	// url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/home");

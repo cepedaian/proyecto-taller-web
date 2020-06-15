@@ -12,4 +12,7 @@ public interface RepositorioUsuario {
 	void crearUsuario(Usuario usuario);
 
 	public List<Usuario> buscarUsuario(Usuario usuario);
+
+	Boolean buscarUsuarioByUserName(Usuario usuario);
+
 }

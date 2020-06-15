@@ -22,7 +22,7 @@ public class Cuenta {
 
 	private String password;
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(cascade= CascadeType.ALL ,fetch=FetchType.EAGER)
 	private Usuario usuario;
 
 	public Long getId() {

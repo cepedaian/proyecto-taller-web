@@ -14,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.filter.UsuarioFilter;
 import ar.edu.unlam.tallerweb1.modelo.Barrio;
+import ar.edu.unlam.tallerweb1.modelo.Cuenta;
 import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.BarrioService;
+import ar.edu.unlam.tallerweb1.servicios.CuentaService;
 import ar.edu.unlam.tallerweb1.servicios.UsuarioService;
 
 @Controller
@@ -24,75 +26,76 @@ public class UsuarioController {
 
 	private UsuarioService usuarioService;
 	private BarrioService barrioService;
-	
+	private CuentaService cuentaService;
+
 	@Autowired
-	public UsuarioController(UsuarioService usuarioService, BarrioService barrioService) {
-		
+	public UsuarioController(UsuarioService usuarioService, BarrioService barrioService, CuentaService cuentaService) {
+
 		this.usuarioService = usuarioService;
 		this.barrioService = barrioService;
-		
+		this.cuentaService = cuentaService;
 	}
-	
-	@RequestMapping (path="/crear-usuario", method = RequestMethod.GET)
+
+	@RequestMapping(path = "/crear-usuario", method = RequestMethod.GET)
 	public ModelAndView CrearUsuario() {
-		
+
 		ModelMap model = new ModelMap();
-		
+
 		List<Barrio> barrios = this.barrioService.getAll();
 		model.put("barrios", barrios);
 		model.put("usuario", new Usuario());
-		
+		model.put("cuenta", new Cuenta());
+
 		return new ModelAndView("form-usuario", model);
-		
+
 	}
-	
-	@RequestMapping(path="/insertar-usuario", method = RequestMethod.POST)
-	public ModelAndView InsertarUsuario(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
+
+	@RequestMapping(path = "/insertar-usuario", method = RequestMethod.POST)
+	public ModelAndView InsertarUsuario(@ModelAttribute("cuenta") Cuenta cuenta, HttpServletRequest request) {
+
+		ModelMap model = new ModelMap();
 		
+		
+		try {
+
+			this.cuentaService.crearCuenta(cuenta);
+			return new ModelAndView("confirmar-usuario", model);
+		
+		} catch (Exception e) {
+			
+			model.put("error", e.getMessage());
+			return new ModelAndView("form-usuario", model);
+		}
+		
+
+	}
+
+	@RequestMapping(value = "/invitar-usuario", method = RequestMethod.GET)
+	public ModelAndView InvitarUsuario() {
+
 		ModelMap model = new ModelMap();
 
-		this.usuarioService.crearUsuario(usuario);
-		
-		return new ModelAndView ("confirmar-usuario", model);
-		
-	}
-	
-	
-	@RequestMapping(value="/invitar-usuario", method= RequestMethod.GET)
-	public ModelAndView InvitarUsuario(){
-		
-		ModelMap model = new ModelMap();
-		
-		//UsuarioFilter usuarioFilter = new UsuarioFilter();
-		
-		//model.put("usuarioFilter",usuarioFilter);
-		
+		// UsuarioFilter usuarioFilter = new UsuarioFilter();
+
+		// model.put("usuarioFilter",usuarioFilter);
+
 		List<Barrio> barrios = this.barrioService.getAll();
 		model.put("barrios", barrios);
-		
-		model.put("usuario",new Usuario());
-		
-		return new ModelAndView ("form-invitado", model);
+
+		model.put("usuario", new Usuario());
+
+		return new ModelAndView("form-invitado", model);
 	}
 
+	@RequestMapping(value = "/buscar-usuario", method = RequestMethod.POST)
+	public ModelAndView BuscarUsuario(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
 
-	@RequestMapping(value="/buscar-usuario", method= RequestMethod.POST)
-	public ModelAndView BuscarUsuario(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request){
-		
 		ModelMap model = new ModelMap();
-		
-		
-		
+
 		List<Usuario> usuarios = this.usuarioService.buscarUsuario(usuario);
 		model.put("usuarios", usuarios);
-		
-		
-		return new ModelAndView ("mostrar-usuarios", model);
+
+		return new ModelAndView("mostrar-usuarios", model);
 	}
-
-
-
-
-
 
 }

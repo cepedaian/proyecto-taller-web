@@ -16,34 +16,59 @@ public class RepositorioCuentaImpl implements RepositorioCuenta {
 
 	private SessionFactory sessionFactory;
 
-    @Autowired
-	public RepositorioCuentaImpl(SessionFactory sessionFactory){
+	@Autowired
+	public RepositorioCuentaImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
-	
 	@Override
 	public Cuenta findByEmail(String email) {
 		Session session = sessionFactory.getCurrentSession();
 
-	  	Criteria criteria = session.createCriteria(Cuenta.class);
-	  	criteria.add(Restrictions.eq("email", email));
+		Criteria criteria = session.createCriteria(Cuenta.class);
+		criteria.add(Restrictions.eq("email", email));
 
-	  	Cuenta cuenta = (Cuenta) criteria.uniqueResult();
+		Cuenta cuenta = (Cuenta) criteria.uniqueResult();
 
-	  	return cuenta;
+		return cuenta;
 	}
 
 	@Override
 	public Cuenta getCuenta(Cuenta cuenta) {
 		Session session = sessionFactory.getCurrentSession();
 
-	  	Criteria criteria = session.createCriteria(Cuenta.class);
-	  	criteria.add(Restrictions.eq("email", cuenta.getEmail()));
-	  	criteria.add(Restrictions.eq("password", cuenta.getPassword()));
+		Criteria criteria = session.createCriteria(Cuenta.class);
+		criteria.add(Restrictions.eq("email", cuenta.getEmail()));
+		criteria.add(Restrictions.eq("password", cuenta.getPassword()));
 
-	  	Cuenta cuentaBuscada = (Cuenta) criteria.uniqueResult();
+		Cuenta cuentaBuscada = (Cuenta) criteria.uniqueResult();
 
-	  	return cuentaBuscada;
+		return cuentaBuscada;
 	}
+
+	@Override
+	public void crearCuenta(Cuenta cuenta) {
+
+		final Session session = sessionFactory.getCurrentSession();
+		session.save(cuenta);
+
+	}
+
+	@Override
+	public Boolean validarCuentaEmail(Cuenta cuenta) {
+
+		final Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(Cuenta.class);
+		criteria.add(Restrictions.eq("email", cuenta.getEmail()));
+
+		Cuenta cuentaBuscada = (Cuenta) criteria.uniqueResult();
+
+		if (cuentaBuscada == null) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 }

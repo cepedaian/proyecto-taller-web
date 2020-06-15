@@ -7,4 +7,8 @@ public interface RepositorioCuenta {
     Cuenta findByEmail(String email);
 
     Cuenta getCuenta(Cuenta cuenta);
+
+	void crearCuenta(Cuenta cuenta);
+
+	Boolean validarCuentaEmail(Cuenta cuenta);
 }
