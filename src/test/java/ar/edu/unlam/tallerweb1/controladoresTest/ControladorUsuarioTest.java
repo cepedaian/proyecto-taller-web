@@ -8,6 +8,7 @@ import static org.mockito.Mockito.*;
 
 import ar.edu.unlam.tallerweb1.controladores.UsuarioController;
 import ar.edu.unlam.tallerweb1.modelo.Cuenta;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.BarrioService;
 import ar.edu.unlam.tallerweb1.servicios.CuentaService;
 import ar.edu.unlam.tallerweb1.servicios.UsuarioService;
@@ -34,6 +35,29 @@ public class ControladorUsuarioTest {
 		assertThat(modelandview.getViewName()).isEqualTo("form-usuario");
 		assertThat(modelandview.getModel()).containsKey("error");
 		assertThat(modelandview.getModel().get("error")).isEqualTo("Email existente");
+	}
+	
+	@Test
+	public void testQueValidaMensajeDeErrorEnLaVistaCrearUsuarioUserNameExistente() throws Exception{
+
+		UsuarioService servicioUsuario = mock(UsuarioService.class);
+		BarrioService barrioService = mock(BarrioService.class);
+		CuentaService cuentaService = mock(CuentaService.class);
+		Cuenta cuenta = new Cuenta();
+		Usuario usuario = new Usuario();
+		usuario.setUserName("DiegoSL");
+		
+		Exception e = new Exception("UserName existente");
+		
+		doThrow(e).when(cuentaService).crearCuenta(cuenta);
+		
+		UsuarioController usuarioController = new UsuarioController(servicioUsuario,barrioService,cuentaService);
+		
+		final ModelAndView modelandview = usuarioController.InsertarUsuario(cuenta, null);
+	
+		assertThat(modelandview.getViewName()).isEqualTo("form-usuario");
+		assertThat(modelandview.getModel()).containsKey("error");
+		assertThat(modelandview.getModel().get("error")).isEqualTo("UserName existente");
 	}
 
 }

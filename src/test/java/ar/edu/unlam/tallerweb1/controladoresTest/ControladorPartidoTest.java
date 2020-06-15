@@ -15,8 +15,8 @@ import ar.edu.unlam.tallerweb1.servicios.PartidoService;
 public class ControladorPartidoTest{
 	
 	@Test
-	@Transactional @Rollback
 	
+	//TEST METODO MOSTRAR-PARTIDO DE PARTIDOCONTROLLER
 	public void verificarQueControladorTeLleveALaViewPartidos() {
 		
 		//preparacion 
@@ -34,5 +34,41 @@ public class ControladorPartidoTest{
 		assertThat(modelandview.getViewName()).isEqualTo("partidos");
 	}
 
+	
+	@Test
+	//TEST METODO ELIMINAR-PARTIDO DE PARTIDOCONTROLLER
+	public void verificarQueControladorTeLleveALaViewEliminarPartido() {
+		
+		//prearacion
+		PartidoService servicioPartido = mock(PartidoService.class);
+		CanchaService servicioCancha = mock(CanchaService.class);
+		PartidoController controlador = new PartidoController(servicioPartido, servicioCancha);
+		
+		//ejecucion
+		final ModelAndView modelandview = controlador.eliminarPartido(null);
+		
+		//validacion
+		
+		assertThat(modelandview.getViewName()).isEqualTo("partido-eliminado");
+		
+	}
+	
+	@Test
+	//TEST METODO CREAR-PARTIDO DE PARTIDOCONTROLLER
+	public void verificarQueControladorTeLleveALaViewCrearPartido() {
+		
+		//prearacion
+		PartidoService servicioPartido = mock(PartidoService.class);
+		CanchaService servicioCancha = mock(CanchaService.class);
+		PartidoController controlador = new PartidoController(servicioPartido, servicioCancha);
+		
+		//ejecucion
+		final ModelAndView modelandview = controlador.crearPartido();
+		
+		//validacion
+		
+		assertThat(modelandview.getViewName()).isEqualTo("form-partido");
+		
+	}
 	
 }

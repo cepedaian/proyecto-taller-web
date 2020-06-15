@@ -12,7 +12,7 @@ import static org.mockito.Mockito.*;
 public class ServicioCuentaTest {
 
     @Test(expected= Exception.class)
-    public void validarQueSeLanzeUnaExceptionPorMailExistente()throws Exception{
+    public void validarQueSeLanceUnaExceptionPorMailExistente()throws Exception{
         //preparacion
         RepositorioCuenta repositorioCuenta = mock(RepositorioCuenta.class);
         RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);

@@ -44,7 +44,7 @@ public class PartidoController {
 	}
 	
 	
-	@RequestMapping(value="/mostrar-partidos", method= RequestMethod.GET)
+	@RequestMapping(value="/mostrar-partidos", method= RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView mostrarPartidos(){
 		
 		ModelMap model = new ModelMap();
@@ -56,7 +56,7 @@ public class PartidoController {
 		return new ModelAndView ("partidos", model);
 	}
 	
-	@RequestMapping(value="/eliminar-partido/{id}", method= RequestMethod.POST)
+	@RequestMapping(value="/eliminar-partido/{id}", method= RequestMethod.POST) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView eliminarPartido(@PathVariable("id") Long id){
 		
 		ModelMap model = new ModelMap();
@@ -66,7 +66,7 @@ public class PartidoController {
 		return new ModelAndView ("partido-eliminado", model);
 	}
 
-	@RequestMapping(value="/crear-partido", method= RequestMethod.GET)
+	@RequestMapping(value="/crear-partido", method= RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView crearPartido(){
 		
 		ModelMap model = new ModelMap();
