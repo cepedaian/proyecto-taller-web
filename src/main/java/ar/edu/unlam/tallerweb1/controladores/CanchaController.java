@@ -30,7 +30,7 @@ public class CanchaController {
 		this.barrioService = barrioService;
 	}
 	
-	@RequestMapping(path = "/mostrar-canchas", method = RequestMethod.GET)
+	@RequestMapping(path = "/mostrar-canchas", method = RequestMethod.GET)//TEST REALIZADO Y VERIFICADO
 	public ModelAndView mostrarCanchas() {
 		ModelMap model = new ModelMap();
 		
@@ -42,7 +42,7 @@ public class CanchaController {
 		return new ModelAndView("canchas", model);
 	}
 
-	@RequestMapping(path = "/show-form-cancha", method = RequestMethod.GET)
+	@RequestMapping(path = "/show-form-cancha", method = RequestMethod.GET)//TEST REALIZADO Y VERIFICADO
 	public ModelAndView showFormCancha() {
 		ModelMap model = new ModelMap();
 

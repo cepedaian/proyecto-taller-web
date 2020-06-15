@@ -1,5 +1,8 @@
 package ar.edu.unlam.tallerweb1.controladoresTest;
 
+import ar.edu.unlam.tallerweb1.modelo.Barrio;
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
+import ar.edu.unlam.tallerweb1.modelo.Partido;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,5 +73,23 @@ public class ControladorPartidoTest{
 		assertThat(modelandview.getViewName()).isEqualTo("form-partido");
 		
 	}
-	
+	@Test
+	//TEST METODO INSERTAR-PARTIDO DE PARTIDOCONTROLLER
+	public void verificarQueControladorTeLleveALaViewConfirmarPartido() {
+
+		//prearacion
+		PartidoService servicioPartido = mock(PartidoService.class);
+		CanchaService servicioCancha = mock(CanchaService.class);
+		PartidoController controlador = new PartidoController(servicioPartido, servicioCancha);
+		//Cancha cancha = new Cancha();
+		//Barrio barrio = new Barrio();
+		Partido partido = new Partido();
+		//ejecucion
+		final ModelAndView modelandview = controlador.insertarPartido(partido, null);
+
+		//validacion
+
+		assertThat(modelandview.getViewName()).isEqualTo("confirmar-partido");
+
+	}
 }

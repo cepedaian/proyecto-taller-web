@@ -82,7 +82,7 @@ public class PartidoController {
 		return new ModelAndView ("form-partido", model);
 	}
 	
-	@RequestMapping(path = "/insertar-partido", method = RequestMethod.POST)
+	@RequestMapping(path = "/insertar-partido", method = RequestMethod.POST) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView insertarPartido(@ModelAttribute("partido") Partido partido, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
