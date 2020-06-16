@@ -55,7 +55,7 @@ public class CanchaController {
 		return new ModelAndView("form-cancha", model);
 	}
 	
-	@RequestMapping(path = "/crear-cancha", method = RequestMethod.POST)
+	@RequestMapping(path = "/crear-cancha", method = RequestMethod.POST)//TEST REALIZADO Y VERIFICADO - PREGUNTAR TEMA "ID"
 	public ModelAndView crearCancha(@ModelAttribute("cancha") Cancha cancha, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
@@ -71,7 +71,7 @@ public class CanchaController {
 		return new ModelAndView ("canchas", model);
 	}
 
-	@RequestMapping(value="/eliminar-cancha/{id}", method= RequestMethod.POST)
+	@RequestMapping(value="/eliminar-cancha/{id}", method= RequestMethod.POST) //TEST REALIZADO Y VERIFICADO
 	public ModelAndView eliminarCancha(@PathVariable("id") Long id){
 
 		ModelMap model = new ModelMap();

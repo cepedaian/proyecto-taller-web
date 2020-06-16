@@ -50,7 +50,7 @@ public class UsuarioController {
 
 	}
 
-	@RequestMapping(path = "/insertar-usuario", method = RequestMethod.POST)
+	@RequestMapping(path = "/insertar-usuario", method = RequestMethod.POST) //TEST REALIZADO Y VERIFICADO
 	public ModelAndView InsertarUsuario(@ModelAttribute("cuenta") Cuenta cuenta, HttpServletRequest request) {
 
 		ModelMap model = new ModelMap();
@@ -70,7 +70,7 @@ public class UsuarioController {
 
 	}
 
-	@RequestMapping(value = "/invitar-usuario", method = RequestMethod.GET)
+	@RequestMapping(value = "/invitar-usuario", method = RequestMethod.GET) //TEST REALIZADO Y VERIFICADO
 	public ModelAndView InvitarUsuario() {
 
 		ModelMap model = new ModelMap();

@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladoresTest;
 
 import ar.edu.unlam.tallerweb1.controladores.CanchaController;
+import ar.edu.unlam.tallerweb1.modelo.Cancha;
 import ar.edu.unlam.tallerweb1.servicios.BarrioService;
 import ar.edu.unlam.tallerweb1.servicios.CanchaService;
 import org.junit.Test;
@@ -40,4 +41,40 @@ public class ControladorCanchaTest {
         //validacion
         assertThat(modelandview.getViewName()).isEqualTo("form-cancha");
     }
+    
+    @Test
+    //TEST METODO CREAR-CANCHA DE CANCHACONTROLLER
+    public void verificarQueControladorTeLlevaAlViewCanchas() {
+    	
+    	//preparacion
+        CanchaService servicioCancha = mock(CanchaService.class);
+        CanchaController controlador = new CanchaController(servicioCancha,null);
+        Cancha cancha = new Cancha();
+        servicioCancha.crearCancha(cancha);
+        
+        //ejecucion
+
+        final ModelAndView modelandview = controlador.crearCancha(cancha, null);
+        
+        //validacion
+        assertThat(modelandview.getViewName()).isEqualTo("canchas");
+        //assertThat(modelandview.getModel().get("mensaje")).isEqualTo("La cancha se creo con exito!!!"); VERIFICAR QUE EL ID DEL CONTROLADOR SEA DISTINTO DE CERO
+    }
+    
+    @Test
+    //TEST METODO ELIMINAR-CANCHA DE CANCHACONTROLLER
+    public void verificarQueControladorTeLlevaAlViewCanchaEliminada() {
+    	
+    	//preparacion
+    	CanchaService servicioCancha = mock(CanchaService.class);
+        CanchaController controlador = new CanchaController(servicioCancha,null);
+        
+        //ejecucion
+        
+        final ModelAndView modelandview = controlador.eliminarCancha(null);
+        
+        //validacion
+        assertThat(modelandview.getViewName()).isEqualTo("cancha-eliminada");
+    }
+    
 }
