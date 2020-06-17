@@ -18,7 +18,7 @@
                     <a class="nav-link" href="mostrar-partidos">Partidos</a>
                 </li>
                 <li class="nav-item">
-                    	<button class="btn btn-sm btn-primary" type="submit"/>Crear Partido</button>
+                    <button class="btn btn-sm btn-primary" type="submit"/>Crear Partido</button>
                 </li>
             	</form:form>	
             </c:if>
