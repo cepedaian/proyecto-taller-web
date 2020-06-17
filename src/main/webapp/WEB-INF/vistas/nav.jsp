@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <nav class="navbar navbar-expand-lg bg-secondary d-flex justify-content-between">
     <a class="navbar-brand" href="home">
         <img src="../../img/logo.png" style="height: 3em">
@@ -10,9 +10,17 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <c:if test="${not empty cuenta}">
+                <form:form action="crear-partido/${cuenta.usuario.userName}" method="POST">
                 <li class="nav-item text-white">
                     Hola ${cuenta.usuario.userName}
                 </li>
+            	<li class="nav-item">
+                    <a class="nav-link" href="mostrar-partidos">Partidos</a>
+                </li>
+                <li class="nav-item">
+                    	<button class="btn btn-sm btn-primary" type="submit"/>Crear Partido</button>
+                </li>
+            	</form:form>	
             </c:if>
             <c:if test="${empty cuenta}">
                 <li class="nav-item">

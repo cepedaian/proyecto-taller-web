@@ -64,9 +64,9 @@ public class ControladorPartidoTest{
 		PartidoService servicioPartido = mock(PartidoService.class);
 		CanchaService servicioCancha = mock(CanchaService.class);
 		PartidoController controlador = new PartidoController(servicioPartido, servicioCancha);
-		
+		String user = "pepe";
 		//ejecucion
-		final ModelAndView modelandview = controlador.crearPartido();
+		final ModelAndView modelandview = controlador.crearPartido(user);
 		
 		//validacion
 		

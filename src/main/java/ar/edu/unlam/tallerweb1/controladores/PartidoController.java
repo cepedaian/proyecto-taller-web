@@ -22,77 +22,88 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Controller
 public class PartidoController {
-	
+
 	private PartidoService partidoService;
 	private CanchaService canchaService;
-	
+
 	@Autowired
-	public PartidoController(PartidoService partidoService, CanchaService canchaService){
+	public PartidoController(PartidoService partidoService, CanchaService canchaService) {
 		this.partidoService = partidoService;
 		this.canchaService = canchaService;
 	}
-	
+
 	@RequestMapping("/home")
 	public ModelAndView irAHome() {
 
 		ModelMap modelo = new ModelMap();
-		
+
 		Partido partido = new Partido();
 		modelo.put("partido", partido);
-		
+
 		return new ModelAndView("home", modelo);
 	}
-	
-	
-	@RequestMapping(value="/mostrar-partidos", method= RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
-	public ModelAndView mostrarPartidos(){
-		
+
+	@RequestMapping(value = "/mostrar-partidos", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
+	public ModelAndView mostrarPartidos() {
+
 		ModelMap model = new ModelMap();
 
 		List<Partido> partidos = this.partidoService.getAll();
 		model.put("partidos", partidos);
-		
-		
-		return new ModelAndView ("partidos", model);
-	}
-	
-	@RequestMapping(value="/eliminar-partido/{id}", method= RequestMethod.POST) // TEST REALIZADO Y VERIFICADO
-	public ModelAndView eliminarPartido(@PathVariable("id") Long id){
-		
-		ModelMap model = new ModelMap();
 
-        this.partidoService.eliminarPartido(id);
-
-		return new ModelAndView ("partido-eliminado", model);
+		return new ModelAndView("partidos", model);
 	}
 
-	@RequestMapping(value="/crear-partido", method= RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
-	public ModelAndView crearPartido(){
-		
+	@RequestMapping(value = "/eliminar-partido/{id}", method = RequestMethod.POST) // TEST REALIZADO Y VERIFICADO
+	public ModelAndView eliminarPartido(@PathVariable("id") Long id) {
+
 		ModelMap model = new ModelMap();
-		
+
+		this.partidoService.eliminarPartido(id);
+
+		return new ModelAndView("partido-eliminado", model);
+	}
+
+	@RequestMapping(value = "/crear-partido/{userName}", method = RequestMethod.POST) // TEST REALIZADO Y VERIFICADO
+	public ModelAndView crearPartido(@PathVariable("userName") String userName) {
+
+		ModelMap model = new ModelMap();
+
 		Partido partido = new Partido();
-		
-		model.put("partido",partido);
-		
+		model.put("userName", userName);
+		model.put("partido", partido);
+
 		List<Cancha> canchas = this.canchaService.getAll();
 		model.put("canchas", canchas);
+
+		return new ModelAndView("form-partido", model);
+
 		
-		
-		return new ModelAndView ("form-partido", model);
 	}
-	
+
+	/*@RequestMapping(value = "/crear-partido", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
+	public ModelAndView crearPartido() {
+
+		ModelMap model = new ModelMap();
+
+		Partido partido = new Partido();
+
+		model.put("partido", partido);
+
+		List<Cancha> canchas = this.canchaService.getAll();
+		model.put("canchas", canchas);
+
+		return new ModelAndView("form-partido", model);
+	}*/
+
 	@RequestMapping(path = "/insertar-partido", method = RequestMethod.POST) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView insertarPartido(@ModelAttribute("partido") Partido partido, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
 		this.partidoService.insertarPartido(partido);
-		
-		return new ModelAndView ("confirmar-partido", model);
-			
+
+		return new ModelAndView("confirmar-partido", model);
+
 	}
-	
-
-
 
 }
