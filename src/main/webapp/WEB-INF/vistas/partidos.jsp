@@ -4,8 +4,8 @@
 <jsp:include page="header.jsp" />
 <jsp:include page="nav.jsp" />
 
-<section class="container-fluid section">
-		<h1 class="display-4 text-center text-white mb-2">Partidos</h1>
+<section class="container-fluid p-3 section text-center">
+		<h1 class="display-4 text-white mb-4 font-weight-bold">Partidos</h1>
 		<table class="table text-white">
 				<tr>
 					<td>Id</td>
@@ -31,10 +31,14 @@
 						${partido.cantidadJugadores}
 					</td>
 					<td>
-						<button class="btn btn-sm btn-danger" type="submit"/>Eliminar</button>
+						<c:if test="${partido.organizador == cuenta.usuario.userName}">
+							<button class="btn btn-sm btn-danger" type="submit"/>Eliminar</button>
+						</c:if>
 					</td>
 					<td>
-						<a class="btn btn-primary" href="invitar-usuario">Invitar Jugador</a>
+						<c:if test="${partido.organizador == cuenta.usuario.userName}">
+							<a class="btn btn-primary" href="invitar-usuario">Invitar Jugador</a>
+						</c:if>
 					</td>
 					</form:form>
 				</tr>

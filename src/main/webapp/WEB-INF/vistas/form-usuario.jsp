@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
 
-<section class="container p-3">
-	<h1 class="display-4 text-white mb-4 font-weight-bold">Crear
-		Cuenta</h1>
-	<form:form action="insertar-usuario" method="POST"
+<section class="container-fluid p-3 section text-center">
+	<h1 class="display-4 text-white mb-4 font-weight-bold">Crear Cuenta</h1>
+
+	<form:form class="text-white text-right m-5" action="insertar-usuario" method="POST"
 		modelAttribute="cuenta">
 
 		<div class="form-group row">
@@ -14,7 +14,7 @@
 			<div class="col-sm-10">
 				<form:input path="email" type="email"
 					class="form-control form-control-sm" id="email"
-					placeholder="Ingrese su Email" />
+					placeholder="Ingrese su Email" required="" />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -23,7 +23,7 @@
 			<div class="col-sm-10">
 				<form:input path="password" type="text"
 					class="form-control form-control-sm" id="password"
-					placeholder="Ingrese su password" />
+					placeholder="Ingrese su password" required="" />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -32,11 +32,11 @@
 			<div class="col-sm-10">
 				<form:input path="usuario.userName" type="text"
 					class="form-control form-control-sm" id="userName"
-					placeholder="Ingrese su UserName" />
+					placeholder="Ingrese su UserName" required="" />
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="posiscion"
+			<label for="posicion"
 				class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Posicion:</label>
 			<div class="col-sm-10">
 				<form:select path="usuario.posicion"
@@ -66,7 +66,7 @@
 				de nacimiento:</label>
 			<div class="col-sm-10">
 				<form:input path="usuario.fecha_nac" type="date"
-					class="form-control form-control-sm" id="fecha_nac" />
+					class="form-control form-control-sm" id="fecha_nac" required="" />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -81,8 +81,12 @@
 			</div>
 		</div>
 
-		<button class="btn btn-sm btn-primary" type="submit" />Crear</button>
+		<div class="text-center">
+			<a class="btn btn-md btn-secondary mr-2" href="home">Cancelar</a>
+			<button class="btn btn-md btn-success" type="submit" />Crear</button>
+		</div>
 	</form:form>
+
 	<c:if test="${not empty error}">
 		<small class="text-danger">${error}</small>
 	</c:if>

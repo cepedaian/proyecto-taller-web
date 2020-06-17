@@ -36,9 +36,8 @@ public class UsuarioController {
 		this.cuentaService = cuentaService;
 	}
 
-	@RequestMapping(path = "/crear-usuario", method = RequestMethod.GET)
+	@RequestMapping(path = "/show-form-usuario", method = RequestMethod.GET)
 	public ModelAndView CrearUsuario() {
-
 		ModelMap model = new ModelMap();
 
 		List<Barrio> barrios = this.barrioService.getAll();
@@ -47,41 +46,34 @@ public class UsuarioController {
 		model.put("cuenta", new Cuenta());
 
 		return new ModelAndView("form-usuario", model);
-
 	}
 
 	@RequestMapping(path = "/insertar-usuario", method = RequestMethod.POST) //TEST REALIZADO Y VERIFICADO
 	public ModelAndView InsertarUsuario(@ModelAttribute("cuenta") Cuenta cuenta, HttpServletRequest request) {
-
 		ModelMap model = new ModelMap();
-		
-		
-		try {
 
+		try {
 			this.cuentaService.crearCuenta(cuenta);
-			return new ModelAndView("confirmar-usuario", model);
-		
+			String mensaje = "Se registro con exito!!!";
+			model.put("msj", mensaje);
+			return new ModelAndView("home", model);
 		} catch (Exception e) {
-			
 			model.put("error", e.getMessage());
+			List<Barrio> barrios = this.barrioService.getAll();
+			model.put("barrios", barrios);
 			return new ModelAndView("form-usuario", model);
 		}
-		
-
 	}
 
 	@RequestMapping(value = "/invitar-usuario", method = RequestMethod.GET) //TEST REALIZADO Y VERIFICADO
 	public ModelAndView InvitarUsuario() {
-
 		ModelMap model = new ModelMap();
 
 		// UsuarioFilter usuarioFilter = new UsuarioFilter();
-
 		// model.put("usuarioFilter",usuarioFilter);
 
 		List<Barrio> barrios = this.barrioService.getAll();
 		model.put("barrios", barrios);
-
 		model.put("usuario", new Usuario());
 
 		return new ModelAndView("form-invitado", model);
@@ -89,7 +81,6 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/buscar-usuario", method = RequestMethod.POST)
 	public ModelAndView BuscarUsuario(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
-
 		ModelMap model = new ModelMap();
 
 		List<Usuario> usuarios = this.usuarioService.buscarUsuario(usuario);

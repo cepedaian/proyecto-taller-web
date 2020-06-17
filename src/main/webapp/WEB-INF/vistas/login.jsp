@@ -6,7 +6,7 @@
 <div class="container-fluid section d-flex justify-content-center">
 	<div class="col-sm-6 p-4 text-white">
 		<form:form action="validar-login" method="POST" modelAttribute="cuenta" class="d-flex flex-column aling-items-start">
-			<img class="mb-3" src="../../img/logo.png" style="align-self: center;">
+			<img class="mb-3" src="../../img/logo.png" style="width:50%; align-self: center;">
 			<label for="email">Email:</label>
 			<form:input path="email" id="email" type="email" class="form-control mb-3" />
 			<label for="password">Password:</label>

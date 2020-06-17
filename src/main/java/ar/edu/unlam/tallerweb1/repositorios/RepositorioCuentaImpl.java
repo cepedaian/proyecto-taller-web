@@ -48,27 +48,18 @@ public class RepositorioCuentaImpl implements RepositorioCuenta {
 
 	@Override
 	public void crearCuenta(Cuenta cuenta) {
-
 		final Session session = sessionFactory.getCurrentSession();
 		session.save(cuenta);
-
 	}
 
 	@Override
 	public Boolean validarCuentaEmail(Cuenta cuenta) {
-
 		final Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Cuenta.class);
 		criteria.add(Restrictions.eq("email", cuenta.getEmail()));
 
 		Cuenta cuentaBuscada = (Cuenta) criteria.uniqueResult();
 
-		if (cuentaBuscada == null) {
-			return true;
-		} else {
-			return false;
-		}
-
+		return (cuentaBuscada == null);
 	}
-
 }
