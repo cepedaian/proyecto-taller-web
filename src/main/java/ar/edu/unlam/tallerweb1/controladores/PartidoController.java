@@ -2,8 +2,11 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import ar.edu.unlam.tallerweb1.modelo.Cuenta;
 import ar.edu.unlam.tallerweb1.servicios.CanchaService;
 import ar.edu.unlam.tallerweb1.servicios.PartidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import ar.edu.unlam.tallerweb1.modelo.Partido;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Controller
-public class PartidoController {
+public class PartidoController extends HttpServlet {
 
 	private PartidoService partidoService;
 	private CanchaService canchaService;
@@ -44,9 +47,16 @@ public class PartidoController {
 	}
 
 	@RequestMapping(value = "/mostrar-partidos", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
-	public ModelAndView mostrarPartidos() {
+	public ModelAndView mostrarPartidos(HttpServletRequest request) {
 
+		HttpSession session = request.getSession(false);
 		ModelMap model = new ModelMap();
+
+		if(session != null){
+			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			model.put("cuenta", cuenta);
+		}
+
 
 		List<Partido> partidos = this.partidoService.getAll();
 		model.put("partidos", partidos);

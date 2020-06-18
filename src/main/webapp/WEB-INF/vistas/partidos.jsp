@@ -6,6 +6,7 @@
 
 <section class="container-fluid p-3 section text-center">
 	<h1 class="display-4 text-white mb-4 font-weight-bold">Partidos</h1>
+	<h2>${cuenta.usuario.userName}</h2>
 	<div id="div1" style="overflow-y: scroll; height: 450px; width: 100%;">
 		<table class="table text-white">
 			<tr>

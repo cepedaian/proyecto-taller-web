@@ -15,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
-public class LoginController {
+public class LoginController extends HttpServlet {
 
 	private ServicioLogin servicioLogin;
 	private PartidoService partidoService;
@@ -45,6 +47,8 @@ public class LoginController {
 
 		Cuenta usuarioBuscado = servicioLogin.getCuenta(cuenta);
 		if (usuarioBuscado != null) {
+			HttpSession session = request.getSession(true);
+			session.setAttribute("usuario",usuarioBuscado);
 			view = "partidos";
 			model.put("cuenta", usuarioBuscado);
 			List<Partido> partidos = this.partidoService.getAll();

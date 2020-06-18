@@ -1,4 +1,4 @@
-package ar.edu.unlam.tallerweb1.controladoresTest;
+/*package ar.edu.unlam.tallerweb1.controladoresTest;
 
 import ar.edu.unlam.tallerweb1.modelo.Barrio;
 import ar.edu.unlam.tallerweb1.modelo.Cancha;
@@ -93,3 +93,4 @@ public class ControladorPartidoTest{
 
 	}
 }
+*/
