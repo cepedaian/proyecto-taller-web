@@ -14,23 +14,31 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 public class UsuarioServiceImpl implements UsuarioService {
 
 	private RepositorioUsuario repositorioUsuario;
-	
+
 	@Autowired
 	public UsuarioServiceImpl(RepositorioUsuario repositorioUsuario) {
-		
+
 		this.repositorioUsuario = repositorioUsuario;
-		
+
 	}
+
 	@Override
 	public void crearUsuario(Usuario usuario) {
 
 		this.repositorioUsuario.crearUsuario(usuario);
-	 
-	
+
 	}
+
 	@Override
 	public List<Usuario> buscarUsuario(Usuario usuario) {
 
-		return this.repositorioUsuario.buscarUsuario(usuario);
+		if (usuario.getUserName() != "") {
+			List<Usuario> usuarioBuscado = this.repositorioUsuario.buquedaUsuarioByUserName(usuario);
+			return usuarioBuscado;
+		} else {
+			List<Usuario> usuarioBuscado = this.repositorioUsuario.buscarUsuario(usuario);
+			return usuarioBuscado;
+		}
+
 	}
 }

@@ -25,7 +25,7 @@ public class CuentaServiceImpl implements CuentaService {
 
 	@Override
 	public void crearCuenta(Cuenta cuenta) throws Exception {
-		if(cuenta.getPassword() == null) {
+		if(cuenta.getPassword() == "") {
 			throw new Exception("Debe completar contraseña");
 		}
 		if(cuenta.getUsuario().getFecha_nac() == null) {
@@ -34,10 +34,10 @@ public class CuentaServiceImpl implements CuentaService {
 		if(cuenta.getUsuario().getBarrio() == null) {
 			throw new Exception("Debe completar barrio");
 		}
-		if(cuenta.getUsuario().getPosicion() == null) {
+		if(cuenta.getUsuario().getPosicion() == "") {
 			throw new Exception("Debe completar la posición");
 		}
-		if(cuenta.getUsuario().getSexo() == null) {
+		if(cuenta.getUsuario().getSexo() == "") {
 			throw new Exception("Debe completar sexo");
 		}
 		if (this.repositorioCuenta.validarCuentaEmail(cuenta) == false) {

@@ -28,7 +28,15 @@
 			  </form:select>
 			</div>
 		</div>
-		
+		<div class="form-group row">
+			<label for="userName"
+				class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">UserName:</label>
+			<div class="col-sm-10">
+				<form:input path="userName" type="text"
+					class="form-control form-control-sm" id="userName"
+					placeholder="Ingrese su UserName" required="" />
+			</div>
+		</div>
 
 		<button class="btn btn-sm btn-primary" type="submit"/>Buscar</button>
 	</form:form>

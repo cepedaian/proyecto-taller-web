@@ -15,4 +15,6 @@ public interface RepositorioUsuario {
 
 	Boolean buscarUsuarioByUserName(Usuario usuario);
 
+	List<Usuario> buquedaUsuarioByUserName(Usuario usuario);
+
 }

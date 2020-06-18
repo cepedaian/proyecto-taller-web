@@ -71,6 +71,19 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 	}
 
 	@Override
+	public List<Usuario> buquedaUsuarioByUserName(Usuario usuario) {
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria criteria = session.createCriteria(Usuario.class);
+		criteria.add(Restrictions.eq("userName", usuario.getUserName()));
+
+		List<Usuario> u = criteria.list();
+
+		return u;
+	}
+
+	@Override
 	public Boolean buscarUsuarioByUserName(Usuario usuario) {
 
 		Session session = sessionFactory.getCurrentSession();
