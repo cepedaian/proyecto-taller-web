@@ -3,10 +3,11 @@
 
 <jsp:include page="header.jsp" />
 <jsp:include page="nav.jsp" />
-
+<c:if test="${not empty msj1}">
+	<div class="bg-success p-2 text-white">${msj1}${id}${msj2}</div>
+</c:if>
 <section class="container-fluid p-3 section text-center">
 	<h1 class="display-4 text-white mb-4 font-weight-bold">Partidos</h1>
-	<h2>${cuenta.usuario.userName}</h2>
 	<div id="div1" style="overflow-y: scroll; height: 450px; width: 100%;">
 		<table class="table text-white">
 			<tr>

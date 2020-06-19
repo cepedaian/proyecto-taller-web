@@ -39,7 +39,7 @@
 		</div>
 		<div class="form-group col-md-12 col-sm-12">
 			<label class="col-form-label col-form-label-sm font-weight-bold">Organizador:</label>
-			<form:input path="organizador" type="text" id="organizador" class="form-control mb-2" value="${userName}" disabled=""/>
+			<form:input path="organizador" type="text" id="organizador" class="form-control mb-2" value="${cuenta.usuario.userName}" disabled=""/>
 		</div>
 		<button class="btn btn-sm btn-primary" type="submit"/>Crear</button>
 

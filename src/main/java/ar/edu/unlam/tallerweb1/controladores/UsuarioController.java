@@ -2,7 +2,9 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,7 @@ import ar.edu.unlam.tallerweb1.servicios.CuentaService;
 import ar.edu.unlam.tallerweb1.servicios.UsuarioService;
 
 @Controller
-public class UsuarioController {
+public class UsuarioController extends HttpServlet {
 
 	private UsuarioService usuarioService;
 	private BarrioService barrioService;
@@ -48,7 +50,7 @@ public class UsuarioController {
 		return new ModelAndView("form-usuario", model);
 	}
 
-	@RequestMapping(path = "/insertar-usuario", method = RequestMethod.POST) //TEST REALIZADO Y VERIFICADO
+	@RequestMapping(path = "/insertar-usuario", method = RequestMethod.POST) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView InsertarUsuario(@ModelAttribute("cuenta") Cuenta cuenta, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
@@ -65,12 +67,15 @@ public class UsuarioController {
 		}
 	}
 
-	@RequestMapping(value = "/invitar-usuario", method = RequestMethod.GET) //TEST REALIZADO Y VERIFICADO
-	public ModelAndView InvitarUsuario() {
+	@RequestMapping(value = "/invitar-usuario", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
+	public ModelAndView InvitarUsuario(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
 		ModelMap model = new ModelMap();
 
-		// UsuarioFilter usuarioFilter = new UsuarioFilter();
-		// model.put("usuarioFilter",usuarioFilter);
+		if (session != null) {
+			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			model.put("cuenta", cuenta);
+		}
 
 		List<Barrio> barrios = this.barrioService.getAll();
 		model.put("barrios", barrios);
@@ -81,8 +86,13 @@ public class UsuarioController {
 
 	@RequestMapping(value = "/buscar-usuario", method = RequestMethod.POST)
 	public ModelAndView BuscarUsuario(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
 		ModelMap model = new ModelMap();
 
+		if (session != null) {
+			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			model.put("cuenta", cuenta);
+		}
 		List<Usuario> usuarios = this.usuarioService.buscarUsuario(usuario);
 		model.put("usuarios", usuarios);
 

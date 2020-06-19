@@ -10,17 +10,17 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <c:if test="${not empty cuenta}">
-                <form:form action="crear-partido/${cuenta.usuario.userName}" method="POST">
+                
                 <li class="nav-item text-white">
                     Hola ${cuenta.usuario.userName}
                 </li>
             	<li class="nav-item">
-                    <a class="nav-link" href="mostrar-partidos">Partidos</a>
+                    <a class="nav-link" href="/mostrar-partidos">Partidos</a>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-sm btn-primary" type="submit"/>Crear Partido</button>
+                    <a class="nav-link" href="/crear-partido">Crear Partido</a>
                 </li>
-            	</form:form>	
+            		
             </c:if>
             <c:if test="${empty cuenta}">
                 <li class="nav-item">

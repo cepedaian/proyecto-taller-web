@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
-
+<jsp:include page="nav.jsp" />
 <section class="container-fluid p-3 section text-center">
 	<h1 class="display-4 text-white mb-4 font-weight-bold">Crear Cuenta</h1>
 
