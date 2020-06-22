@@ -1,9 +1,9 @@
 package ar.edu.unlam.tallerweb1.controladoresTest;
 
-import ar.edu.unlam.tallerweb1.controladores.CanchaController;
-import ar.edu.unlam.tallerweb1.modelo.Cancha;
-import ar.edu.unlam.tallerweb1.servicios.BarrioService;
-import ar.edu.unlam.tallerweb1.servicios.CanchaService;
+import ar.edu.unlam.tallerweb1.controladores.ControladorCancha;
+import ar.edu.unlam.tallerweb1.modelos.Cancha;
+import ar.edu.unlam.tallerweb1.servicios.ServicioBarrio;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,8 +17,8 @@ public class ControladorCanchaTest {
     public void verificarQueControladorTeLleveAlViewCanchas(){
 
         //preparacion
-        CanchaService servicio = mock(CanchaService.class);
-        CanchaController controlador = new CanchaController(servicio,null);
+        ServicioCancha servicio = mock(ServicioCancha.class);
+        ControladorCancha controlador = new ControladorCancha(servicio,null);
 
         //ejecucion
         final ModelAndView modelandview = controlador.mostrarCanchas();
@@ -31,9 +31,9 @@ public class ControladorCanchaTest {
     public void verificarQueControladorTeLleveAlViewFormCancha(){
 
         //preparacion
-        CanchaService servicioCancha = mock(CanchaService.class);
-        BarrioService servicioBarrio = mock(BarrioService.class);
-        CanchaController controlador = new CanchaController(servicioCancha,servicioBarrio);
+        ServicioCancha servicioCancha = mock(ServicioCancha.class);
+        ServicioBarrio servicioBarrio = mock(ServicioBarrio.class);
+        ControladorCancha controlador = new ControladorCancha(servicioCancha,servicioBarrio);
 
         //ejecucion
         final ModelAndView modelandview = controlador.showFormCancha();
@@ -47,8 +47,8 @@ public class ControladorCanchaTest {
     public void verificarQueControladorTeLlevaAlViewCanchas() {
     	
     	//preparacion
-        CanchaService servicioCancha = mock(CanchaService.class);
-        CanchaController controlador = new CanchaController(servicioCancha,null);
+        ServicioCancha servicioCancha = mock(ServicioCancha.class);
+        ControladorCancha controlador = new ControladorCancha(servicioCancha,null);
         Cancha cancha = new Cancha();
         servicioCancha.crearCancha(cancha);
         
@@ -66,8 +66,8 @@ public class ControladorCanchaTest {
     public void verificarQueControladorTeLlevaAlViewCanchaEliminada() {
     	
     	//preparacion
-    	CanchaService servicioCancha = mock(CanchaService.class);
-        CanchaController controlador = new CanchaController(servicioCancha,null);
+    	ServicioCancha servicioCancha = mock(ServicioCancha.class);
+        ControladorCancha controlador = new ControladorCancha(servicioCancha,null);
         
         //ejecucion
         

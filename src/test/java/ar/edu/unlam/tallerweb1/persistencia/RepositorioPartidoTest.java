@@ -7,9 +7,8 @@ import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import antlr.collections.List;
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelos.Partido;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPartidoImpl;
 
 public class RepositorioPartidoTest extends SpringTest {

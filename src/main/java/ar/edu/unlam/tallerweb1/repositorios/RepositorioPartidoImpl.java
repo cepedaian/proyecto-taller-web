@@ -1,14 +1,17 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import java.util.List;
+import java.util.*;
 
+import ar.edu.unlam.tallerweb1.dtos.PartidoDTO;
+import ar.edu.unlam.tallerweb1.modelos.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.unlam.tallerweb1.modelo.Partido;
+import ar.edu.unlam.tallerweb1.modelos.Partido;
 
 @Repository("repositorioPartido")
 public class RepositorioPartidoImpl implements RepositorioPartido {
@@ -22,8 +25,13 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 	
 	@Override
 	public List<Partido> getAll() {
+    	Calendar c = new GregorianCalendar();
+
+		Date currentDate = c.getTime();
+
 		final Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(Partido.class);
+		criteria.add(Restrictions.gt("fecha", currentDate));
 		List<Partido> partidos = criteria.list();
 		return partidos;
 	}
@@ -39,6 +47,13 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 	public void insertarPartido(Partido partido) {
 		final Session session = sessionFactory.getCurrentSession();
 		session.save(partido);
+	}
+
+	@Override
+	public Partido getById(Long id) {
+		final Session session = sessionFactory.getCurrentSession();
+		Partido partidoBuscado = session.get(Partido.class, id);
+		return partidoBuscado;
 	}
 }
 	

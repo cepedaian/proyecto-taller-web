@@ -10,8 +10,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
-import ar.edu.unlam.tallerweb1.modelo.Barrio;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelos.Barrio;
+import ar.edu.unlam.tallerweb1.modelos.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuarioImpl;
 
 public class RepositorioUsuarioTest extends SpringTest {
@@ -33,9 +33,9 @@ public class RepositorioUsuarioTest extends SpringTest {
 		// ejecucion
 		session().save(barrio);
 		
-		ru.crearUsuario(usuario);
+		ru.crear(usuario);
 		
-		List<Usuario> usuariosBuscados = ru.buscarUsuario(usuario);
+		List<Usuario> usuariosBuscados = ru.buscar(usuario);
 		
 
 		// comprobacion

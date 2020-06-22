@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.modelo.Cuenta;
+import ar.edu.unlam.tallerweb1.modelos.Cuenta;
 
 public interface RepositorioCuenta {
 

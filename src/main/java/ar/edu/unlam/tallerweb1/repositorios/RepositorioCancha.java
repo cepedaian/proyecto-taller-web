@@ -2,8 +2,8 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import java.util.List;
 
-import ar.edu.unlam.tallerweb1.modelo.Barrio;
-import ar.edu.unlam.tallerweb1.modelo.Cancha;
+import ar.edu.unlam.tallerweb1.modelos.Barrio;
+import ar.edu.unlam.tallerweb1.modelos.Cancha;
 
 public interface RepositorioCancha {
 	

@@ -2,19 +2,19 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import java.util.List;
 
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelos.Usuario;
 
 // Interface que define los metodos del Repositorio de Usuarios.
 public interface RepositorioUsuario {
 	
-	Usuario consultarUsuario (Usuario usuario);
+	Usuario consultar (Usuario usuario);
 	
-	void crearUsuario(Usuario usuario);
+	void crear(Usuario usuario);
 
-	public List<Usuario> buscarUsuario(Usuario usuario);
+	public List<Usuario> buscar(Usuario usuario);
 
-	Boolean buscarUsuarioByUserName(Usuario usuario);
+	Boolean buscarByUserName(Usuario usuario);
 
-	List<Usuario> buquedaUsuarioByUserName(Usuario usuario);
+	List<Usuario> buquedaByUserName(Usuario usuario);
 
 }

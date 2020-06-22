@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.modelo.Barrio;
+import ar.edu.unlam.tallerweb1.modelos.Barrio;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

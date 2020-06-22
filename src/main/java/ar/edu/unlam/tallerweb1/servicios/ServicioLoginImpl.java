@@ -1,15 +1,10 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
-import javax.inject.Inject;
-
-import ar.edu.unlam.tallerweb1.modelo.Cuenta;
+import ar.edu.unlam.tallerweb1.modelos.Cuenta;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioCuenta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("servicioLogin")
 @Transactional

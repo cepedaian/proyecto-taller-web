@@ -1,15 +1,12 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.modelo.Cuenta;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelos.Cuenta;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 @Repository("repositorioCuenta")
 public class RepositorioCuentaImpl implements RepositorioCuenta {
