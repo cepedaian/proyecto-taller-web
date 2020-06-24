@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelos.Cancha;
 import ar.edu.unlam.tallerweb1.modelos.Partido;
+import ar.edu.unlam.tallerweb1.modelos.Usuario;
 
 @Controller
 public class ControladorPartido extends HttpServlet {
@@ -55,7 +59,7 @@ public class ControladorPartido extends HttpServlet {
 			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
 			model.put("cuenta", cuenta);
 		}
-
+		
 		List<Partido> partidos = this.servicioPartido.getAll();
 		model.put("partidos", partidos);
 
@@ -124,10 +128,10 @@ public class ControladorPartido extends HttpServlet {
 		model.put("msj", "El partido se creo con éxito.");
 
 		this.servicioPartido.insertarPartido(partido);
-		
+
 		List<Partido> partidos = this.servicioPartido.getAll();
 		model.put("partidos", partidos);
-		
+
 		return new ModelAndView("partidos", model);
 
 	}
@@ -146,7 +150,35 @@ public class ControladorPartido extends HttpServlet {
 		Partido partido = this.servicioPartido.getById(id);
 		model.put("partido", partido);
 
+		Set<Usuario> usuarios = this.servicioPartido.usuariosEnPartido(id);
+
+		model.put("usuarios", usuarios);
+
 		return new ModelAndView("detalle-partido", model);
+
+	}
+
+	@RequestMapping(value = "/unirse-partido/{id}", method = RequestMethod.GET)
+	public ModelAndView unirse(@PathVariable("id") Long id, HttpServletRequest request) {
+
+		HttpSession session = request.getSession(false);
+		ModelMap model = new ModelMap();
+
+		if (session != null) {
+			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			model.put("cuenta", cuenta);
+		}
+
+		Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+		Usuario usuario = cuenta.getUsuario();
+		Partido partido = this.servicioPartido.getById(id);
+
+		this.servicioPartido.unirse(partido, usuario);
+		String msj = "Te uniste al partido satisfactoriamente.";
+		model.put("msj", msj);
+		List<Partido> partidos = this.servicioPartido.getAll();
+		model.put("partidos", partidos);
+		return new ModelAndView("partidos", model);
 
 	}
 

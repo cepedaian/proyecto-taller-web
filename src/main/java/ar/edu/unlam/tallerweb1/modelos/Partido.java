@@ -24,13 +24,16 @@ public class Partido {
 
 	private String organizador;
 
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.EAGER)
 	@JoinTable(
 	  name = "usuario_partido",
 	  joinColumns = @JoinColumn(name = "partido_id"),
 	  inverseJoinColumns = @JoinColumn(name = "usuario_id"))
 	private Set<Usuario> usuarios;
 
+	
+	
+	
 	public Long getId() {
 		return id;
 	}

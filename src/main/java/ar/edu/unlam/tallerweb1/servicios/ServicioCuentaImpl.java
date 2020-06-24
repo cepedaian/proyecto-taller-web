@@ -24,21 +24,7 @@ public class ServicioCuentaImpl implements ServicioCuenta {
 
 	@Override
 	public void crearCuenta(Cuenta cuenta) throws Exception {
-		if(cuenta.getPassword() == "") {
-			throw new Exception("Debe completar contrase?a");
-		}
-		if(cuenta.getUsuario().getFecha_nac() == null) {
-			throw new Exception("Debe completar fecha nacimiento");
-		}
-		if(cuenta.getUsuario().getBarrio() == null) {
-			throw new Exception("Debe completar barrio");
-		}
-		if(cuenta.getUsuario().getPosicion() == "") {
-			throw new Exception("Debe completar la posición");
-		}
-		if(cuenta.getUsuario().getSexo() == "") {
-			throw new Exception("Debe completar sexo");
-		}
+		
 		if (this.repositorioCuenta.validarCuentaEmail(cuenta) == false) {
 			throw new Exception("Email existente");
 		}

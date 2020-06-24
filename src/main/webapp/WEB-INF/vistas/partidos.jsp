@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
+
 <jsp:include page="header.jsp" />
 <jsp:include page="nav.jsp" />
 
@@ -37,18 +39,18 @@
 						<i>Disponibilidad: ${partido.cantidadJugadores}</i>
 					</div>
 					<div class="col-sm-6">
-						<a class="btn btn-sm btn-success" href="detalle-partido/${partido.id}">
+						<a class="btn btn-sm btn-success" href="/detalle-partido/${partido.id}">
 							<i class="fa fa-search" title="Ver detalle"></i> Ver detalle
 						</a>
 						<c:if
 							test="${partido.organizador == cuenta.usuario.userName}">
-							<a class="btn btn-sm btn-primary" href="invitar-usuario">
+							<a class="btn btn-sm btn-primary" href="/invitar-usuario">
 								<i class="fa fa-user"></i> Invitar
 							</a>
 						</c:if>
 						<c:if
 							test="${partido.organizador == cuenta.usuario.userName}">
-							<a class="btn btn-sm btn-danger" href="eliminar-partido/${partido.id}" />
+							<a class="btn btn-sm btn-danger" href="/eliminar-partido/${partido.id}">
 								<i class="fa fa-trash"></i> Eliminar
 							</a>
 						</c:if>

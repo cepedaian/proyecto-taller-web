@@ -1,4 +1,4 @@
-package ar.edu.unlam.tallerweb1.controladoresTest;
+/*package ar.edu.unlam.tallerweb1.controladoresTest;
 
 import ar.edu.unlam.tallerweb1.controladores.ControladorCuenta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuenta;
@@ -80,7 +80,7 @@ public class ControladorUsuarioTest {
 		assertThat(modelandview.getModel().get("error")).isEqualTo("UserName existente");
 	}
 	
-/*	@Test
+	@Test
 	//TEST METODO INVITAR-USUARIO DE USUARIOCONTROLLER
 	public void verificarQueElControladorNosLlevaALaViewFormInvitado() {
 		
@@ -97,6 +97,6 @@ public class ControladorUsuarioTest {
 		
 		//validacion
 		assertThat(modelandview.getViewName()).isEqualTo("form-invitado");
-	}*/
+	}
 
-}
+}*/
