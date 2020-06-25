@@ -26,15 +26,12 @@ public class Usuario {
 
 	private String posicion;
 
-	@ManyToMany(cascade = {CascadeType.ALL},mappedBy = "usuarios")
+	@ManyToMany(cascade = {CascadeType.ALL},mappedBy = "usuarios")//VER ALL IANO
     private Set<Partido> partidos;
 
-	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario")
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "destinatario")
 	private List<Notificacion> notificaciones;
 
-	public List<Notificacion> getNotificaciones() {
-		return notificaciones;
-	}
 
 	public Long getId() {
 		return id;

@@ -79,4 +79,12 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 		return usuarios;
 	}
 
+	@Override
+	public String getOrganizador(Partido partido){
+		final Session session = sessionFactory.getCurrentSession();
+		Partido partido2 = session.get(Partido.class,partido.getId());
+
+		return partido2.getOrganizador();
+	}
+
 }

@@ -80,6 +80,18 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 	}
 
 	@Override
+	public Usuario getByUserName(String userName) {
+
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria criteria = session.createCriteria(Usuario.class);
+		criteria.add(Restrictions.eq("userName", userName));
+
+
+		return (Usuario) criteria.uniqueResult();
+	}
+
+	@Override
 	public Boolean buscarByUserName(Usuario usuario) {
 
 		Session session = sessionFactory.getCurrentSession();

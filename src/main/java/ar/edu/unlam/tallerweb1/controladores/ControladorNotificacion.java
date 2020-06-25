@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelos.Cuenta;
 import ar.edu.unlam.tallerweb1.modelos.Notificacion;
 import ar.edu.unlam.tallerweb1.modelos.Partido;
+import ar.edu.unlam.tallerweb1.modelos.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioBarrio;
 
 import ar.edu.unlam.tallerweb1.servicios.ServicioNotificacion;
@@ -36,13 +37,16 @@ public class ControladorNotificacion {
 
         HttpSession session = request.getSession(false);
         ModelMap model = new ModelMap();
-
+        Cuenta cuenta = new Cuenta();
         if (session != null) {
-            Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+            cuenta = (Cuenta) session.getAttribute("usuario");
             model.put("cuenta", cuenta);
         }
 
-        List<Notificacion> notificaciones = this.servicioNotificacion.getAll();
+        Usuario usuario = cuenta.getUsuario();
+
+        //Usuario usuario = (Usuario) session.getAttribute("usuario");
+        List<Notificacion> notificaciones = this.servicioNotificacion.getNotificacionesByUsuarioId(usuario.getId());
         model.put("notificaciones", notificaciones);
 
         return new ModelAndView("notificaciones", model);

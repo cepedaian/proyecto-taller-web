@@ -8,4 +8,5 @@ public interface ServicioUsuario {
 
 	void crear(Usuario usuario);
 	List<Usuario> buscar(Usuario usuario);
+	Usuario getByUserName(String userName);
 }

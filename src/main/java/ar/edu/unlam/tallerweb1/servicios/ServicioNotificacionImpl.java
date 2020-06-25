@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelos.Notificacion;
+import ar.edu.unlam.tallerweb1.modelos.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioNotificacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,16 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
     @Override
     public List<Notificacion> getAll() {
         return this.repositorioNotificacion.getAll();
+    }
+
+    @Override
+    public void crear(Notificacion notificacion) {
+
+        this.repositorioNotificacion.crear(notificacion);
+    }
+    @Override
+    public List<Notificacion> getNotificacionesByUsuarioId(Long id){
+
+        return this.repositorioNotificacion.getNotificacionesByUsuarioId(id);
     }
 }

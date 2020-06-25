@@ -9,36 +9,42 @@ public class Notificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String descripcion;
-
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)//CAMBIAR A LAZY
     private Partido partido;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Usuario usuario;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)//CAMBIAR A LAZY VER CACADE ALL
+    private Usuario destinatario;
+
+    private String remitente;
+
+    public Usuario getDestinatario() {
+        return destinatario;
+    }
+
+    public void setDestinatario(Usuario destinatario) {
+        this.destinatario = destinatario;
+    }
+
+    public String getRemitente() {
+        return remitente;
+    }
+
+    public void setRemitente(String remitente) {
+        this.remitente = remitente;
+    }
+
 
     public Partido getPartido() {
         return partido;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setPartido(Partido partido) {
+        this.partido = partido;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 }

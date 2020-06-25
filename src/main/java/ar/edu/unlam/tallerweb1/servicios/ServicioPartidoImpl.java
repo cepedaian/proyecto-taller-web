@@ -73,4 +73,9 @@ public class ServicioPartidoImpl implements ServicioPartido {
 		return this.repositorioPartido.usuariosEnPartido(id);
 	}
 
+	@Override
+	public String getOrganizador(Partido partido){
+
+		return this.repositorioPartido.getOrganizador(partido);
+	}
 }

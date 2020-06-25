@@ -16,50 +16,35 @@
         <div class="col-sm-6">
             <h1 class="display-4 text-white mb-4 font-weight-bold">Notificaciones</h1>
         </div>
-        <!--<div class="col-sm-6 text-right">
-            <c:if test="${not empty cuenta}">
-                <a class="btn btn-primary" href="/crear-partido">Crear partido</a>
-            </c:if>
-        </div>-->
     </div>
-
     <c:forEach items="${notificaciones}" var="notificacion">
         <div class="card mb-3">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-sm-6"><h5>${notificacion.usuario.userName}</h5></div>
-                    <div class="col-sm-6"><h5><fmt:formatDate value="${notificacion.partido.fecha}" pattern="dd/MM HH:mm" />hs.</h5></div>
+                    <div class="col-sm-6"><h5>Nuevo jugador!</h5></div>
+                    <div class="col-sm-6"><h5>${notificacion.partido.fecha}>hs.</h5></div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-6">
-                        <h5 class="card-title">Organiza: ${partido.organizador}</h5>
-                        <p class="card-text">Cancha: ${notificacion.partido.cancha.nombre}</p>
-                        <p class="card-text">Desea unirse al partido</p>
+                        <h5 class="card-title">${notificacion.remitente}</h5>
+                        <p class="card-text">Se unió al partido</p>
                         <i>Disponibilidad: ${notificacion.partido.cantidadJugadores}</i>
                     </div>
                     <div class="col-sm-6">
-                        <!--<a class="btn btn-sm btn-success" href="/detalle-partido/${partido.id}">
-                            <i class="fa fa-search" title="Ver detalle"></i> Ver detalle
-                        </a>-->
                         <c:if
                                 test="${partido.organizador == cuenta.usuario.userName}">
-                            <a class="btn btn-sm btn-primary" href="/eliminar-usuario/${partido.id,notificacion.usuario.id}">
+                            <a class="btn btn-sm btn-danger" href="/eliminar-usuario/${notificacion.usuario.userName}">
                                 <i class="fa fa-user"></i> Eliminar
                             </a>
                         </c:if>
-                        <!--<c:if
-                                test="${partido.organizador == cuenta.usuario.userName}">
-                            <a class="btn btn-sm btn-danger" href="/eliminar-partido/${partido.id}">
-                                <i class="fa fa-trash"></i> Eliminar
-                            </a>
-                        </c:if>-->
                     </div>
                 </div>
             </div>
         </div>
     </c:forEach>
+
 </section>
 
 <jsp:include page="footer.jsp" />

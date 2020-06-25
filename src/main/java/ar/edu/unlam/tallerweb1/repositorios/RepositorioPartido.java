@@ -20,4 +20,6 @@ public interface RepositorioPartido {
     public void unirse(Partido partido,Usuario usuario);
     
     Set<Usuario> usuariosEnPartido(Long id);
+
+    String getOrganizador(Partido partido);
 }
