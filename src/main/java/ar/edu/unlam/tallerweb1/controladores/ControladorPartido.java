@@ -174,6 +174,7 @@ public class ControladorPartido extends HttpServlet {
 		Partido partido = this.servicioPartido.getById(id);
 
 		this.servicioPartido.unirse(partido, usuario);
+
 		String msj = "Te uniste al partido satisfactoriamente.";
 		model.put("msj", msj);
 		List<Partido> partidos = this.servicioPartido.getAll();

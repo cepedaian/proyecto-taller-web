@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,7 +28,14 @@ public class Usuario {
 
 	@ManyToMany(cascade = {CascadeType.ALL},mappedBy = "usuarios")
     private Set<Partido> partidos;
-	
+
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "usuario")
+	private List<Notificacion> notificaciones;
+
+	public List<Notificacion> getNotificaciones() {
+		return notificaciones;
+	}
+
 	public Long getId() {
 		return id;
 	}
