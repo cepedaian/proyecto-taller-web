@@ -76,4 +76,8 @@ public class Partido {
 	public void setJugadores(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
+	public void restarJugador() {
+		this.cantidadJugadores--;
+	}
 }
