@@ -150,7 +150,7 @@ public class ControladorPartido extends HttpServlet {
 		Partido partido = this.servicioPartido.getById(id);
 		model.put("partido", partido);
 
-		Set<Usuario> usuarios = this.servicioPartido.usuariosEnPartido(id);
+		Set<Usuario> usuarios = this.servicioPartido.detalleListaUsuarios(id).getJugadores();
 
 		model.put("usuarios", usuarios);
 

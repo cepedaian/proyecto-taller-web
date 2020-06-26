@@ -24,7 +24,7 @@ public class Partido {
 
 	private String organizador;
 
-	@ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.LAZY)
 	@JoinTable(
 	  name = "usuario_partido",
 	  joinColumns = @JoinColumn(name = "partido_id"),

@@ -68,9 +68,18 @@ public class ServicioPartidoImpl implements ServicioPartido {
 	}
 
 	@Override
+	public Partido detalleListaUsuarios(Long id) {
+		
+		return repositorioPartido.detalleListaUsuarios(id);
+		
+		
+	}
+	
+	
+	/*	@Override
 	public Set<Usuario> usuariosEnPartido(Long id) {
 		
 		return this.repositorioPartido.usuariosEnPartido(id);
-	}
+	}*/
 
 }

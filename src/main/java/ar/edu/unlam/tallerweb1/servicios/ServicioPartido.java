@@ -20,5 +20,6 @@ public interface ServicioPartido {
 
 	void unirse(Partido partido, Usuario usuario);
 	
-	Set<Usuario> usuariosEnPartido(Long id);
+
+	Partido detalleListaUsuarios(Long id);
 }

@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.dtos.PartidoDTO;
 import ar.edu.unlam.tallerweb1.modelos.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -70,13 +71,49 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 
 	}
 
-	public Set<Usuario> usuariosEnPartido(Long id) {
+	/*public Set<Usuario> usuariosEnPartido(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
 		Partido partido = session.get(Partido.class, id);
 		
 		Set<Usuario> usuarios = partido.getJugadores();
 		
 		return usuarios;
+	}*/
+
+	public Partido detalleListaUsuarios(Long id) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		Partido partido = session.find(Partido.class, id);
+		
+		 if (partido != null) {
+	            // Get Lazy Model
+	            Hibernate.initialize(partido.getJugadores());
+	        }
+		
+		return partido;
 	}
+
+/*	@Override
+    public Distribucion obtenerDistribucion(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+
+ 
+
+        Distribucion distribucion = session.find(Distribucion.class, id);
+
+ 
+
+        if (distribucion != null) {
+            // Get Lazy Model
+            Hibernate.initialize(distribucion.getDetalles());
+        }
+
+ 
+
+        return distribucion;
+    }*/
+
+
+
 
 }
