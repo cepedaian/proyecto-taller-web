@@ -76,10 +76,12 @@ public class ServicioPartidoImpl implements ServicioPartido {
 	}
 	
 	
-	/*	@Override
-	public Set<Usuario> usuariosEnPartido(Long id) {
-		
-		return this.repositorioPartido.usuariosEnPartido(id);
-	}*/
+	
+
+	@Override
+	public String getOrganizador(Partido partido){
+
+		return this.repositorioPartido.getOrganizador(partido);
+	}
 
 }

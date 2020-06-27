@@ -19,7 +19,11 @@ public interface ServicioPartido {
     Partido getById(Long id);
 
 	void unirse(Partido partido, Usuario usuario);
-	
 
 	Partido detalleListaUsuarios(Long id);
+
+
+	String getOrganizador(Partido partido);
+
 }
+

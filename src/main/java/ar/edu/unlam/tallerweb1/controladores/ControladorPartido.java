@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import ar.edu.unlam.tallerweb1.dtos.PartidoDTO;
-import ar.edu.unlam.tallerweb1.modelos.Cuenta;
+import ar.edu.unlam.tallerweb1.modelos.*;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
+import ar.edu.unlam.tallerweb1.servicios.ServicioNotificacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,20 +24,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unlam.tallerweb1.modelos.Cancha;
-import ar.edu.unlam.tallerweb1.modelos.Partido;
-import ar.edu.unlam.tallerweb1.modelos.Usuario;
-
 @Controller
 public class ControladorPartido extends HttpServlet {
 
 	private ServicioPartido servicioPartido;
 	private ServicioCancha servicioCancha;
+	private ServicioNotificacion servicioNotificacion;
+	private ServicioUsuario servicioUsuario;
 
 	@Autowired
-	public ControladorPartido(ServicioPartido servicioPartido, ServicioCancha servicioCancha) {
+	public ControladorPartido(ServicioPartido servicioPartido, ServicioCancha servicioCancha,ServicioNotificacion servicioNotificacion, ServicioUsuario servicioUsuario) {
 		this.servicioPartido = servicioPartido;
 		this.servicioCancha = servicioCancha;
+		this.servicioNotificacion = servicioNotificacion;
+		this.servicioUsuario = servicioUsuario;
 	}
 
 	@RequestMapping("/home")
@@ -164,16 +166,24 @@ public class ControladorPartido extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		ModelMap model = new ModelMap();
 
+		Cuenta cuenta = new Cuenta();
+		Notificacion notificacion = new Notificacion();
 		if (session != null) {
-			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			cuenta = (Cuenta) session.getAttribute("usuario");
 			model.put("cuenta", cuenta);
 		}
 
-		Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
 		Usuario usuario = cuenta.getUsuario();
 		Partido partido = this.servicioPartido.getById(id);
+		Usuario destinatario = this.servicioUsuario.getByUserName(partido.getOrganizador());
+
+		notificacion.setDestinatario(destinatario);
+		notificacion.setPartido(partido);
+		notificacion.setRemitente(usuario.getUserName());
 
 		this.servicioPartido.unirse(partido, usuario);
+		this.servicioNotificacion.crear(notificacion);
+
 		String msj = "Te uniste al partido satisfactoriamente.";
 		model.put("msj", msj);
 		List<Partido> partidos = this.servicioPartido.getAll();

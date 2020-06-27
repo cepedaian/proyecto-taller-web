@@ -17,4 +17,5 @@ public interface RepositorioUsuario {
 
 	List<Usuario> buquedaByUserName(Usuario usuario);
 
+    Usuario getByUserName(String userName);
 }

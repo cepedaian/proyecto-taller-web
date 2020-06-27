@@ -23,7 +23,7 @@ public class RepositorioUsuarioTest extends SpringTest {
 		Barrio barrio = new Barrio();
 		barrio.setDescripcion("boedo");
 		
-		Usuario usuario = new Usuario();	
+		Usuario usuario = new Usuario();
 		usuario.setBarrio(barrio);
 		usuario.setPosicion("delantero");
 		

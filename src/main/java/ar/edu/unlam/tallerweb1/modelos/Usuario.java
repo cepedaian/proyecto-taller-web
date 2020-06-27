@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,9 +26,13 @@ public class Usuario {
 
 	private String posicion;
 
-	@ManyToMany(cascade = {CascadeType.ALL},mappedBy = "usuarios")
+	@ManyToMany(cascade = {CascadeType.ALL},mappedBy = "usuarios")//VER ALL IANO
     private Set<Partido> partidos;
-	
+
+	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "destinatario")
+	private List<Notificacion> notificaciones;
+
+
 	public Long getId() {
 		return id;
 	}

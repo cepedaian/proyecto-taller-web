@@ -71,49 +71,35 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 
 	}
 
-	/*public Set<Usuario> usuariosEnPartido(Long id) {
-		final Session session = sessionFactory.getCurrentSession();
-		Partido partido = session.get(Partido.class, id);
-		
-		Set<Usuario> usuarios = partido.getJugadores();
-		
-		return usuarios;
-	}*/
+	/*
+	 * public Set<Usuario> usuariosEnPartido(Long id) { final Session session =
+	 * sessionFactory.getCurrentSession(); Partido partido =
+	 * session.get(Partido.class, id);
+	 * 
+	 * Set<Usuario> usuarios = partido.getJugadores();
+	 * 
+	 * return usuarios; }
+	 */
 
 	public Partido detalleListaUsuarios(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
-		
+
 		Partido partido = session.find(Partido.class, id);
-		
-		 if (partido != null) {
-	            // Get Lazy Model
-	            Hibernate.initialize(partido.getJugadores());
-	        }
-		
+
+		if (partido != null) {
+			// Get Lazy Model
+			Hibernate.initialize(partido.getJugadores());
+		}
+
 		return partido;
 	}
 
-/*	@Override
-    public Distribucion obtenerDistribucion(Long id) {
-        final Session session = sessionFactory.getCurrentSession();
+	@Override
+	public String getOrganizador(Partido partido) {
+		final Session session = sessionFactory.getCurrentSession();
+		Partido partido2 = session.get(Partido.class, partido.getId());
 
- 
-
-        Distribucion distribucion = session.find(Distribucion.class, id);
-
- 
-
-        if (distribucion != null) {
-            // Get Lazy Model
-            Hibernate.initialize(distribucion.getDetalles());
-        }
-
- 
-
-        return distribucion;
-    }*/
-
-
-
+		return partido2.getOrganizador();
+	}
 
 }
