@@ -127,7 +127,7 @@ public class ControladorPartido extends HttpServlet {
 			model.put("msj", "Para crear partido te tenes que loguear. No hagas trampa!");
 		}
 
-		model.put("msj", "El partido se creo con éxito.");
+		model.put("msj", "El partido se creo con exito.");
 
 		this.servicioPartido.insertarPartido(partido);
 

@@ -66,7 +66,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 		Partido partido1 = session.get(Partido.class, partido.getId());
 
 		partido1.getJugadores().add(usuario);
-
+		partido1.restarJugador();
 		session.save(partido1);
 
 	}

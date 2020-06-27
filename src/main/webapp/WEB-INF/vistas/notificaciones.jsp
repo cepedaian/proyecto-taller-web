@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 
@@ -17,24 +18,25 @@
             <h1 class="display-4 text-white mb-4 font-weight-bold">Notificaciones</h1>
         </div>
     </div>
+    <div class="row"> 
     <c:forEach items="${notificaciones}" var="notificacion">
-        <div class="card mb-3">
+      
+        <div class="card mb-3 col-sm-5 ml-5">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-sm-6"><h5>Nuevo jugador!</h5></div>
-                    <div class="col-sm-6"><h5>${notificacion.partido.fecha}>hs.</h5></div>
+                    <div class="col-sm-6"><h5><i class="fa fa-futbol-o" aria-hidden="true"></i> Nuevo jugador!</h5></div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row d-flex align-items-center">
-                    <div class="col-sm-6">
-                        <h5 class="card-title">${notificacion.remitente}</h5>
-                        <p class="card-text">Se unió al partido</p>
-                        <i>Disponibilidad: ${notificacion.partido.cantidadJugadores}</i>
+                    <div class="col-sm-8">
+                        <h5 class="card-title"><i class="fa fa-user"></i> ${notificacion.remitente} se unio al partido!</h5>
+                        <p><i class="fa fa-calendar" aria-hidden="true"></i> <fmt:formatDate value="${notificacion.partido.fecha}" pattern="dd/MM HH:mm" /> hs.</p><br>
+                        <i><i class="fa fa-users" aria-hidden="true"></i> Quedan ${notificacion.partido.cantidadJugadores} lugares disponibles </i>
                     </div>
                     <div class="col-sm-6">
                         <c:if
-                                test="${partido.organizador == cuenta.usuario.userName}">
+                        	test="${partido.organizador == cuenta.usuario.userName}">
                             <a class="btn btn-sm btn-danger" href="/eliminar-usuario/${notificacion.usuario.userName}">
                                 <i class="fa fa-user"></i> Eliminar
                             </a>
@@ -43,8 +45,9 @@
                 </div>
             </div>
         </div>
+        
     </c:forEach>
-
+	</div>
 </section>
 
 <jsp:include page="footer.jsp" />
