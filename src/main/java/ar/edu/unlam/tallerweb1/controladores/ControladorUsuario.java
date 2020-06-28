@@ -47,24 +47,7 @@ public class ControladorUsuario extends HttpServlet {
 
 		return new ModelAndView("form-usuario", model);
 	}
-
-	@RequestMapping(value = "/invitar-usuario", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
-	public ModelAndView invitar(HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		ModelMap model = new ModelMap();
-
-		if (session != null) {
-			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
-			model.put("cuenta", cuenta);
-		}
-
-		List<Barrio> barrios = this.servicioBarrio.getAll();
-		model.put("barrios", barrios);
-		model.put("usuario", new Usuario());
-
-		return new ModelAndView("form-buscar-usuario", model);
-	}
-
+	
 	@RequestMapping(value = "/buscar-usuario", method = RequestMethod.POST)
 	public ModelAndView buscar(@ModelAttribute("usuario") Usuario usuario, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
@@ -81,4 +64,7 @@ public class ControladorUsuario extends HttpServlet {
 		return new ModelAndView("lista-usuarios-invitar", model);
 	}
 
+	
+
+	
 }

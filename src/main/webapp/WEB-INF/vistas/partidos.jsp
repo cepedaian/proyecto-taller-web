@@ -44,7 +44,7 @@
 						</a>
 						<c:if
 							test="${partido.organizador == cuenta.usuario.userName}">
-							<a class="btn btn-sm btn-primary" href="/invitar-usuario">
+							<a class="btn btn-sm btn-primary" href="/invitar-usuario-partido/${partido.id}">
 								<i class="fa fa-user"></i> Invitar
 							</a>
 						</c:if>

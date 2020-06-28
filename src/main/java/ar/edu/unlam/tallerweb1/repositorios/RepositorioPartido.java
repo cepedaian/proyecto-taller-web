@@ -11,7 +11,7 @@ public interface RepositorioPartido {
 
 	public List<Partido> getAll();
 
-	public void eliminarPartido(Long id);
+	public void eliminarPartido(Partido partido);
 
 	public void insertarPartido(Partido partido);
 

@@ -40,9 +40,9 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 	}
 
 	@Override
-	public void eliminarPartido(Long id) {
+	public void eliminarPartido(Partido partido) {
 		final Session session = sessionFactory.getCurrentSession();
-		Partido partidoBuscado = session.get(Partido.class, id);
+		Partido partidoBuscado = session.find(Partido.class, partido.getId());
 		session.delete(partidoBuscado);
 	}
 
@@ -71,15 +71,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 
 	}
 
-	/*
-	 * public Set<Usuario> usuariosEnPartido(Long id) { final Session session =
-	 * sessionFactory.getCurrentSession(); Partido partido =
-	 * session.get(Partido.class, id);
-	 * 
-	 * Set<Usuario> usuarios = partido.getJugadores();
-	 * 
-	 * return usuarios; }
-	 */
+
 
 	public Partido detalleListaUsuarios(Long id) {
 		final Session session = sessionFactory.getCurrentSession();

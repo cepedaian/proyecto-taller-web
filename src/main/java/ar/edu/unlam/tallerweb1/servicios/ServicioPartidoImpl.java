@@ -33,8 +33,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
 	}
 
 	@Override
-	public void eliminarPartido(Long id) {
-		repositorioPartido.eliminarPartido(id);
+	public void eliminarPartido(Partido partido) {
+		repositorioPartido.eliminarPartido(partido);
 	}
 
 	@Override

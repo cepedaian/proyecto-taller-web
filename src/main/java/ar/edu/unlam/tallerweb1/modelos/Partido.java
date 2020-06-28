@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 public class Partido {
 	
@@ -23,8 +25,9 @@ public class Partido {
 	private String sexo;
 
 	private String organizador;
-
-	@ManyToMany(cascade = {CascadeType.ALL},fetch=FetchType.LAZY)
+	
+	//@Cascade(CascadeType.SAVE_UPDATE)
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinTable(
 	  name = "usuario_partido",
 	  joinColumns = @JoinColumn(name = "partido_id"),

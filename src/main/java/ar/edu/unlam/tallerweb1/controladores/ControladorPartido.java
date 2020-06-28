@@ -4,13 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import ar.edu.unlam.tallerweb1.dtos.PartidoDTO;
 import ar.edu.unlam.tallerweb1.modelos.*;
+import ar.edu.unlam.tallerweb1.servicios.ServicioBarrio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCuenta;
 import ar.edu.unlam.tallerweb1.servicios.ServicioNotificacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
@@ -31,13 +39,18 @@ public class ControladorPartido extends HttpServlet {
 	private ServicioCancha servicioCancha;
 	private ServicioNotificacion servicioNotificacion;
 	private ServicioUsuario servicioUsuario;
+	private ServicioCuenta servicioCuenta;
+	private ServicioBarrio servicioBarrio;
 
 	@Autowired
-	public ControladorPartido(ServicioPartido servicioPartido, ServicioCancha servicioCancha,ServicioNotificacion servicioNotificacion, ServicioUsuario servicioUsuario) {
+	public ControladorPartido(ServicioPartido servicioPartido, ServicioCancha servicioCancha,
+			ServicioNotificacion servicioNotificacion, ServicioUsuario servicioUsuario, ServicioCuenta servicioCuenta,ServicioBarrio servicioBarrio) {
 		this.servicioPartido = servicioPartido;
 		this.servicioCancha = servicioCancha;
 		this.servicioNotificacion = servicioNotificacion;
 		this.servicioUsuario = servicioUsuario;
+		this.servicioCuenta = servicioCuenta;
+		this.servicioBarrio = servicioBarrio;
 	}
 
 	@RequestMapping("/home")
@@ -51,6 +64,37 @@ public class ControladorPartido extends HttpServlet {
 		return new ModelAndView("home", modelo);
 	}
 
+	private static void enviarConGMail(String destinatario, String asunto, String cuerpo) {
+		// Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el
+		// remitente también.
+		String remitente = "lineadecuatro2020@gmail.com"; // Para la dirección nomcuenta@gmail.com
+
+		java.util.Properties props = System.getProperties();
+		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
+		props.put("mail.smtp.user", remitente);
+		props.put("mail.smtp.clave", "unlam2020"); // La clave de la cuenta
+		props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
+		props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
+		props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
+
+		Session session = Session.getDefaultInstance(props);
+		MimeMessage message = new MimeMessage(session);
+
+		try {
+			message.setFrom(new InternetAddress(remitente));
+			message.addRecipients(Message.RecipientType.TO, destinatario); // Se podrían añadir varios de la misma
+																			// manera
+			message.setSubject(asunto);
+			message.setText(cuerpo);
+			Transport transport = session.getTransport("smtp");
+			transport.connect("smtp.gmail.com", remitente, "unlam2020");
+			transport.sendMessage(message, message.getAllRecipients());
+			transport.close();
+		} catch (MessagingException me) {
+			me.printStackTrace(); // Si se produce un error
+		}
+	}
+
 	@RequestMapping(value = "/mostrar-partidos", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView mostrarPartidos(HttpServletRequest request) {
 
@@ -61,7 +105,7 @@ public class ControladorPartido extends HttpServlet {
 			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
 			model.put("cuenta", cuenta);
 		}
-		
+
 		List<Partido> partidos = this.servicioPartido.getAll();
 		model.put("partidos", partidos);
 
@@ -79,14 +123,12 @@ public class ControladorPartido extends HttpServlet {
 			model.put("cuenta", cuenta);
 		}
 
-		String mensaje1 = "El partido ";
-		String mensaje2 = " ha sido eliminado.";
+		String mensaje = "El partido ha sido eliminado. ";
 
-		model.put("msj1", mensaje1);
-		model.put("msj2", mensaje2);
-		model.put("id", id);
+		model.put("msj", mensaje);
+		Partido partido = this.servicioPartido.detalleListaUsuarios(id);
 
-		this.servicioPartido.eliminarPartido(id);
+		this.servicioPartido.eliminarPartido(partido);
 
 		List<Partido> partidos = this.servicioPartido.getAll();
 		model.put("partidos", partidos);
@@ -172,10 +214,20 @@ public class ControladorPartido extends HttpServlet {
 			cuenta = (Cuenta) session.getAttribute("usuario");
 			model.put("cuenta", cuenta);
 		}
-
-		Usuario usuario = cuenta.getUsuario();
 		Partido partido = this.servicioPartido.getById(id);
 		Usuario destinatario = this.servicioUsuario.getByUserName(partido.getOrganizador());
+		
+		//envio de mail
+		
+		Usuario usuario = cuenta.getUsuario();
+		String remitente = usuario.getUserName();
+		String emailDestinatario = this.servicioCuenta.getEmailByIdUsuario(destinatario.getId());	
+		String asunto = remitente + " se unió a tu partido!";
+		String cuerpo = asunto;
+
+		enviarConGMail(emailDestinatario, asunto, cuerpo);
+
+		//notificacion app
 
 		notificacion.setDestinatario(destinatario);
 		notificacion.setPartido(partido);
@@ -191,5 +243,33 @@ public class ControladorPartido extends HttpServlet {
 		return new ModelAndView("partidos", model);
 
 	}
+	
+	@RequestMapping(value = "/invitar-usuario-partido/{id}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
+	public ModelAndView invitar(@PathVariable("id") Long id,HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		ModelMap model = new ModelMap();
+
+		if (session != null) {
+			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			model.put("cuenta", cuenta);
+		}
+		
+		Partido partido = this.servicioPartido.getById(id);
+		
+		model.put("partido",partido);
+		
+		List<Barrio> barrios = this.servicioBarrio.getAll();
+		model.put("barrios", barrios);
+		model.put("usuario", new Usuario());
+
+		return new ModelAndView("form-buscar-usuario", model);
+	}
+	
+	
+	
+	
+
+
+	
 
 }

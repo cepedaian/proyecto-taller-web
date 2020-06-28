@@ -39,4 +39,10 @@ public class ServicioCuentaImpl implements ServicioCuenta {
 
 	}
 
+	@Override
+	public String getEmailByIdUsuario(Long id) {
+		
+		return this.repositorioCuenta.getEmailByIdUsuario(id); 
+	}
+
 }
