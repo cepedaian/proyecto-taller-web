@@ -41,4 +41,11 @@ public class ServicioUsuarioImpl implements ServicioUsuario {
 		}
 
 	}
+
+	@Override
+	public Usuario getByUserName(String userName) {
+
+		return this.repositorioUsuario.getByUserName(userName);
+	}
+
 }

@@ -1,16 +1,26 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import ar.edu.unlam.tallerweb1.modelos.Partido;
+import ar.edu.unlam.tallerweb1.modelos.Usuario;
 
 public interface RepositorioPartido {
-	
+
 	public List<Partido> getAll();
 
-	public void eliminarPartido(Long id);
+	public void eliminarPartido(Partido partido);
 
 	public void insertarPartido(Partido partido);
 
-    Partido getById(Long id);
+	Partido getById(Long id);
+
+	public void unirse(Partido partido, Usuario usuario);
+
+	Partido detalleListaUsuarios(Long id);
+
+	String getOrganizador(Partido partido);
+
 }

@@ -5,6 +5,8 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+import org.hibernate.annotations.Cascade;
+
 @Entity
 public class Partido {
 	
@@ -23,14 +25,18 @@ public class Partido {
 	private String sexo;
 
 	private String organizador;
-
-	@ManyToMany
+	
+	//@Cascade(CascadeType.SAVE_UPDATE)
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinTable(
 	  name = "usuario_partido",
 	  joinColumns = @JoinColumn(name = "partido_id"),
 	  inverseJoinColumns = @JoinColumn(name = "usuario_id"))
 	private Set<Usuario> usuarios;
 
+	
+	
+	
 	public Long getId() {
 		return id;
 	}
@@ -72,5 +78,9 @@ public class Partido {
 	}
 	public void setJugadores(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
+	}
+	
+	public void restarJugador() {
+		this.cantidadJugadores--;
 	}
 }

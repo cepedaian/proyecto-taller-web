@@ -1,4 +1,4 @@
-package ar.edu.unlam.tallerweb1.persistencia;
+/*package ar.edu.unlam.tallerweb1.persistencia;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -58,4 +58,4 @@ public class RepositorioPartidoTest extends SpringTest {
     }
 
 
-}
+}*/

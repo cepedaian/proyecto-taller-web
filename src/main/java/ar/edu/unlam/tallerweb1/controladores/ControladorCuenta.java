@@ -30,6 +30,42 @@ public class ControladorCuenta {
 	public ModelAndView insertar(@ModelAttribute("cuenta") Cuenta cuenta, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
+		if(cuenta.getPassword() == "") {
+			String mensaje = "Debe completar contrase?a";
+			model.put("error", mensaje);
+			List<Barrio> barrios = this.servicioBarrio.getAll();
+			model.put("barrios", barrios);
+			return new ModelAndView("form-usuario", model);
+		}
+		if(cuenta.getUsuario().getFecha_nac() == null) {
+			String mensaje = "Debe completar fecha nacimiento";
+			model.put("error", mensaje);
+			List<Barrio> barrios = this.servicioBarrio.getAll();
+			model.put("barrios", barrios);
+			return new ModelAndView("form-usuario", model);
+		}
+		if(cuenta.getUsuario().getBarrio() == null) {
+			String mensaje = "Debe completar barrio";
+			model.put("error", mensaje);
+			List<Barrio> barrios = this.servicioBarrio.getAll();
+			model.put("barrios", barrios);
+			return new ModelAndView("form-usuario", model);
+		}
+		if(cuenta.getUsuario().getPosicion() == "") {
+			String mensaje = "Debe completar la posición";
+			model.put("error", mensaje);
+			List<Barrio> barrios = this.servicioBarrio.getAll();
+			model.put("barrios", barrios);
+			return new ModelAndView("form-usuario", model);
+		}
+		if(cuenta.getUsuario().getSexo() == "") {
+			String mensaje = "Debe completar sexo";
+			model.put("error", mensaje);
+			List<Barrio> barrios = this.servicioBarrio.getAll();
+			model.put("barrios", barrios);
+			return new ModelAndView("form-usuario", model);
+		}
+		
 		try {
 			this.servicioCuenta.crearCuenta(cuenta);
 			String mensaje = "Se registro con exito!";

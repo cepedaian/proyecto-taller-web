@@ -28,7 +28,7 @@
 					
 					</td>
 					<td>
-						<button class="btn btn-sm btn-primary" type="submit"/>Invitar</button>
+						<a class="btn btn-primary" href="/enviar-invitacion-partido">Invitar</a>
 					</td>
 					
 				</tr>

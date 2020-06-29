@@ -4,7 +4,7 @@
 <jsp:include page="nav.jsp" />
 
 <section class="container-fluid section p-3">
-	<h1 class="display-5 text-white mb-4 font-weight-bold">Busc&aacute; los usuarios que quieras invitar</h1>
+	<h1 class="display-5 text-white mb-4 font-weight-bold">Busc&aacute; los usuarios que quieras invitar al partido ${partido.id}</h1>
 	<form:form action="buscar-usuario" method="POST" modelAttribute="usuario">
 		
 		<div class="form-group row">
@@ -38,8 +38,7 @@
 					class="form-control form-control-sm" id="userName"
 					placeholder="Ingrese su UserName" onkeyup="changeUserName(this.value)" />
 			</div>
-		</div>
-
+		</div>	
 		<button class="btn btn-sm btn-primary" type="submit"/>Buscar</button>
 	</form:form>
 

@@ -2,15 +2,28 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <nav class="navbar navbar-light bg-secondary justify-content-between pt-0 pb-1">
-    <a class="navbar-brand" href="home">
-        <img src="../../img/logo.png" style="height: 3em">
-    </a>
-
+    
+    
+    <c:if test="${empty cuenta}"><!-----SI NO ESTA LOGUEADO QUE LOGO VUELVA A HOME-->
+	    <a class="navbar-brand" href="home">
+		        <img src="../../img/logo.png" style="height: 3em">
+		</a>
+	</c:if>
+    <c:if test="${not empty cuenta}"> <!-----SI ESTA LOGUEADO QUE LOGO VUELVA A MOSTRAR PARTIDOS-->
+	    <a class="navbar-brand" href="/mostrar-partidos">
+	        <img src="../../img/logo.png" style="height: 3em">
+	    </a>
+	</c:if>
+	
+	
     <ul class="navbar-brand list-unstyled d-flex m-0">
         <%--<li class="nav-item">
             <a class="nav-link" href="/mostrar-partidos">Partidos</a>
         </li>--%>
         <c:if test="${not empty cuenta}">
+            <li class="nav-item">
+                <a class="nav-link" href="/mostrar-notificaciones"><i class="fa fa-envelope"></i></a>
+            </li>
             <li class="nav-item d-flex align-items-center flex-column">
                 <i class="fa fa-user-circle"></i>
                 <small class="text-white font-14">${cuenta.usuario.userName}</small>

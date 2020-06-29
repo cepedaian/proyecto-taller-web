@@ -11,4 +11,6 @@ public interface RepositorioCuenta {
 	void crearCuenta(Cuenta cuenta);
 
 	Boolean validarCuentaEmail(Cuenta cuenta);
+
+	String getEmailByIdUsuario(Long id);
 }

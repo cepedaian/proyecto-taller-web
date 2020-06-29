@@ -44,7 +44,7 @@ public class ControladorLogin extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		ModelMap model = new ModelMap();
-		model.put("msj", "Hasta el próximo partido!");
+		model.put("msj", "Hasta el proximo partido!");
 
 		return new ModelAndView("home", model);
 	}
