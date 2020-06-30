@@ -7,7 +7,7 @@
 <jsp:include page="nav.jsp" />
 
 <section class="container-fluid section">
-	<h1 class="display-4 text-white mb-4 font-weight-bold">Detalle
+	<h1 class="display-4 text-white mb-4 pt-2 font-weight-bold">Detalle
 		partido</h1>
 	<div class="row m-3">
 		<div class="col-sm-12 col-md-6">
@@ -38,19 +38,22 @@
 				Participantes:</h4>
 			<ul class="list-unstyled">
                 <c:forEach items="${usuarios}" var="usuario">
-                    <li class="text-white mb-1">${usuario.userName}</li>
+                    <li class="text-white mb-1">
+						<h5 class="display-5">${usuario.userName}</h5>
+					</li>
                 </c:forEach>
-            	<p>${usuarios.size()}</p>
             </ul>
+			<h5 class="display-5 text-white">
+				Cupos disponibles: ${partido.cantidadJugadores - usuarios.size()}
+			</h5>
+				<a class="btn btn-md btn-secondary mt-3" href="/mostrar-partidos">Volver</a>
+			<c:if test="${btnUnirse}">
+				<a class="btn btn-md btn-primary pull-right mt-3" href="/unirse-partido/${partido.id}">
+					<i class="fa fa-user"></i> Unirse
+				</a>
+			</c:if>
 		</div>
 	</div>
-	<a class="btn btn-sm btn-secondary" href="/mostrar-partidos">Volver</a>
-	<c:if test="${partido.cantidadJugadores > usuarios.size()}">
-		<a class="btn btn-sm btn-primary" href="/unirse-partido/${partido.id}">
-			<i class="fa fa-user"></i> Unirse
-		</a>
-	</c:if>
-
 </section>
 
 <jsp:include page="footer.jsp" />

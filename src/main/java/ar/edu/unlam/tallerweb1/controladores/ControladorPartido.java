@@ -161,9 +161,9 @@ public class ControladorPartido extends HttpServlet {
 	public ModelAndView insertarPartido(@ModelAttribute("partido") Partido partido, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		ModelMap model = new ModelMap();
-
+		Cuenta cuenta = new Cuenta();
 		if (session != null) {
-			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			cuenta = (Cuenta) session.getAttribute("usuario");
 			model.put("cuenta", cuenta);
 		} else {
 			model.put("msj", "Para crear partido te tenes que loguear. No hagas trampa!");
@@ -172,6 +172,7 @@ public class ControladorPartido extends HttpServlet {
 		model.put("msj", "El partido se creo con exito.");
 
 		this.servicioPartido.insertarPartido(partido);
+		this.servicioPartido.unirse(partido, cuenta.getUsuario());
 
 		List<Partido> partidos = this.servicioPartido.getAll();
 		model.put("partidos", partidos);
@@ -186,8 +187,9 @@ public class ControladorPartido extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		ModelMap model = new ModelMap();
 
+		Cuenta cuenta = new Cuenta();
 		if (session != null) {
-			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			cuenta = (Cuenta) session.getAttribute("usuario");
 			model.put("cuenta", cuenta);
 		}
 
@@ -198,8 +200,27 @@ public class ControladorPartido extends HttpServlet {
 
 		model.put("usuarios", usuarios);
 
+		//mostrar boton de unirse
+		if(cuenta != null &&
+				(!cuenta.getUsuario().getUserName().equals(partido.getOrganizador())) &&
+				partido.getCantidadJugadores() > usuarios.size() &&
+				!estaUnido(cuenta.getUsuario(), usuarios)) {
+			model.put("btnUnirse", true);
+		}
+
 		return new ModelAndView("detalle-partido", model);
 
+	}
+
+	private boolean estaUnido(Usuario usuario, Set<Usuario> usuarios) {
+		boolean unido = false;
+		for (Usuario user: usuarios) {
+			if(user.getUserName().equals(usuario.getUserName())) {
+				unido = true;
+				break;
+			}
+		}
+		return unido;
 	}
 
 	@RequestMapping(value = "/unirse-partido/{id}", method = RequestMethod.GET)
@@ -218,10 +239,9 @@ public class ControladorPartido extends HttpServlet {
 		Usuario destinatario = this.servicioUsuario.getByUserName(partido.getOrganizador());
 		
 		//envio de mail
-		
 		Usuario usuario = cuenta.getUsuario();
 		String remitente = usuario.getUserName();
-		String emailDestinatario = this.servicioCuenta.getEmailByIdUsuario(destinatario.getId());	
+		String emailDestinatario = this.servicioCuenta.getEmailByIdUsuario(destinatario.getId());
 		String asunto = remitente + " se unió a tu partido!";
 		String cuerpo = asunto;
 
@@ -264,12 +284,4 @@ public class ControladorPartido extends HttpServlet {
 
 		return new ModelAndView("form-buscar-usuario", model);
 	}
-	
-	
-	
-	
-
-
-	
-
 }
