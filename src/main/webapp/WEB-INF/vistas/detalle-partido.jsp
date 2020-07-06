@@ -44,7 +44,7 @@
                 </c:forEach>
             </ul>
 			<h5 class="display-5 text-white">
-				Cupos disponibles: ${partido.cantidadJugadores - usuarios.size()}
+				Cupos disponibles: ${partido.cantidadJugadores}
 			</h5>
 				<a class="btn btn-md btn-secondary mt-3" href="/mostrar-partidos">Volver</a>
 			<c:if test="${btnUnirse}">
