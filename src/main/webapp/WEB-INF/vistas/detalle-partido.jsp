@@ -36,7 +36,7 @@
 		<div class="col-sm-12">
 			<h4 class="display-5 text-white font-weight-bold">
 				Participantes:</h4>
-			<ul class="list-unstyled">
+			<ul class="list-unstyled">	
                 <c:forEach items="${usuarios}" var="usuario">
                     <li class="text-white mb-1">
 						<h5 class="display-5">${usuario.userName}</h5>
@@ -44,7 +44,7 @@
                 </c:forEach>
             </ul>
 			<h5 class="display-5 text-white">
-				Cupos disponibles: ${partido.cantidadJugadores - usuarios.size()}
+				Cupos disponibles: ${partido.cantidadJugadores} <!-- VER RESTA UNO DE MÁS -->
 			</h5>
 				<a class="btn btn-md btn-secondary mt-3" href="/mostrar-partidos">Volver</a>
 			<c:if test="${btnUnirse}">

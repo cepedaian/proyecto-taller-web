@@ -5,7 +5,7 @@
 
 <section class="container-fluid section p-3">
 	<h1 class="display-5 text-white mb-4 font-weight-bold">Busc&aacute; los usuarios que quieras invitar al partido ${partido.id}</h1>
-	<form:form action="buscar-usuario" method="POST" modelAttribute="usuario">
+	<form:form action="/buscar-usuario" method="POST" modelAttribute="usuario">
 		
 		<div class="form-group row">
 			<label for="barrio" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Barrio:</label>

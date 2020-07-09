@@ -68,7 +68,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
 	}
 
 	@Override
-	public Partido detalleListaUsuarios(Long id) {
+	public Partido getByIdLazyMode(Long id) {
 		
 		return repositorioPartido.detalleListaUsuarios(id);
 		

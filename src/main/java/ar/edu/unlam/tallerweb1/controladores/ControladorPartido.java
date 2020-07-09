@@ -126,8 +126,9 @@ public class ControladorPartido extends HttpServlet {
 		String mensaje = "El partido ha sido eliminado. ";
 
 		model.put("msj", mensaje);
-		Partido partido = this.servicioPartido.detalleListaUsuarios(id);
-
+		
+		Partido partido = this.servicioPartido.getByIdLazyMode(id);
+		
 		this.servicioPartido.eliminarPartido(partido);
 
 		List<Partido> partidos = this.servicioPartido.getAll();
@@ -196,7 +197,7 @@ public class ControladorPartido extends HttpServlet {
 		Partido partido = this.servicioPartido.getById(id);
 		model.put("partido", partido);
 
-		Set<Usuario> usuarios = this.servicioPartido.detalleListaUsuarios(id).getJugadores();
+		Set<Usuario> usuarios = this.servicioPartido.getByIdLazyMode(id).getJugadores();
 
 		model.put("usuarios", usuarios);
 

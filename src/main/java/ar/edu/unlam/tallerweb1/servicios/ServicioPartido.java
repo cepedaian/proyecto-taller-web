@@ -20,7 +20,7 @@ public interface ServicioPartido {
 
 	void unirse(Partido partido, Usuario usuario);
 
-	Partido detalleListaUsuarios(Long id);
+	Partido getByIdLazyMode(Long id);
 
 
 	String getOrganizador(Partido partido);

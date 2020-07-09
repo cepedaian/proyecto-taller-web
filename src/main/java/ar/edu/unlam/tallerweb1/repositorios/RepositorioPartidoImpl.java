@@ -42,8 +42,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 	@Override
 	public void eliminarPartido(Partido partido) {
 		final Session session = sessionFactory.getCurrentSession();
-		Partido partidoBuscado = session.find(Partido.class, partido.getId());
-		session.delete(partidoBuscado);
+		session.delete(partido);
 	}
 
 	@Override
