@@ -25,7 +25,7 @@ public class Usuario {
 
 	private String posicion;
 
-	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "usuarios")
+	@ManyToMany(mappedBy = "usuarios")
     private Set<Partido> partidos;
 	
 	public Long getId() {

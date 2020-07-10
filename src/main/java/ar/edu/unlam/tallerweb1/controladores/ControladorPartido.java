@@ -127,9 +127,7 @@ public class ControladorPartido extends HttpServlet {
 
 		model.put("msj", mensaje);
 		
-		Partido partido = this.servicioPartido.getByIdLazyMode(id);
-		
-		this.servicioPartido.eliminarPartido(partido);
+		this.servicioPartido.eliminarPartido(id);
 
 		List<Partido> partidos = this.servicioPartido.getAll();
 		model.put("partidos", partidos);
@@ -208,6 +206,12 @@ public class ControladorPartido extends HttpServlet {
 				!estaUnido(cuenta.getUsuario(), usuarios)) {
 			model.put("btnUnirse", true);
 		}
+		
+		if(cuenta != null &&
+				(estaUnido(cuenta.getUsuario(), usuarios))) {
+			model.put("btnBajarse", true);
+		}
+		
 
 		return new ModelAndView("detalle-partido", model);
 
@@ -264,6 +268,49 @@ public class ControladorPartido extends HttpServlet {
 		return new ModelAndView("partidos", model);
 
 	}
+	@RequestMapping(value = "/baja-partido/{id}", method = RequestMethod.GET)
+	public ModelAndView bajarse(@PathVariable("id") Long id, HttpServletRequest request) {
+
+		HttpSession session = request.getSession(false);
+		ModelMap model = new ModelMap();
+
+		Cuenta cuenta = new Cuenta();
+		Notificacion notificacion = new Notificacion();
+		if (session != null) {
+			cuenta = (Cuenta) session.getAttribute("usuario");
+			model.put("cuenta", cuenta);
+		}
+		Partido partido = this.servicioPartido.getById(id);
+		Usuario destinatario = this.servicioUsuario.getByUserName(partido.getOrganizador());
+		
+		Usuario usuario = cuenta.getUsuario();
+		//envio de mail
+		String remitente = usuario.getUserName();
+		String emailDestinatario = this.servicioCuenta.getEmailByIdUsuario(destinatario.getId());
+		String asunto = remitente + " se bajó del partido!";
+		String cuerpo = asunto;
+
+		enviarConGMail(emailDestinatario, asunto, cuerpo);
+
+		//notificacion app
+
+		notificacion.setDestinatario(destinatario);
+		notificacion.setPartido(partido);
+		notificacion.setRemitente(usuario.getUserName());
+
+		this.servicioPartido.bajarse(partido, usuario);
+		//this.servicioNotificacion.crear(notificacion);
+
+		String msj = "Te bajaste del partido satisfactoriamente.";
+		model.put("msj", msj);
+		List<Partido> partidos = this.servicioPartido.getAll();
+		model.put("partidos", partidos);
+		return new ModelAndView("partidos", model);
+
+	}
+	
+	
+	
 	
 	@RequestMapping(value = "/invitar-usuario-partido/{id}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView invitar(@PathVariable("id") Long id,HttpServletRequest request) {
@@ -285,4 +332,29 @@ public class ControladorPartido extends HttpServlet {
 
 		return new ModelAndView("form-buscar-usuario", model);
 	}
+	@RequestMapping(value = "/eliminar-participante/{id_usuario}/{id_partido}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
+	public ModelAndView eliminarParticipante(@PathVariable("id_usuario") Long id_usuario,
+			@PathVariable("id_partido") Long id_partido, HttpServletRequest request) {
+
+		HttpSession session = request.getSession(false);
+		ModelMap model = new ModelMap();
+
+		if (session != null) {
+			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
+			model.put("cuenta", cuenta);
+		}
+
+		String mensaje = "El participante ha sido eliminado. ";
+
+		model.put("msj", mensaje);
+		
+		this.servicioPartido.eliminarParticipante(id_usuario,id_partido);
+
+		List<Partido> partidos = this.servicioPartido.getAll();
+		model.put("partidos", partidos);
+
+		return new ModelAndView("partidos", model);
+	}
+
+
 }

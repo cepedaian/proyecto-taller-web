@@ -50,7 +50,7 @@
 						</c:if>
 						<c:if
 							test="${partido.organizador == cuenta.usuario.userName}">
-							<a class="btn btn-sm btn-danger" href="/eliminar-partido/${partido.id}">
+							<a class="btn btn-sm btn-danger"  href="/eliminar-partido/${partido.id}">
 								<i class="fa fa-trash"></i> Eliminar
 							</a>
 						</c:if>

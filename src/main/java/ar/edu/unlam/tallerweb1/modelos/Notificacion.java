@@ -11,7 +11,7 @@ public class Notificacion {
 
     @OneToOne(fetch = FetchType.EAGER)//CAMBIAR A LAZY
     private Partido partido;
-
+    //probar mapear del lado de partido
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)//CAMBIAR A LAZY VER CACADE ALL
     private Usuario destinatario;
 

@@ -26,7 +26,7 @@ public class Partido {
 
 	private String organizador;
 	
-	//@Cascade(CascadeType.SAVE_UPDATE)
+	
 	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinTable(
 	  name = "usuario_partido",
@@ -82,5 +82,9 @@ public class Partido {
 	
 	public void restarJugador() {
 		this.cantidadJugadores--;
+	}
+	public void sumarJugador() {
+		this.cantidadJugadores++;
+		
 	}
 }
