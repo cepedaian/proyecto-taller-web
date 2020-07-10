@@ -192,7 +192,7 @@ public class ControladorPartido extends HttpServlet {
 			model.put("cuenta", cuenta);
 		}
 
-		Partido partido = this.servicioPartido.getById(id);
+		Partido partido = this.servicioPartido.getByIdLazyMode(id);
 		model.put("partido", partido);
 
 		Set<Usuario> usuarios = this.servicioPartido.getByIdLazyMode(id).getJugadores();
@@ -208,11 +208,11 @@ public class ControladorPartido extends HttpServlet {
 		}
 		
 		if(cuenta != null &&
-				(estaUnido(cuenta.getUsuario(), usuarios))) {
+				(estaUnido(cuenta.getUsuario(), usuarios)) && 
+				!cuenta.getUsuario().getUserName().equals(partido.getOrganizador()) )  {
 			model.put("btnBajarse", true);
 		}
 		
-
 		return new ModelAndView("detalle-partido", model);
 
 	}
@@ -299,7 +299,7 @@ public class ControladorPartido extends HttpServlet {
 		notificacion.setRemitente(usuario.getUserName());
 
 		this.servicioPartido.bajarse(partido, usuario);
-		//this.servicioNotificacion.crear(notificacion);
+		this.servicioNotificacion.crear(notificacion);
 
 		String msj = "Te bajaste del partido satisfactoriamente.";
 		model.put("msj", msj);

@@ -36,14 +36,14 @@
 		<div class="col-sm-12">
 			<h4 class="display-5 text-white font-weight-bold">
 				Participantes:</h4>
-			<ul class="list-unstyled">
+			<ul class="list-unstyled col">
 				<c:forEach items="${usuarios}" var="usuario">
-					<li class="text-white mb-1">
-						<h5 class="display-5">${usuario.userName}</h5> <c:if
+					<li class="text-white mb-1 row">
+						<h5 class="display-5 mr-2">${usuario.userName}</h5> <c:if
 							test="${partido.organizador == cuenta.usuario.userName}">
 							<a class="btn btn-sm btn-danger"
 								href="/eliminar-participante/${usuario.id}/${partido.id}"> <i
-								class="fa fa-trash"></i> Eliminar
+								class="fa fa-close"></i>Eliminar
 							</a>
 						</c:if>
 					</li>

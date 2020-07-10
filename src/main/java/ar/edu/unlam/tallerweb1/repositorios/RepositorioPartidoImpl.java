@@ -37,7 +37,22 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 		Criteria criteria = session.createCriteria(Partido.class);
 		criteria.add(Restrictions.gt("fecha", currentDate));
 		List<Partido> partidos = criteria.list();
-		return partidos;
+
+		List<Partido> listaPartidosLazy = new ArrayList();
+
+		for (Partido partido: partidos) {
+
+			partido = session.find(Partido.class, partido.getId());
+
+			if (partido != null) {
+				// Get Lazy Model
+				Hibernate.initialize(partido.getCancha());
+				listaPartidosLazy.add(partido);
+			}
+
+		}
+
+		return listaPartidosLazy;
 	}
 
 	@Override
@@ -46,11 +61,10 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 
 		Partido partido = session.find(Partido.class, id);
 
-		
-		String hql = "delete from Notificacion where partido.id = " +id;
+		String hql = "delete from Notificacion where partido.id = " + id;
 		Query query = session.createQuery(hql);
 		query.executeUpdate();
-		
+
 		if (partido != null) {
 			// Get Lazy Model
 			Hibernate.initialize(partido.getJugadores());
@@ -87,7 +101,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 
 	}
 
-	public Partido detalleListaUsuarios(Long id) {
+	public Partido getPartidoLazyMode(Long id) {
 		final Session session = sessionFactory.getCurrentSession();
 
 		Partido partido = session.find(Partido.class, id);
@@ -95,6 +109,7 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 		if (partido != null) {
 			// Get Lazy Model
 			Hibernate.initialize(partido.getJugadores());
+			Hibernate.initialize(partido.getCancha());
 		}
 
 		return partido;
@@ -113,17 +128,17 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 
 		final Session session = sessionFactory.getCurrentSession();
 		Partido partido1 = session.get(Partido.class, partido.getId());
-		
+
 		Set<Usuario> usuarios = partido1.getJugadores();
-		
-		for (Usuario user: usuarios) {
-			if(user.getUserName().equals(usuario.getUserName())) {
+
+		for (Usuario user : usuarios) {
+			if (user.getUserName().equals(usuario.getUserName())) {
 				usuarios.remove(user);
 				break;
 			}
-		
-		}	
-		
+
+		}
+
 		partido1.sumarJugador();
 
 		session.update(partido1);
@@ -131,29 +146,25 @@ public class RepositorioPartidoImpl implements RepositorioPartido {
 	}
 
 	@Override
-	public void eliminarParticipante(Long id_usuario,Long id_partido) {
+	public void eliminarParticipante(Long id_usuario, Long id_partido) {
 		final Session session = sessionFactory.getCurrentSession();
 		Partido partido = session.get(Partido.class, id_partido);
-		
-		Usuario usuario = session.get(Usuario.class,id_usuario);
-		
+
+		Usuario usuario = session.get(Usuario.class, id_usuario);
+
 		Set<Usuario> usuarios = partido.getJugadores();
-		
-		for (Usuario user: usuarios) {
-			if(user.getId().equals(usuario.getId())) {
+
+		for (Usuario user : usuarios) {
+			if (user.getId().equals(usuario.getId())) {
 				usuarios.remove(user);
 				break;
 			}
 		}
-		
+
 		partido.sumarJugador();
-		
+
 		session.update(partido);
-		
-	
+
 	}
-	
-
-
 
 }

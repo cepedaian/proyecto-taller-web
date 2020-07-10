@@ -9,10 +9,10 @@ public class Notificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)//CAMBIAR A LAZY
+    @ManyToOne(fetch = FetchType.LAZY)
     private Partido partido;
     //probar mapear del lado de partido
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)//CAMBIAR A LAZY VER CACADE ALL
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Usuario destinatario;
 
     private String remitente;

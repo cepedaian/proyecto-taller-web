@@ -21,7 +21,7 @@ public interface RepositorioPartido {
 	
 	public void bajarse(Partido partido, Usuario usuario);
 	
-	Partido detalleListaUsuarios(Long id);
+	Partido getPartidoLazyMode(Long id);
 
 	String getOrganizador(Partido partido);
 	

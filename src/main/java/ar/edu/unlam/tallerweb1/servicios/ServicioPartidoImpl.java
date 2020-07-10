@@ -70,7 +70,7 @@ public class ServicioPartidoImpl implements ServicioPartido {
 	@Override
 	public Partido getByIdLazyMode(Long id) {
 		
-		return repositorioPartido.detalleListaUsuarios(id);
+		return repositorioPartido.getPartidoLazyMode(id);
 		
 		
 	}

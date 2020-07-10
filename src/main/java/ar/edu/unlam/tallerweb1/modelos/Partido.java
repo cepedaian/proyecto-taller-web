@@ -16,7 +16,7 @@ public class Partido {
 
 	private Integer cantidadJugadores;
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	private Cancha cancha;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
