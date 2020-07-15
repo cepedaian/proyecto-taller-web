@@ -47,6 +47,9 @@ public class ControladorNotificacion {
 
         //Usuario usuario = (Usuario) session.getAttribute("usuario");
         List<Notificacion> notificaciones = this.servicioNotificacion.getNotificacionesByUsuarioId(usuario.getId());
+        
+        //List<Notificacion> notificacionesLazy = this.servicioNotificacion.getNotificacionesLazyMode(notificaciones);
+        
         model.put("notificaciones", notificaciones);
 
         return new ModelAndView("notificaciones", model);

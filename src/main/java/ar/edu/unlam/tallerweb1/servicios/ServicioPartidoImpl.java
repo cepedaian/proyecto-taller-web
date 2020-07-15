@@ -33,8 +33,8 @@ public class ServicioPartidoImpl implements ServicioPartido {
 	}
 
 	@Override
-	public void eliminarPartido(Partido partido) {
-		repositorioPartido.eliminarPartido(partido);
+	public void eliminarPartido(Long id) {
+		repositorioPartido.eliminarPartido(id);
 	}
 
 	@Override
@@ -68,9 +68,9 @@ public class ServicioPartidoImpl implements ServicioPartido {
 	}
 
 	@Override
-	public Partido detalleListaUsuarios(Long id) {
+	public Partido getByIdLazyMode(Long id) {
 		
-		return repositorioPartido.detalleListaUsuarios(id);
+		return repositorioPartido.getPartidoLazyMode(id);
 		
 		
 	}
@@ -82,6 +82,19 @@ public class ServicioPartidoImpl implements ServicioPartido {
 	public String getOrganizador(Partido partido){
 
 		return this.repositorioPartido.getOrganizador(partido);
+	}
+
+	@Override
+	public void bajarse(Partido partido, Usuario usuario) {
+		
+		this.repositorioPartido.bajarse(partido,usuario);
+		
+	}
+
+	@Override
+	public void eliminarParticipante(Long id_usuario,Long id_partido) {
+		this.repositorioPartido.eliminarParticipante(id_usuario,id_partido);
+		
 	}
 
 }

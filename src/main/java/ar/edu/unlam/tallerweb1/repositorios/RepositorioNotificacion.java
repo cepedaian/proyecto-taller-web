@@ -12,4 +12,6 @@ public interface RepositorioNotificacion {
     void crear(Notificacion notificacion);
 
     List<Notificacion> getNotificacionesByUsuarioId(Long id);
+
+	List<Notificacion> getNotificacionesLazyMode(List<Notificacion> notificaciones);
 }

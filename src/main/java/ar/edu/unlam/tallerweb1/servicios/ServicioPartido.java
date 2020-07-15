@@ -12,18 +12,22 @@ import java.util.Set;
 public interface ServicioPartido {
 	public List<Partido> getAll();
 	
-	public void eliminarPartido(Partido partido);
+	public void eliminarPartido(Long id);
 
 	public void insertarPartido(Partido partido);
 
     Partido getById(Long id);
 
 	void unirse(Partido partido, Usuario usuario);
-
-	Partido detalleListaUsuarios(Long id);
+	
+	void bajarse(Partido partido, Usuario usuario);
+	
+	Partido getByIdLazyMode(Long id);
 
 
 	String getOrganizador(Partido partido);
+	
+	void eliminarParticipante(Long id_usuario,Long id_partido);
 
 }
 

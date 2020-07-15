@@ -11,16 +11,19 @@ public interface RepositorioPartido {
 
 	public List<Partido> getAll();
 
-	public void eliminarPartido(Partido partido);
+	public void eliminarPartido(Long id);
 
 	public void insertarPartido(Partido partido);
 
 	Partido getById(Long id);
 
 	public void unirse(Partido partido, Usuario usuario);
-
-	Partido detalleListaUsuarios(Long id);
+	
+	public void bajarse(Partido partido, Usuario usuario);
+	
+	Partido getPartidoLazyMode(Long id);
 
 	String getOrganizador(Partido partido);
-
+	
+	void eliminarParticipante(Long id_usuario,Long id_partido);
 }

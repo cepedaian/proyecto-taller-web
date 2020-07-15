@@ -36,4 +36,10 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 
         return this.repositorioNotificacion.getNotificacionesByUsuarioId(id);
     }
+
+	@Override
+	public List<Notificacion> getNotificacionesLazyMode(List<Notificacion> notificaciones) {
+		
+		return this.repositorioNotificacion.getNotificacionesLazyMode(notificaciones);
+	}
 }
