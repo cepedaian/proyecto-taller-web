@@ -45,11 +45,9 @@ public class ControladorNotificacion {
 
         Usuario usuario = cuenta.getUsuario();
 
-        
         List<Notificacion> notificaciones = this.servicioNotificacion.getNotificacionesByUsuarioId(usuario.getId());
-
         model.put("notificaciones", notificaciones);
-
+        //model.put("cantNotificaciones", 0);
         this.servicioNotificacion.marcarLeidasByUsuarioId(usuario.getId());
 
         return new ModelAndView("notificaciones", model);

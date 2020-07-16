@@ -28,24 +28,25 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 
     @Override
     public void crear(Notificacion notificacion) {
-
         this.repositorioNotificacion.crear(notificacion);
     }
     @Override
     public List<Notificacion> getNotificacionesByUsuarioId(Long id){
-
         return this.repositorioNotificacion.getNotificacionesByUsuarioId(id);
     }
 
 	@Override
 	public List<Notificacion> getNotificacionesLazyMode(List<Notificacion> notificaciones) {
-		
 		return this.repositorioNotificacion.getNotificacionesLazyMode(notificaciones);
 	}
 
     @Override
     public void marcarLeidasByUsuarioId(Long id) {
-
         this.repositorioNotificacion.marcarLeidasByUsuarioId(id);
+    }
+
+    @Override
+    public Integer getCantNotificacionesNoLeidasByUsuarioId(Long id) {
+        return this.repositorioNotificacion.getCantNotificacionesNoLeidasByUsuarioId(id);
     }
 }

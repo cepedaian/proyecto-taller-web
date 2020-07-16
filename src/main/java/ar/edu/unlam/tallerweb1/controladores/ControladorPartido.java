@@ -311,11 +311,9 @@ public class ControladorPartido extends HttpServlet {
 		return new ModelAndView("partidos", model);
 
 	}
+
 	
-	
-	
-	
-	@RequestMapping(value = "/invitar-usuario-partido/{id}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
+	@RequestMapping(value = "/show-invitar-usuario-partido/{id}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView invitar(@PathVariable("id") Long id,HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		ModelMap model = new ModelMap();
@@ -326,7 +324,6 @@ public class ControladorPartido extends HttpServlet {
 		}
 		
 		Partido partido = this.servicioPartido.getById(id);
-		
 		model.put("partido",partido);
 		
 		List<Barrio> barrios = this.servicioBarrio.getAll();
@@ -335,6 +332,7 @@ public class ControladorPartido extends HttpServlet {
 
 		return new ModelAndView("form-buscar-usuario", model);
 	}
+
 	@RequestMapping(value = "/eliminar-participante/{id_usuario}/{id_partido}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView eliminarParticipante(@PathVariable("id_usuario") Long id_usuario,
 			@PathVariable("id_partido") Long id_partido, HttpServletRequest request) {
@@ -351,10 +349,17 @@ public class ControladorPartido extends HttpServlet {
 
 		model.put("msj", mensaje);
 		
-		this.servicioPartido.eliminarParticipante(id_usuario,id_partido);
+		this.servicioPartido.eliminarParticipante(id_usuario, id_partido);
 
 		List<Partido> partidos = this.servicioPartido.getAll();
 		model.put("partidos", partidos);
+
+		//envio de mail
+		Cuenta destinatario = this.servicioCuenta.getByIdUser(id_usuario);
+		String emailDestinatario = destinatario.getEmail();
+		String asunto = "Te bajaron del partido";
+		String cuerpo = "Lamentablemente el organizador te bajo del partido!";
+		enviarConGMail(emailDestinatario, asunto, cuerpo);
 
 		return new ModelAndView("partidos", model);
 	}

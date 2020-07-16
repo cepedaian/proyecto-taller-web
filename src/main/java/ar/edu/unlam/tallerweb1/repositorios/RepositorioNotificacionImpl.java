@@ -98,8 +98,17 @@ public class RepositorioNotificacionImpl implements RepositorioNotificacion {
 
         final Session session = sessionFactory.getCurrentSession();
 
-        String hql = "update from Notificacion set leido = true where destinatario = " + id;
+        String hql = "update from Notificacion set leido = true where destinatario.id = " + id;
         Query query = session.createQuery(hql);
         query.executeUpdate();
+    }
+
+    @Override
+    public Integer getCantNotificacionesNoLeidasByUsuarioId(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        String hql = "select count(*) from Notificacion where leido = false and destinatario.id = " + id;
+        Query query = session.createQuery(hql);
+        return query.executeUpdate();
     }
 }

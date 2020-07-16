@@ -7,72 +7,75 @@
 <jsp:include page="nav.jsp" />
 
 <section class="container-fluid section">
-	<h1 class="display-4 text-white mb-4 pt-2 font-weight-bold">Detalle
-		partido</h1>
-	<div class="row m-3">
+	<div class="row mt-0 ml-3 mr-3">
 		<div class="col-sm-12 col-md-6">
-			<h4 class="display-5 text-white font-weight-bold">
-				<fmt:formatDate value="${partido.fecha}" pattern="dd-MM-yyyy HH:mm" />
+			<h1 class="display-4 text-white mb-4 pt-2 font-weight-bold">Detalle partido</h1>
+			<h4 class="display-5 mb-4 text-white font-weight-bold">
+				<i class="fa fa-calendar"></i> <fmt:formatDate value="${partido.fecha}" pattern="dd-MM-yyyy HH:mm" />
 			</h4>
-		</div>
-		<div class="col-sm-12 col-md-6">
-			<h4 class="display-5 text-white font-weight-bold">Organiza:
-				${partido.organizador}</h4>
-		</div>
-	</div>
-	<div class="row m-3">
-		<div class="col-sm-12 col-md-6">
-			<h4 class="display-5 text-white font-weight-bold">Cancha:
-				${partido.cancha.nombre}</h4><br>
-			<h4 class="display-5 text-white font-weight-bold">Tipo: ${partido.sexo}</h4>
-		</div>
-		<div class="col-sm-12 col-md-6">
-			<h4 class="display-5 text-white font-weight-bold">
-
+			<h4 class="display-5 mb-4 text-white font-weight-bold">
+				Organiza: ${partido.organizador}
+			</h4>
+			<h4 class="display-5 mb-4 text-white font-weight-bold">
+				Cancha:	${partido.cancha.nombre}
+			</h4>
+			<h4 class="display-5 mb-4 text-white font-weight-bold">
 				Direcci&oacute;n: ${partido.cancha.direccion.calle}
 				${partido.cancha.direccion.altura},
-				${partido.cancha.direccion.barrio.descripcion}</h4>
-		</div>
-	</div>
-	<div class="row">
-		${partido.cancha.mapa}
-	</div>
-	<div class="row m-3">
-		<div class="col-sm-12">
-			<h4 class="display-5 text-white font-weight-bold">
-				Participantes:</h4>
-			<ul class="list-unstyled col">
-				<c:forEach items="${usuarios}" var="usuario">
-					<li class="text-white mb-1 row">
-						<h5 class="display-5 mr-2">${usuario.userName}</h5> <c:if
-							test="${partido.organizador == cuenta.usuario.userName && usuario.userName != partido.organizador}">
-							<button class="btn btn-sm btn-danger" id="btn-modal"
-								data-id="${usuario.id}/${partido.id}">
-								<i class="fa fa-close"></i>Eliminar
-							</button>
-						</c:if>
-					</li>
-				</c:forEach>
-			</ul>
-			<h5 class="display-5 text-white">
-
+				${partido.cancha.direccion.barrio.descripcion}
+			</h4>
+			<h4 class="display-5 mb-4 text-white font-weight-bold">
+				Tipo: ${partido.sexo}
+			</h4>
+			<h4 class="display-5 mb-4 text-white">
 				Cupos disponibles: ${partido.cantidadJugadores}
-				<!-- VER RESTA UNO DE M�S -->
-
-			</h5>
-			<a class="btn btn-md btn-secondary mt-3" href="/mostrar-partidos">Volver</a>
+			</h4>
 			<c:if test="${btnUnirse}">
-				<a class="btn btn-md btn-primary pull-right mt-3"
-					href="/unirse-partido/${partido.id}"> <i class="fa fa-user"></i>
+				<a class="btn btn-lg btn-primary mt-3"
+					href="/unirse-partido/${partido.id}"> <i class="fa fa-user-plus"></i>
 					Unirse
 				</a>
 			</c:if>
 			<c:if test="${btnBajarse}">
-				<a class="btn btn-md btn-danger pull-right mt-3"
-					href="/baja-partido/${partido.id}"> <i class="fa fa-user"></i>
-					Baja
+				<a class="btn btn-lg btn-danger mt-3"
+					href="/baja-partido/${partido.id}"> <i class="fa fa-user-slash"></i>
+					Bajarse
 				</a>
 			</c:if>
+		</div>
+		<div class="col-sm-12 col-md-6 pt-4">
+			${partido.cancha.mapa}
+		</div>
+	</div>
+
+	<div class="row m-3">
+		<div class="col-sm-12">
+			<h3 class="display-4 text-white font-weight-bold">
+				Participantes:</h3>
+			<ul class="list-unstyled d-flex">
+				<c:forEach items="${usuarios}" var="usuario">
+					<li class="text-white mb-1 d-flex align-items-center">
+
+						<h3 class="display-5 mr-3 mb-0">
+							<c:if test="${usuario.sexo == 'masculino'}">
+								<i class="fa fa-male"></i>
+							</c:if>
+							<c:if test="${usuario.sexo == 'femenino'}">
+								<i class="fa fa-female"></i>
+							</c:if>
+							${usuario.userName}</h3>
+						<c:if
+							test="${partido.organizador == cuenta.usuario.userName && usuario.userName != partido.organizador}">
+							<a class="text-danger pointer" id="btn-modal"
+								data-id="${usuario.id}/${partido.id}">
+								<i class="fa fa-trash"></i> Eliminar
+							</a>
+						</c:if>
+					</li>
+				</c:forEach>
+			</ul>
+
+			<a class="btn btn-md btn-secondary mt-3 mb-3" href="/mostrar-partidos">Volver</a>
 
 		</div>
 	</div>

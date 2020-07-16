@@ -24,25 +24,25 @@ public class ServicioCuentaImpl implements ServicioCuenta {
 
 	@Override
 	public void crearCuenta(Cuenta cuenta) throws Exception {
-		
 		if (this.repositorioCuenta.validarCuentaEmail(cuenta) == false) {
 			throw new Exception("Email existente");
 		}
 		if (this.repositorioUsuario.buscarByUserName(cuenta.getUsuario()) == false) {
 
 			throw new Exception("UserName existente");
-
 		} else {
 			this.repositorioCuenta.crearCuenta(cuenta);
-
 		}
-
 	}
 
 	@Override
 	public String getEmailByIdUsuario(Long id) {
-		
 		return this.repositorioCuenta.getEmailByIdUsuario(id); 
+	}
+
+	@Override
+	public Cuenta getByIdUser(Long id) {
+		return this.repositorioCuenta.getByIdUser(id);
 	}
 
 }

@@ -3,14 +3,13 @@
 <jsp:include page="header.jsp" />
 <jsp:include page="nav.jsp" />
 
-<section class="container-fluid section p-3">
-	<h1 class="display-5 text-white mb-4 font-weight-bold">Busc&aacute; los usuarios que quieras invitar al partido ${partido.id}</h1>
-	<form:form action="/buscar-usuario" method="POST" modelAttribute="usuario">
-		
+<section class="container-fluid section p-4">
+	<h1 class="display-5 text-white mb-4 font-weight-bold">Busc&aacute; los usuarios que quieras invitar al partido</h1>
+	<form:form action="/buscar-usuario/${partido.id}" method="POST" modelAttribute="usuario">
 		<div class="form-group row">
-			<label for="barrio" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Barrio:</label>
+			<label for="barrio" class="col-sm-2 col-form-label text-white font-weight-bold">Barrio:</label>
 			<div class="col-sm-10">
-			  	<form:select path="barrio.id" class="form-control form-control-sm" id="barrio">
+			  	<form:select path="barrio.id" class="form-control" id="barrio">
 					<option value=""></option>
 				  	<c:forEach items="${barrios}" var="barrioUsuario">
 						<option value="${barrioUsuario.id}">${barrioUsuario.descripcion}</option>
@@ -19,9 +18,9 @@
 			</div>
 		</div>
 		<div class="form-group row">
-			<label for="posicion" class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">Posicion:</label>
+			<label for="posicion" class="col-sm-2 col-form-label text-white font-weight-bold">Posicion:</label>
 			<div class="col-sm-10">
-			  <form:select path="posicion" class="form-control form-control-sm" id="posicion">
+			  <form:select path="posicion" class="form-control" id="posicion">
 				  <option value=""></option>
 				  <option value="arquero">Arquero</option>
 				  <option value="defensor">Defensor</option>
@@ -32,14 +31,14 @@
 		</div>
 		<div class="form-group row">
 			<label for="userName"
-				class="col-sm-2 col-form-label col-form-label-sm font-weight-bold">UserName:</label>
+				class="col-sm-2 col-form-label text-white font-weight-bold">UserName:</label>
 			<div class="col-sm-10">
 				<form:input path="userName" type="text"
-					class="form-control form-control-sm" id="userName"
+					class="form-control" id="userName"
 					placeholder="Ingrese su UserName" onkeyup="changeUserName(this.value)" />
 			</div>
 		</div>	
-		<button class="btn btn-sm btn-primary" type="submit"/>Buscar</button>
+		<button class="btn btn-lg btn-primary" type="submit"/><i class="fa fa-search"></i> Buscar</button>
 	</form:form>
 
 

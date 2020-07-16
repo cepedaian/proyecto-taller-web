@@ -18,7 +18,7 @@
 		</div>
 		<div class="col-sm-6 text-right">
 			<c:if test="${not empty cuenta}">
-				<a class="btn btn-primary" href="/crear-partido">Crear partido</a>
+				<a class="btn btn-lg btn-primary" href="/crear-partido">Crear partido</a>
 			</c:if>
 		</div>
 	</div>
@@ -47,19 +47,19 @@
 						<i>Disponibilidad: ${partido.cantidadJugadores}</i>
 					</div>
 					<div class="col-sm-6">
-						<a class="btn btn-sm btn-success"
+						<a class="btn btn-md mr-2 btn-success"
 							href="/detalle-partido/${partido.id}"> <i
 							class="fa fa-search" title="Ver detalle"></i> Ver detalle
 						</a>
 						<c:if test="${partido.organizador == cuenta.usuario.userName}">
-							<a class="btn btn-sm btn-primary"
-								href="/invitar-usuario-partido/${partido.id}"> <i
+							<a class="btn btn-md mr-2 btn-primary"
+								href="/show-invitar-usuario-partido/${partido.id}"> <i
 								class="fa fa-user"></i> Invitar
 							</a>
 						</c:if>
 						<c:if test="${partido.organizador == cuenta.usuario.userName}">
 							<button id="btn-modal" data-id="${partido.id}"
-								class="btn btn-sm btn-danger">
+								class="btn btn-md mr-2 btn-danger">
 								<i class="fa fa-trash"></i> Eliminar
 							</button>
 						</c:if>

@@ -17,15 +17,13 @@
 	
 	
     <ul class="navbar-brand list-unstyled d-flex m-0">
-        <%--<li class="nav-item">
-            <a class="nav-link" href="/mostrar-partidos">Partidos</a>
-        </li>--%>
         <c:if test="${not empty cuenta}">
-            <li class="nav-item">
-                <a class="nav-link" href="/mostrar-notificaciones"><i class="fa fa-envelope"></i></a>
-                <span class="badge badge-pill badge-danger">${notificaciones.size()}</span>
-            </li>
-
+            <c:if test="${not empty cantNotificaciones}">
+                <li class="nav-item d-flex">
+                    <a class="nav-link pr-0" href="/mostrar-notificaciones"><i class="fa fa-envelope"></i></a>
+                    <span class="badge badge-pill badge-danger font-12" style="align-self: end;">${cantNotificaciones}</span>
+                </li>
+            </c:if>
             <li class="nav-item d-flex align-items-center flex-column">
                 <i class="fa fa-user-circle"></i>
                 <small class="text-white font-14">${cuenta.usuario.userName}</small>

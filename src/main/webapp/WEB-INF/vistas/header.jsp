@@ -5,7 +5,7 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <style>
 	* {
 		box-sizing: border-box;
@@ -15,7 +15,11 @@
 	}
 
 	body {
-		min-height: 100vh;
+		height: 100%;
+	}
+
+	.pointer {
+		cursor: pointer;
 	}
 
 	nav {
@@ -41,12 +45,16 @@
 		color: #7ec86a;
 	}
 
+	.font-12 {
+		font-size: 12px;
+	}
+
 	.font-14 {
 		font-size: 14px;
 	}
 
 	.home {
-		height: 90vh;
+		min-height: 95vh;
 		background-image: url("../../img/background_sin_logo.jpg");
 		background-color: #6c757d;
 		background-size: cover;
@@ -56,7 +64,7 @@
 	}
 
 	.section {
-		min-height: 90vh;
+		min-height: 95vh;
 		background: #76b852;  /* fallback for old browsers */
 		background: -webkit-linear-gradient(to bottom, #8DC26F, #76b852);  /* Chrome 10-25, Safari 5.1-6 */
 		background: linear-gradient(to bottom, #8DC26F, #76b852); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
