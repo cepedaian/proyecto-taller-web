@@ -67,8 +67,10 @@ public class ControladorLogin extends HttpServlet {
 			List<Partido> partidos = this.servicioPartido.getAll();
 			model.put("partidos", partidos);
 
-			List<Notificacion> notificaciones = this.servicioNotificacion.getNotificacionesByUsuarioId(usuarioBuscado.getUsuario().getId());
-			model.put("notificaciones",notificaciones);
+			Integer cantNotificaciones = this.servicioNotificacion.getNotificacionesByUsuarioId(usuarioBuscado.getUsuario().getId()).size();
+			if(cantNotificaciones > 0) {
+				model.put("cantNotificaciones", cantNotificaciones);
+			}
 		} else {
 			model.put("error", "Usuario o clave incorrecta");
 		}

@@ -16,4 +16,6 @@ public interface ServicioNotificacion {
     List<Notificacion> getNotificacionesLazyMode(List<Notificacion> notificaciones);
 
     void marcarLeidasByUsuarioId(Long id);
+
+    Integer getCantNotificacionesNoLeidasByUsuarioId(Long id);
 }

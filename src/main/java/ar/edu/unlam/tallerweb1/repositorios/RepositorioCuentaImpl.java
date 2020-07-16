@@ -66,11 +66,22 @@ public class RepositorioCuentaImpl implements RepositorioCuenta {
 
 		Criteria criteria = session.createCriteria(Cuenta.class);
 		criteria.add(Restrictions.eq("usuario.id", id));
-		
 
 		Cuenta cuentaBuscada = (Cuenta) criteria.uniqueResult();
 
 		return cuentaBuscada.getEmail();
 	
+	}
+
+	@Override
+	public Cuenta getByIdUser(Long id) {
+		Session session = sessionFactory.getCurrentSession();
+
+		Criteria criteria = session.createCriteria(Cuenta.class);
+		criteria.add(Restrictions.eq("usuario.id", id));
+
+		Cuenta cuentaBuscada = (Cuenta) criteria.uniqueResult();
+
+		return cuentaBuscada;
 	}
 }

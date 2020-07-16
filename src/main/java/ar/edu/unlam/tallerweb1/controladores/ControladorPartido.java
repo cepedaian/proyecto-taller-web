@@ -19,6 +19,7 @@ import ar.edu.unlam.tallerweb1.modelos.*;
 import ar.edu.unlam.tallerweb1.servicios.ServicioBarrio;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCancha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCuenta;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEnviarMail;
 import ar.edu.unlam.tallerweb1.servicios.ServicioNotificacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioUsuario;
@@ -41,16 +42,19 @@ public class ControladorPartido extends HttpServlet {
 	private ServicioUsuario servicioUsuario;
 	private ServicioCuenta servicioCuenta;
 	private ServicioBarrio servicioBarrio;
-
+	private ServicioEnviarMail servicioMail;
+	
 	@Autowired
 	public ControladorPartido(ServicioPartido servicioPartido, ServicioCancha servicioCancha,
-			ServicioNotificacion servicioNotificacion, ServicioUsuario servicioUsuario, ServicioCuenta servicioCuenta,ServicioBarrio servicioBarrio) {
+			ServicioNotificacion servicioNotificacion, ServicioUsuario servicioUsuario, ServicioCuenta servicioCuenta,
+			ServicioBarrio servicioBarrio,ServicioEnviarMail servicioMail) {
 		this.servicioPartido = servicioPartido;
 		this.servicioCancha = servicioCancha;
 		this.servicioNotificacion = servicioNotificacion;
 		this.servicioUsuario = servicioUsuario;
 		this.servicioCuenta = servicioCuenta;
 		this.servicioBarrio = servicioBarrio;
+		this.servicioMail = servicioMail;
 	}
 
 	@RequestMapping("/home")
@@ -64,36 +68,6 @@ public class ControladorPartido extends HttpServlet {
 		return new ModelAndView("home", modelo);
 	}
 
-	private static void enviarConGMail(String destinatario, String asunto, String cuerpo) {
-		// Esto es lo que va delante de @gmail.com en tu cuenta de correo. Es el
-		// remitente también.
-		String remitente = "lineadecuatro2020@gmail.com"; // Para la dirección nomcuenta@gmail.com
-
-		java.util.Properties props = System.getProperties();
-		props.put("mail.smtp.host", "smtp.gmail.com"); // El servidor SMTP de Google
-		props.put("mail.smtp.user", remitente);
-		props.put("mail.smtp.clave", "unlam2020"); // La clave de la cuenta
-		props.put("mail.smtp.auth", "true"); // Usar autenticación mediante usuario y clave
-		props.put("mail.smtp.starttls.enable", "true"); // Para conectar de manera segura al servidor SMTP
-		props.put("mail.smtp.port", "587"); // El puerto SMTP seguro de Google
-
-		Session session = Session.getDefaultInstance(props);
-		MimeMessage message = new MimeMessage(session);
-
-		try {
-			message.setFrom(new InternetAddress(remitente));
-			message.addRecipients(Message.RecipientType.TO, destinatario); // Se podrían añadir varios de la misma
-																			// manera
-			message.setSubject(asunto);
-			message.setText(cuerpo);
-			Transport transport = session.getTransport("smtp");
-			transport.connect("smtp.gmail.com", remitente, "unlam2020");
-			transport.sendMessage(message, message.getAllRecipients());
-			transport.close();
-		} catch (MessagingException me) {
-			me.printStackTrace(); // Si se produce un error
-		}
-	}
 
 	@RequestMapping(value = "/mostrar-partidos", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView mostrarPartidos(HttpServletRequest request) {
@@ -250,7 +224,7 @@ public class ControladorPartido extends HttpServlet {
 		String asunto = "Nuevo jugador!";
 		String cuerpo = remitente + " se unió a tu partido!";
 
-		enviarConGMail(emailDestinatario, asunto, cuerpo);
+		this.servicioMail.enviarMail(emailDestinatario, asunto, cuerpo);
 
 		//notificacion app
 		
@@ -292,7 +266,7 @@ public class ControladorPartido extends HttpServlet {
 		String asunto = "Uno Menos!";
 		String cuerpo = remitente + " se bajó de tu partido!";
 
-		enviarConGMail(emailDestinatario, asunto, cuerpo);
+		this.servicioMail.enviarMail(emailDestinatario, asunto, cuerpo);
 
 		//notificacion app
 		notificacion.setAsunto(asunto);
@@ -311,11 +285,9 @@ public class ControladorPartido extends HttpServlet {
 		return new ModelAndView("partidos", model);
 
 	}
+
 	
-	
-	
-	
-	@RequestMapping(value = "/invitar-usuario-partido/{id}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
+	@RequestMapping(value = "/show-invitar-usuario-partido/{id}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView invitar(@PathVariable("id") Long id,HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		ModelMap model = new ModelMap();
@@ -326,7 +298,6 @@ public class ControladorPartido extends HttpServlet {
 		}
 		
 		Partido partido = this.servicioPartido.getById(id);
-		
 		model.put("partido",partido);
 		
 		List<Barrio> barrios = this.servicioBarrio.getAll();
@@ -335,6 +306,7 @@ public class ControladorPartido extends HttpServlet {
 
 		return new ModelAndView("form-buscar-usuario", model);
 	}
+
 	@RequestMapping(value = "/eliminar-participante/{id_usuario}/{id_partido}", method = RequestMethod.GET) // TEST REALIZADO Y VERIFICADO
 	public ModelAndView eliminarParticipante(@PathVariable("id_usuario") Long id_usuario,
 			@PathVariable("id_partido") Long id_partido, HttpServletRequest request) {
@@ -351,10 +323,17 @@ public class ControladorPartido extends HttpServlet {
 
 		model.put("msj", mensaje);
 		
-		this.servicioPartido.eliminarParticipante(id_usuario,id_partido);
+		this.servicioPartido.eliminarParticipante(id_usuario, id_partido);
 
 		List<Partido> partidos = this.servicioPartido.getAll();
 		model.put("partidos", partidos);
+
+		//envio de mail
+		Cuenta destinatario = this.servicioCuenta.getByIdUser(id_usuario);
+		String emailDestinatario = destinatario.getEmail();
+		String asunto = "Te bajaron del partido";
+		String cuerpo = "Lamentablemente el organizador te bajo del partido!";
+		this.servicioMail.enviarMail(emailDestinatario, asunto, cuerpo);
 
 		return new ModelAndView("partidos", model);
 	}

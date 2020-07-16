@@ -52,6 +52,12 @@
 			  	</form:select>
 			</div>
 		</div>
+		<div class="form-row">
+			<div class="form-group col-sm-12">
+				<label for="mapa">Insertar mapa:</label>
+				<form:input path="mapa" type="text" class="form-control form-control-sm" placeholder="coloque el iframe de google maps"/>
+			</div>
+		</div>
 
 		<button class="btn btn-sm btn-primary" type="submit"/>Crear</button>
 	</form:form>

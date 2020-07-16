@@ -13,7 +13,7 @@ public class Notificacion {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Partido partido;
-    //probar mapear del lado de partido
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Usuario destinatario;
 
