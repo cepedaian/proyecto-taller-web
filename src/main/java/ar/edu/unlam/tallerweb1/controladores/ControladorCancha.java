@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import ar.edu.unlam.tallerweb1.modelos.Barrio;
+import ar.edu.unlam.tallerweb1.modelos.Partido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioBarrio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,10 +66,13 @@ public class ControladorCancha {
 			model.put("mensaje", "La cancha se creo con exito!!!");
 		}
 
+		Partido partido = new Partido();
+		model.put("partido", partido);
+
 		List<Cancha> canchas = this.servicioCancha.getAll();
 		model.put("canchas", canchas);
-		
-		return new ModelAndView ("canchas", model);
+
+		return new ModelAndView("form-partido", model);
 	}
 
 	@RequestMapping(value="/eliminar-cancha/{id}", method= RequestMethod.POST) //TEST REALIZADO Y VERIFICADO

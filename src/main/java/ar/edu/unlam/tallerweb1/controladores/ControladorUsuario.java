@@ -105,6 +105,8 @@ public class ControladorUsuario extends HttpServlet {
 		model.put("barrios", barrios);
 		model.put("usuario", new Usuario());
 
+		model.put("mensaje", "La invitacion fue enviada!!!");
+
 		return new ModelAndView("form-buscar-usuario", model);
 	}
 

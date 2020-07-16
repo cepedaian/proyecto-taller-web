@@ -16,36 +16,46 @@
 		</div>
 	</div>
 
-	<c:forEach items="${usuarios}" var="usuario">
-		<div class="card mb-3">
-			<div class="card-header">
-				<div class="row">
-					<div class="col-sm-6">
-						<h4 class="display-4">${usuario.userName}</h4>
-					</div>
-					<div class="col-sm-6">
+	<c:if test="${usuarios.size() > 0}">
+		<c:forEach items="${usuarios}" var="usuario">
+			<div class="card mb-3">
+				<div class="card-header">
+					<div class="row">
+						<div class="col-sm-6">
+							<h4 class="display-4">${usuario.userName}</h4>
+						</div>
+						<div class="col-sm-6">
 
+						</div>
+					</div>
+				</div>
+				<div class="card-body">
+					<div class="row d-flex align-items-center">
+						<div class="col-sm-6">
+							<h5 class="card-title">Posici&oacute;n preferida: ${usuario.posicion}</h5>
+						</div>
+						<div class="col-sm-6">
+							<h5>
+								Fecha nacimiento:
+								<fmt:formatDate value="${usuario.fecha_nac}" pattern="dd/MM/yyyy" />
+							</h5>
+						</div>
+					</div>
+					<div class="text-right">
+						<a class="btn btn-lg btn-primary" href="/invitar-usuario/${id-partido}/${usuario.id}">Invitar</a>
 					</div>
 				</div>
 			</div>
-			<div class="card-body">
-				<div class="row d-flex align-items-center">
-					<div class="col-sm-6">
-						<h5 class="card-title">Posici&oacute;n preferida: ${usuario.posicion}</h5>
-					</div>
-					<div class="col-sm-6">
-						<h5>
-							Fecha nacimiento:
-							<fmt:formatDate value="${usuario.fecha_nac}" pattern="dd/MM/yyyy" />
-						</h5>
-					</div>
-				</div>
-				<div class="text-right">
-					<a class="btn btn-lg btn-primary" href="/invitar-usuario/${id-partido}/${usuario.id}">Invitar</a>
-				</div>
-			</div>
-		</div>
-	</c:forEach>
+		</c:forEach>
+	</c:if>
+	<c:if test="${usuarios.size() == 0}">
+		<h4 class="display-5 text-white mb-4">No hay usuarios encontrados para los filtros ingresados</h4>
+	</c:if>
+
+	<a class="btn btn-md mr-2 btn-secondary"
+		href="/show-invitar-usuario-partido/${id-partido}">Volver
+	</a>
 </section>
+
 
 <jsp:include page="footer.jsp" />

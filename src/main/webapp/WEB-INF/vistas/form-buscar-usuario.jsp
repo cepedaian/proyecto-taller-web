@@ -3,6 +3,10 @@
 <jsp:include page="header.jsp" />
 <jsp:include page="nav.jsp" />
 
+<c:if test="${not empty mensaje}">
+	<div class="bg-success p-2 text-white">${mensaje}</div>
+</c:if>
+
 <section class="container-fluid section p-4">
 	<h1 class="display-5 text-white mb-4 font-weight-bold">Busc&aacute; los usuarios que quieras invitar al partido</h1>
 	<form:form action="/buscar-usuario/${partido.id}" method="POST" modelAttribute="usuario">
@@ -37,8 +41,9 @@
 					class="form-control" id="userName"
 					placeholder="Ingrese su UserName" onkeyup="changeUserName(this.value)" />
 			</div>
-		</div>	
-		<button class="btn btn-lg btn-primary" type="submit"/><i class="fa fa-search"></i> Buscar</button>
+		</div>
+		<a class="btn btn-md btn-secondary mb-3" href="/mostrar-partidos">Volver</a>
+		<button class="btn btn-lg btn-primary float-right" type="submit"/><i class="fa fa-search"></i> Buscar</button>
 	</form:form>
 
 
