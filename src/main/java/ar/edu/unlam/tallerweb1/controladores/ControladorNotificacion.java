@@ -45,12 +45,12 @@ public class ControladorNotificacion {
 
         Usuario usuario = cuenta.getUsuario();
 
-        //Usuario usuario = (Usuario) session.getAttribute("usuario");
+        
         List<Notificacion> notificaciones = this.servicioNotificacion.getNotificacionesByUsuarioId(usuario.getId());
-        
-        //List<Notificacion> notificacionesLazy = this.servicioNotificacion.getNotificacionesLazyMode(notificaciones);
-        
+
         model.put("notificaciones", notificaciones);
+
+        this.servicioNotificacion.marcarLeidasByUsuarioId(usuario.getId());
 
         return new ModelAndView("notificaciones", model);
     }

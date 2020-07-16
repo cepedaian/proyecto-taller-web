@@ -145,7 +145,7 @@ public class ControladorPartido extends HttpServlet {
 			Cuenta cuenta = (Cuenta) session.getAttribute("usuario");
 			model.put("cuenta", cuenta);
 		}
-
+		
 		Partido partido = new Partido();
 		model.put("partido", partido);
 
@@ -203,7 +203,7 @@ public class ControladorPartido extends HttpServlet {
 		if(cuenta != null &&
 				(!cuenta.getUsuario().getUserName().equals(partido.getOrganizador())) &&
 				partido.getCantidadJugadores() > usuarios.size() &&
-				!estaUnido(cuenta.getUsuario(), usuarios)) {
+				!estaUnido(cuenta.getUsuario(), usuarios) && cuenta.getUsuario().getSexo().equals(partido.getSexo())) {
 			model.put("btnUnirse", true);
 		}
 		
@@ -247,13 +247,15 @@ public class ControladorPartido extends HttpServlet {
 		Usuario usuario = cuenta.getUsuario();
 		String remitente = usuario.getUserName();
 		String emailDestinatario = this.servicioCuenta.getEmailByIdUsuario(destinatario.getId());
-		String asunto = remitente + " se unió a tu partido!";
-		String cuerpo = asunto;
+		String asunto = "Nuevo jugador!";
+		String cuerpo = remitente + " se unió a tu partido!";
 
 		enviarConGMail(emailDestinatario, asunto, cuerpo);
 
 		//notificacion app
-
+		
+		notificacion.setAsunto(asunto);
+		notificacion.setCuerpo(cuerpo);
 		notificacion.setDestinatario(destinatario);
 		notificacion.setPartido(partido);
 		notificacion.setRemitente(usuario.getUserName());
@@ -287,13 +289,14 @@ public class ControladorPartido extends HttpServlet {
 		//envio de mail
 		String remitente = usuario.getUserName();
 		String emailDestinatario = this.servicioCuenta.getEmailByIdUsuario(destinatario.getId());
-		String asunto = remitente + " se bajó del partido!";
-		String cuerpo = asunto;
+		String asunto = "Uno Menos!";
+		String cuerpo = remitente + " se bajó de tu partido!";
 
 		enviarConGMail(emailDestinatario, asunto, cuerpo);
 
 		//notificacion app
-
+		notificacion.setAsunto(asunto);
+		notificacion.setCuerpo(cuerpo);
 		notificacion.setDestinatario(destinatario);
 		notificacion.setPartido(partido);
 		notificacion.setRemitente(usuario.getUserName());

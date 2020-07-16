@@ -1,12 +1,6 @@
 package ar.edu.unlam.tallerweb1.modelos;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity 
 public class Cancha {
@@ -18,6 +12,9 @@ public class Cancha {
 	private String suelo;
 
 	private Integer tipo;
+
+	@Column(length = 1000)
+	private String mapa;
 
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Direccion direccion;
@@ -61,4 +58,13 @@ public class Cancha {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+
+	public String getMapa() {
+		return mapa;
+	}
+
+	public void setMapa(String mapa){
+		this.mapa = mapa;
+	}
+
 }

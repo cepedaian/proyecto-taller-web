@@ -41,8 +41,8 @@
 				<div class="form-group">
 					<label for="sexo" class="col-form-label col-form-label-sm font-weight-bold text-white">Tipo de partido:</label>
 					  <form:select path="sexo" class="form-control form-control-sm">
-						  <option value="M">Masculino</option>
-						  <option value="F">Femenino</option>
+
+						  <option value="${cuenta.usuario.getSexo()}">${cuenta.usuario.getSexo()}</option>
 					  </form:select>
 				</div>
 			</div>

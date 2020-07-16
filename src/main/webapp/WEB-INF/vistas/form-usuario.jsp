@@ -75,8 +75,8 @@
 			<div class="col-sm-10">
 				<form:select path="usuario.sexo"
 					class="form-control form-control-sm" id="sexo">
-					<option value="M">Masculino</option>
-					<option value="F">Femenino</option>
+					<option value="masculino">Masculino</option>
+					<option value="femenino">Femenino</option>
 				</form:select>
 			</div>
 		</div>

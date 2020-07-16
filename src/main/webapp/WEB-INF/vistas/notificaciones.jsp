@@ -24,13 +24,13 @@
         <div class="card mb-3 col-sm-5 ml-5">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-sm-6"><h5><i class="fa fa-futbol-o" aria-hidden="true"></i> Nuevo jugador!</h5></div>
+                    <div class="col-sm-6"><h5><i class="fa fa-futbol-o" aria-hidden="true"></i> ${notificacion.asunto}</h5></div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="row d-flex align-items-center">
                     <div class="col-sm-8">
-                        <h5 class="card-title"><i class="fa fa-user"></i> ${notificacion.remitente} se unio al partido!</h5>
+                        <h5 class="card-title"><i class="fa fa-user"></i> ${notificacion.cuerpo}</h5>
                         <p><i class="fa fa-calendar" aria-hidden="true"></i> <fmt:formatDate value="${notificacion.partido.fecha}" pattern="dd/MM HH:mm" /> hs.</p><br>
                         <i><i class="fa fa-users" aria-hidden="true"></i> Quedan ${notificacion.partido.cantidadJugadores} lugares disponibles </i>
                     </div>

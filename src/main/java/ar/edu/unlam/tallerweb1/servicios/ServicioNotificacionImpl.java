@@ -42,4 +42,10 @@ public class ServicioNotificacionImpl implements ServicioNotificacion {
 		
 		return this.repositorioNotificacion.getNotificacionesLazyMode(notificaciones);
 	}
+
+    @Override
+    public void marcarLeidasByUsuarioId(Long id) {
+
+        this.repositorioNotificacion.marcarLeidasByUsuarioId(id);
+    }
 }
