@@ -23,14 +23,19 @@
 	<div class="row m-3">
 		<div class="col-sm-12 col-md-6">
 			<h4 class="display-5 text-white font-weight-bold">Cancha:
-				${partido.cancha.nombre}</h4>
+				${partido.cancha.nombre}</h4><br>
+			<h4 class="display-5 text-white font-weight-bold">Tipo: ${partido.sexo}</h4>
 		</div>
 		<div class="col-sm-12 col-md-6">
 			<h4 class="display-5 text-white font-weight-bold">
+
 				Direcci&oacute;n: ${partido.cancha.direccion.calle}
 				${partido.cancha.direccion.altura},
 				${partido.cancha.direccion.barrio.descripcion}</h4>
 		</div>
+	</div>
+	<div class="row">
+		${partido.cancha.mapa}
 	</div>
 	<div class="row m-3">
 		<div class="col-sm-12">
@@ -52,7 +57,7 @@
 			<h5 class="display-5 text-white">
 
 				Cupos disponibles: ${partido.cantidadJugadores}
-				<!-- VER RESTA UNO DE MÁS -->
+				<!-- VER RESTA UNO DE Mï¿½S -->
 
 			</h5>
 			<a class="btn btn-md btn-secondary mt-3" href="/mostrar-partidos">Volver</a>

@@ -47,10 +47,10 @@ public class ControladorNotificacion {
 
         
         List<Notificacion> notificaciones = this.servicioNotificacion.getNotificacionesByUsuarioId(usuario.getId());
-        
-        
-        
+
         model.put("notificaciones", notificaciones);
+
+        this.servicioNotificacion.marcarLeidasByUsuarioId(usuario.getId());
 
         return new ModelAndView("notificaciones", model);
     }

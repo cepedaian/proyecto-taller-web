@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelos.Cuenta;
+import ar.edu.unlam.tallerweb1.modelos.Notificacion;
 import ar.edu.unlam.tallerweb1.modelos.Partido;
+import ar.edu.unlam.tallerweb1.servicios.ServicioNotificacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPartido;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +25,13 @@ public class ControladorLogin extends HttpServlet {
 
 	private ServicioLogin servicioLogin;
 	private ServicioPartido servicioPartido;
+	private ServicioNotificacion servicioNotificacion;
 
 	@Autowired
-	public ControladorLogin(ServicioLogin servicioLogin, ServicioPartido servicioPartido) {
+	public ControladorLogin(ServicioLogin servicioLogin, ServicioPartido servicioPartido, ServicioNotificacion servicioNotificacion) {
 		this.servicioLogin = servicioLogin;
 		this.servicioPartido = servicioPartido;
+		this.servicioNotificacion = servicioNotificacion;
 	}
 
 	@RequestMapping("/login")
@@ -62,6 +66,9 @@ public class ControladorLogin extends HttpServlet {
 			model.put("cuenta", usuarioBuscado);
 			List<Partido> partidos = this.servicioPartido.getAll();
 			model.put("partidos", partidos);
+
+			List<Notificacion> notificaciones = this.servicioNotificacion.getNotificacionesByUsuarioId(usuarioBuscado.getUsuario().getId());
+			model.put("notificaciones",notificaciones);
 		} else {
 			model.put("error", "Usuario o clave incorrecta");
 		}

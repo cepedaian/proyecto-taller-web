@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelos;
 
+import net.bytebuddy.implementation.bind.annotation.Default;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,8 @@ public class Notificacion {
     private String asunto;
     
     private String cuerpo;
+    
+    private Boolean leido = false;
     
 
 	public Usuario getDestinatario() {
@@ -66,4 +70,12 @@ public class Notificacion {
 	public void setCuerpo(String cuerpo) {
 		this.cuerpo = cuerpo;
 	}
+
+	public Boolean getLeido() {
+        return leido;
+    }
+
+    public void setLeido(Boolean leido) {
+        this.leido = leido;
+    }
 }

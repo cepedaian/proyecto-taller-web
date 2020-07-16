@@ -9,6 +9,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -51,6 +52,7 @@ public class RepositorioNotificacionImpl implements RepositorioNotificacion {
 
         Criteria criteria = session.createCriteria(Notificacion.class);
         criteria.add(Restrictions.eq("destinatario.id",id));
+        criteria.add(Restrictions.eq("leido", false));
 
         List<Notificacion>listaNotificaciones = criteria.list();
         
@@ -91,6 +93,13 @@ public class RepositorioNotificacionImpl implements RepositorioNotificacion {
         return notificaciones;
     }
 
+    @Override
+    public void marcarLeidasByUsuarioId(Long id) {
 
+        final Session session = sessionFactory.getCurrentSession();
 
+        String hql = "update from Notificacion set leido = true where destinatario = " + id;
+        Query query = session.createQuery(hql);
+        query.executeUpdate();
+    }
 }

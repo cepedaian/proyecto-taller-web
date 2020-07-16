@@ -43,6 +43,7 @@
 					<div class="col-sm-6">
 						<h5 class="card-title">Organiza: ${partido.organizador}</h5>
 						<p class="card-text">Cancha: ${partido.cancha.nombre}</p>
+						<p class="card-text">Tipo: ${partido.sexo}</p>
 						<i>Disponibilidad: ${partido.cantidadJugadores}</i>
 					</div>
 					<div class="col-sm-6">
