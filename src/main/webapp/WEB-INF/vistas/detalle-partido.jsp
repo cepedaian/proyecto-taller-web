@@ -40,11 +40,11 @@
 				<c:forEach items="${usuarios}" var="usuario">
 					<li class="text-white mb-1 row">
 						<h5 class="display-5 mr-2">${usuario.userName}</h5> <c:if
-							test="${partido.organizador == cuenta.usuario.userName}">
-							<a class="btn btn-sm btn-danger"
-								href="/eliminar-participante/${usuario.id}/${partido.id}"> <i
-								class="fa fa-close"></i>Eliminar
-							</a>
+							test="${partido.organizador == cuenta.usuario.userName && usuario.userName != partido.organizador}">
+							<button class="btn btn-sm btn-danger" id="btn-modal"
+								data-id="${usuario.id}/${partido.id}">
+								<i class="fa fa-close"></i>Eliminar
+							</button>
 						</c:if>
 					</li>
 				</c:forEach>
@@ -72,6 +72,34 @@
 		</div>
 	</div>
 </section>
-
+<div class="modal" tabindex="-1" role="dialog" id="confirmDelete">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Atencion!</h5>
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Seguro que desea eliminar el participante?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+				<a id="id_partido" type="button" class="btn btn-primary" href="/#">Confirmar</a>
+			</div>
+		</div>
+	</div>
+</div>
 <jsp:include page="footer.jsp" />
+<script>
+	$(document).on("click", "#btn-modal", function(e) {
+		e.preventDefault();
+		const _self = $(this);
+		const id = _self.data('id');
+		$("#id_partido").attr("href", "/eliminar-participante/" + id);
+		$("#confirmDelete").modal('show');
+	});
+</script>
 
